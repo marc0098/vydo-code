@@ -1,0 +1,176 @@
+import React, { useState, useEffect } from 'react';
+import WhatsAppIcon from './components/WhatsAppIcon';
+
+// Components
+import ButtonCard from './components/ButtonCard';
+import VydoLogo from './components/VydoLogo';
+import ShowcasePage from './components/ShowcasePage';
+import { TemplateCategory } from './types';
+
+// Data
+import { MAIN_LINKS } from './constants';
+
+const SHOWCASE_IDS: string[] = ['linknabio', 'ecommerce', 'sites', 'webapp'];
+
+const App: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<TemplateCategory | null>(null);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#/categoria/')) {
+        const cat = hash.replace('#/categoria/', '') as TemplateCategory;
+        if (SHOWCASE_IDS.includes(cat)) {
+          setCurrentPage(cat);
+          
+          // SEO title update dynamically per category
+          const categoryNames: Record<string, string> = {
+            linknabio: 'Link na Bio Personalizado',
+            ecommerce: 'E-commerce Premium',
+            sites: 'Sites Impactantes',
+            webapp: 'App Web Sob Medida',
+          };
+          document.title = `VYDO CODE | ${categoryNames[cat] || 'Showcase'}`;
+          return;
+        }
+      }
+      setCurrentPage(null);
+      document.title = 'VYDO CODE | Premium Frontend Solutions';
+    };
+
+    // Initialize on load
+    handleHashChange();
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleLinkClick = (id: string, e: React.MouseEvent) => {
+    // Let standard anchor tag handling update the hash, except if it's not a showcase ID
+    if (!SHOWCASE_IDS.includes(id) && id !== 'whatsapp') {
+      e.preventDefault();
+    }
+  };
+
+  if (currentPage) {
+    return <ShowcasePage category={currentPage} onBack={() => { window.location.hash = '#/'; }} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-background relative overflow-x-hidden selection:bg-primary selection:text-white font-sans">
+
+      {/* Premium Ambient Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-blob mix-blend-screen" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-primary-glow/10 rounded-full blur-[100px] animate-blob animation-delay-4000 mix-blend-screen" />
+        
+        {/* Subtle Grid Texture */}
+        <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+      </div>
+
+      {/* Main Content Container */}
+      <main className="relative z-10 max-w-lg mx-auto min-h-screen px-6 py-12 flex flex-col items-center">
+
+        {/* HERO SECTION */}
+        <header className="w-full flex flex-col items-center text-center mb-12 animate-fade-in-up">
+          
+          {/* Logo & Identity */}
+          <div className="mb-10 transform-gpu hover:scale-105 transition-transform duration-500 cursor-none pointer-events-auto">
+            <VydoLogo />
+          </div>
+
+          {/* Profile Circle - Refined */}
+          <div className="relative mb-8 group">
+            {/* Spinning Colored Gradient Ring - Restored */}
+            <div className="absolute inset-[-4px] rounded-full overflow-hidden z-0">
+              <div className="absolute inset-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,#25D366,#0066ff,#a855f7,#25D366)] animate-[spin-gradient_3s_linear_infinite]"></div>
+            </div>
+
+            <div className="relative z-10 w-28 h-28 rounded-full p-[3px] bg-background">
+              <img
+                src="/profile.png"
+                alt="VYDO CODE"
+                className="w-full h-full rounded-full object-cover border-2 border-background/50 grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+            {/* Soft Glow */}
+            <div className="absolute inset-0 rounded-full bg-primary/20 blur-2xl -z-10 group-hover:bg-primary/30 transition-all duration-700" />
+          </div>
+
+          {/* Slogan / Headline */}
+          <div className="mb-10">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+              Que tal criar um <br />
+              <span className="text-primary-glow">projeto</span> comigo?
+            </h1>
+          </div>
+
+
+          {/* Primary CTA - Glass Button Style */}
+          <a
+            href="https://wa.me/5538998802822?text=Ol%C3%A1%2C%20gostaria%20de%20criar%20um%20projeto%20com%20voc%C3%AA!"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass-button relative group inline-flex items-center gap-4 px-8 py-4 rounded-2xl text-white font-bold text-base overflow-hidden"
+          >
+            <span className="relative z-10">Solicitar Projeto</span>
+            <div className="relative z-10 flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+            </div>
+          </a>
+        </header>
+
+        {/* LINKS SECTION */}
+        <section className="w-full space-y-2 mb-16 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          {MAIN_LINKS.filter(l => l.id !== 'whatsapp').map((link) => (
+            <ButtonCard
+              key={link.id}
+              item={link}
+              onClick={(e) => handleLinkClick(link.id, e)}
+            />
+          ))}
+        </section>
+
+        {/* FOOTER */}
+        <footer className="w-full text-center mt-auto pb-12 safe-area-bottom animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+          <div className="h-[1px] w-12 bg-white/10 mx-auto mb-8"></div>
+          
+          <div className="flex justify-center items-center gap-3 mb-6">
+            <span className="text-[10px] font-black tracking-[0.3em] text-white/40 uppercase">
+              Powered by <span className="text-white/80">VYDO CODE</span>
+            </span>
+          </div>
+
+          <p className="text-[10px] text-white/30 mb-4 font-medium">
+            &copy; {new Date().getFullYear()} Todos os direitos reservados.
+          </p>
+          
+          <div className="flex justify-center gap-6 text-[9px] text-white/20 uppercase tracking-[0.2em] font-bold">
+            <a href="#" className="hover:text-white/60 transition-colors">Termos</a>
+            <a href="#" className="hover:text-white/60 transition-colors">Privacidade</a>
+          </div>
+        </footer>
+
+      </main>
+
+      {/* FLOATING WHATSAPP - Original Full Icon */}
+      <a
+        href="https://wa.me/5538998802822"
+        className="fixed bottom-6 right-6 z-50 p-4 rounded-full glass-button shadow-2xl group transition-all duration-500"
+        aria-label="Falar no WhatsApp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" className="w-8 h-8 group-hover:scale-110 transition-transform">
+          <path fill="#25D366" d="M11.996 0c6.602 0 11.956 5.354 11.956 11.956 0 6.602-5.354 11.956-11.956 11.956-2.126 0-4.122-.556-5.856-1.541l-6.138 2.051 2.083-5.996c-1.129-1.876-1.782-4.108-1.782-6.47C0 5.354 5.354 0 11.996 0" />
+          <path fill="#ffffff" d="M18.805 15.354c-.303-.151-1.791-.885-2.067-.985-.275-.1-.476-.151-.676.151-.201.303-.781.985-.956 1.186-.176.201-.351.226-.654.075-.301-.151-1.278-.471-2.435-1.502-.901-.803-1.508-1.796-1.684-2.098-.176-.301-.019-.465.132-.617.135-.136.301-.354.451-.53.151-.176.201-.303.303-.506.1-.205.051-.383-.025-.533-.075-.151-.676-1.643-.926-2.251-.246-.59-.496-.511-.676-.52-.176-.008-.376-.008-.576-.008a1.109 1.109 0 0 0-.803.376c-.276.303-1.054 1.036-1.054 2.527s1.079 2.932 1.231 3.136c.151.201 2.135 3.259 5.172 4.568.721.311 1.284.498 1.724.637.724.231 1.385.198 1.905.12.583-.086 1.791-.733 2.043-1.442.251-.708.251-1.314.176-1.442-.075-.125-.276-.201-.578-.351" />
+        </svg>
+      </a>
+
+    </div>
+  );
+};
+
+
+export default App;

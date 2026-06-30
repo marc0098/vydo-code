@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison — Haute Couture</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', serif;
+            background: #faf9f6;
+            color: #1a1a1a;
+            min-height: 100vh
+        }
+
+        /* Editorial Typography */
+        h1,
+        h2,
+        h3,
+        .brand {
+            font-family: 'Playfair Display', serif
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: transparent;
+            transition: background .3s
+        }
+
+        .nav.scrolled {
+            background: rgba(250, 249, 246, 0.9);
+            backdrop-filter: blur(10px)
+        }
+
+        .brand {
+            font-size: 24px;
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 16px
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #1a1a1a;
+            cursor: pointer;
+            position: relative
+        }
+
+        .badge {
+            position: absolute;
+            top: -4px;
+            right: -8px;
+            width: 16px;
+            height: 16px;
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 10px;
+            font-family: 'Inter';
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        /* Split Hero Editorial */
+        .hero {
+            height: 85vh;
+            display: flex;
+            padding-top: 80px
+        }
+
+        .hero-text {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2
+        }
+
+        .hero-img-wrap {
+            flex: 1;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            padding-right: 24px
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 2px
+        }
+
+        .season {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #666;
+            margin-bottom: 24px
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: #111
+        }
+
+        .hero-title i {
+            font-style: italic;
+            color: #666
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+            margin-top: 16px;
+            width: max-content;
+            transition: all .3s
+        }
+
+        .hero-btn:hover {
+            background: #333;
+            transform: translateX(5px)
+        }
+
+        /* Categories Scroll */
+        .categories-wrapper {
+            padding: 60px 24px 20px;
+            overflow-x: auto
+        }
+
+        .categories-wrapper::-webkit-scrollbar {
+            display: none
+        }
+
+        .categories {
+            display: flex;
+            gap: 40px;
+            width: max-content
+        }
+
+        .cat-item {
+            text-decoration: none;
+            color: #999;
+            font-family: 'Playfair Display';
+            font-size: 24px;
+            font-weight: 400;
+            transition: all .3s;
+            position: relative
+        }
+
+        .cat-item.active {
+            color: #1a1a1a;
+            font-style: italic
+        }
+
+        .cat-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #1a1a1a
+        }
+
+        .cat-item:hover {
+            color: #1a1a1a
+        }
+
+        /* Editorial Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 24px;
+            row-gap: 48px;
+            padding: 40px 24px 100px
+        }
+
+        .product-card {
+            text-decoration: none;
+            color: #1a1a1a;
+            position: relative
+        }
+
+        .img-container {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            margin-bottom: 16px;
+            background: #eee;
+            position: relative
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .7s ease;
+            object-position: center
+        }
+
+        .product-img-hover {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity .5s ease
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05)
+        }
+
+        .product-card:hover .product-img-hover {
+            opacity: 1
+        }
+
+        .fav-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #1a1a1a;
+            z-index: 10;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity .3s
+        }
+
+        .product-card:hover .fav-btn {
+            opacity: 1
+        }
+
+        .fav-btn.active {
+            color: #d94848;
+            opacity: 1;
+            fill: #d94848
+        }
+
+        .prod-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start
+        }
+
+        .prod-title {
+            font-family: 'Playfair Display';
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px
+        }
+
+        .prod-color {
+            font-size: 11px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em
+        }
+
+        .prod-price {
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        /* Mobile specific adjustments for standard template width */
+        @media(max-width:768px) {
+            .hero {
+                flex-direction: column;
+                height: auto;
+                padding-top: 100px
+            }
+
+            .hero-text {
+                padding: 24px
+            }
+
+            .hero-img-wrap {
+                padding: 0;
+                height: 400px
+            }
+
+            .hero-title {
+                font-size: 42px
+            }
+        }
+
+        /* Responsive Mobile First Tweaks (< 380px) */
+        @media (max-width: 380px) {
+            .nav {
+                padding: 16px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                line-height: 1;
+            }
+
+            .hero-btn {
+                padding: 14px 24px;
+                font-size: 11px;
+            }
+
+            .categories-wrapper {
+                padding: 40px 16px 20px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                /* 1 card por linha em telas muito pequenas */
+                padding: 24px 16px 80px;
+            }
+        }
+    </style></head>
+
+<body>
+    <nav class="nav" id="nav">
+        <button class="icon-btn"><i data-lucide="menu" style="width:24px;height:24px"></i></button>
+        <div class="brand">Maison.</div>
+        <div class="nav-icons">
+            <button class="icon-btn"><i data-lucide="search" style="width:20px;height:20px"></i></button>
+            <button class="icon-btn">
+                <i data-lucide="shopping-bag" style="width:20px;height:20px"></i>
+                <span class="badge">2</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-text">
+            <div class="season">Coleção Outono/Inverno</div>
+            <h1 class="hero-title">A nova era do <i>minimalismo</i> urbano.</h1>
+            <a href="#" class="hero-btn">Descubra a coleção <i data-lucide="arrow-right"
+                    style="width:16px;height:16px"></i></a>
+        </div>
+        <div class="hero-img-wrap">
+            <img class="hero-img"
+                src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&h=1200&fit=crop"
+                alt="Fashion Model">
+        </div>
+    </div>
+
+    <div class="categories-wrapper">
+        <div class="categories">
+            <a href="#" class="cat-item active">Novidades</a>
+            <a href="#" class="cat-item">Vestidos</a>
+            <a href="#" class="cat-item">Blazers</a>
+            <a href="#" class="cat-item">Sapatos</a>
+            <a href="#" class="cat-item">Acessórios</a>
+        </div>
+    </div>
+
+    <div class="product-grid">
+        <a href="#" class="product-card">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=800&fit=crop"
+                    alt="Vestido Seda" class="product-img">
+                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=800&fit=crop"
+                    alt="Vestido Seda Detalhe" class="product-img-hover">
+                <button class="fav-btn" onclick="event.preventDefault();this.classList.toggle('active')"><i
+                        data-lucide="heart" style="width:20px;height:20px"></i></button>
+            </div>
+            <div class="prod-info">
+                <div>
+                    <h3 class="prod-title">Vestido de Seda Midi</h3>
+                    <p class="prod-color">Off-White</p>
+                </div>
+                <span class="prod-price">R$ 1.250</span>
+            </div>
+        </a>
+
+        <a href="#" class="product-card">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=800&fit=crop"
+                    alt="Blazer Oversized" class="product-img">
+                <button class="fav-btn active" onclick="event.preventDefault();this.classList.toggle('active')"><i
+                        data-lucide="heart" style="width:20px;height:20px"></i></button>
+            </div>
+            <div class="prod-info">
+                <div>
+                    <h3 class="prod-title">Blazer Oversized Lã</h3>
+                    <p class="prod-color">Camel</p>
+                </div>
+                <span class="prod-price">R$ 1.890</span>
+            </div>
+        </a>
+
+        <a href="#" class="product-card">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=600&h=800&fit=crop"
+                    alt="Calça Alfaiataria" class="product-img">
+                <button class="fav-btn" onclick="event.preventDefault();this.classList.toggle('active')"><i
+                        data-lucide="heart" style="width:20px;height:20px"></i></button>
+            </div>
+            <div class="prod-info">
+                <div>
+                    <h3 class="prod-title">Calça Alfaiataria</h3>
+                    <p class="prod-color">Preto</p>
+                </div>
+                <span class="prod-price">R$ 890</span>
+            </div>
+        </a>
+
+        <a href="#" class="product-card">
+            <div class="img-container">
+                <img src="https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?w=600&h=800&fit=crop"
+                    alt="Bolsa Couro" class="product-img">
+                <button class="fav-btn" onclick="event.preventDefault();this.classList.toggle('active')"><i
+                        data-lucide="heart" style="width:20px;height:20px"></i></button>
+            </div>
+            <div class="prod-info">
+                <div>
+                    <h3 class="prod-title">Mini Bolsa Couro</h3>
+                    <p class="prod-color">Burgundy</p>
+                </div>
+                <span class="prod-price">R$ 2.400</span>
+            </div>
+        </a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+    </script>
+</body>
+
+</html>
+

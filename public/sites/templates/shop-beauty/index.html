@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura — Clean Beauty</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Jost', sans-serif;
+            background-color: #fcf9f8;
+            color: #4a3f35;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        .serif-title {
+            font-family: 'Cormorant Garamond', serif
+        }
+
+        /* Soft Nav Bar */
+        .header {
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            color: #fff
+        }
+
+        .header.dark {
+            color: #4a3f35
+        }
+
+        .brand {
+            font-size: 32px;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: lowercase
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px
+        }
+
+        .n-link {
+            text-decoration: none;
+            color: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 500;
+            transition: opacity .3s
+        }
+
+        .n-link:hover {
+            opacity: 0.6
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center
+        }
+
+        .action-icon {
+            cursor: pointer;
+            opacity: 0.9;
+            transition: transform .3s
+        }
+
+        .action-icon:hover {
+            transform: scale(1.1)
+        }
+
+        /* Hero Split Screen */
+        .hero {
+            height: 100vh;
+            display: flex
+        }
+
+        .hero-img-side {
+            flex: 1;
+            position: relative;
+            overflow: hidden
+        }
+
+        .h-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            animation: slowZoom 20s infinite alternate
+        }
+
+        @keyframes slowZoom {
+            0% {
+                transform: scale(1)
+            }
+
+            100% {
+                transform: scale(1.1)
+            }
+        }
+
+        .hero-text-side {
+            flex: 1.2;
+            background: #eaddd4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 10%;
+            position: relative
+        }
+
+        .hero-text-side::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(to right, rgba(234, 221, 212, 0), #eaddd4);
+            z-index: 2;
+            transform: translateX(-100%)
+        }
+
+        .h-tag {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #8a7a6c;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .h-tag::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: #8a7a6c
+        }
+
+        .h-title {
+            font-size: 72px;
+            line-height: 1;
+            color: #3d3129;
+            margin-bottom: 32px;
+            font-weight: 400
+        }
+
+        .h-title i {
+            font-style: italic;
+            color: #6b5a4d
+        }
+
+        .h-desc {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #6b5a4d;
+            margin-bottom: 48px;
+            max-width: 400px;
+            font-weight: 300
+        }
+
+        .btn-elegant {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 40px;
+            background: #3d3129;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: all .4s;
+            border: 1px solid #3d3129;
+            width: max-content
+        }
+
+        .btn-elegant:hover {
+            background: transparent;
+            color: #3d3129
+        }
+
+        .btn-elegant i {
+            transition: transform .3s
+        }
+
+        .btn-elegant:hover i {
+            transform: translateX(6px)
+        }
+
+        /* Bestsellers Carousel */
+        .section-bestsellers {
+            padding: 120px 40px;
+            background: #fcf9f8
+        }
+
+        .sect-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 64px
+        }
+
+        .s-title {
+            font-size: 48px;
+            color: #3d3129;
+            font-weight: 400
+        }
+
+        .s-link {
+            text-decoration: none;
+            color: #8a7a6c;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #8a7a6c;
+            padding-bottom: 4px;
+            transition: color .3s, border-color .3s
+        }
+
+        .s-link:hover {
+            color: #3d3129;
+            border-color: #3d3129
+        }
+
+        .product-slider {
+            display: flex;
+            gap: 40px;
+            overflow-x: auto;
+            padding-bottom: 40px;
+            padding-right: 40px
+        }
+
+        .product-slider::-webkit-scrollbar {
+            display: none
+        }
+
+        .prod-card {
+            flex: 0 0 320px;
+            text-decoration: none;
+            color: #4a3f35;
+            position: relative
+        }
+
+        .p-img-wrapper {
+            width: 100%;
+            height: 420px;
+            background: #f2ece6;
+            border-radius: 200px 200px 0 0;
+            overflow: hidden;
+            margin-bottom: 24px;
+            position: relative
+        }
+
+        .p-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            mix-blend-mode: multiply;
+            transition: transform .6s ease;
+            padding: 20px
+        }
+
+        .prod-card:hover .p-img {
+            transform: scale(1.08)
+        }
+
+        .p-tag {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #8a7a6c;
+            opacity: 0;
+            transition: opacity .3s, transform .3s translateY(10px)
+        }
+
+        .prod-card:hover .p-tag {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0)
+        }
+
+        .p-info {
+            text-align: center
+        }
+
+        .p-name {
+            font-family: 'Cormorant Garamond';
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 600
+        }
+
+        .p-type {
+            font-size: 12px;
+            color: #8a7a6c;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px
+        }
+
+        .p-price {
+            font-size: 15px;
+            font-weight: 500
+        }
+
+        .add-cart-mini {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(50%);
+            width: 48px;
+            height: 48px;
+            background: #3d3129;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all .3s
+        }
+
+        .prod-card:hover .add-cart-mini {
+            opacity: 1;
+            transform: translateX(-50%) translateY(24px)
+        }
+
+        /* Mobile (Tablet and Small) */
+        @media(max-width:900px) {
+            .hero {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .header {
+                padding: 20px;
+                color: #4a3f35
+            }
+
+            .hero-img-side {
+                flex: none;
+                height: 50vh;
+            }
+
+            .hero-text-side {
+                flex: none;
+                padding: 60px 24px
+            }
+
+            .hero-text-side::before {
+                display: none;
+            }
+
+            .h-title {
+                font-size: 48px
+            }
+
+            .p-img-wrapper {
+                height: 360px
+            }
+
+            .section-bestsellers {
+                padding: 60px 24px;
+            }
+
+            .sect-header {
+                margin-bottom: 40px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+        }
+
+        /* Responsive Mobile First Tweaks (< 380px) */
+        @media (max-width:380px) {
+            .h-title {
+                font-size: 38px;
+            }
+
+            .h-desc {
+                font-size: 14px;
+            }
+
+            .btn-elegant {
+                padding: 16px 24px;
+                font-size: 11px;
+            }
+
+            .s-title {
+                font-size: 36px;
+            }
+
+            .prod-card {
+                flex: 0 0 260px;
+            }
+
+            .p-img-wrapper {
+                height: 280px;
+            }
+        }
+    </style></head>
+
+<body>
+    <header class="header">
+        <div class="nav-links">
+            <a href="#" class="n-link">Skincare</a>
+            <a href="#" class="n-link">Corpo</a>
+        </div>
+        <div class="brand">aura.</div>
+        <div class="nav-actions">
+            <i data-lucide="search" class="action-icon" style="width:20px;height:20px"></i>
+            <i data-lucide="user" class="action-icon" style="width:20px;height:20px"></i>
+            <div style="position:relative">
+                <i data-lucide="shopping-bag" class="action-icon" style="width:20px;height:20px"></i>
+                <span
+                    style="position:absolute;top:-8px;right:-8px;background:#3d3129;color:#fff;font-size:10px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #eaddd4">1</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-img-side">
+            <img class="h-img" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1000&h=1600&fit=crop"
+                alt="Natural Skincare Model">
+        </div>
+        <div class="hero-text-side">
+            <div class="h-tag">A Coleção Radiance</div>
+            <h1 class="h-title">Beleza na sua<br>forma mais <i>pura</i>.</h1>
+            <p class="h-desc">Fórmulas veganas, ingredientes orgânicos certificados e eficácia clinicamente comprovada
+                para o brilho natural da sua pele.</p>
+            <a href="#" class="btn-elegant">
+                Descubra a rotina
+                <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="section-bestsellers">
+        <div class="sect-header">
+            <h2 class="s-title">Nossos <i>favoritos</i></h2>
+            <a href="#" class="s-link">Ver todos os produtos <i data-lucide="chevron-right"
+                    style="width:14px;height:14px"></i></a>
+        </div>
+
+        <div class="product-slider">
+            <a href="#" class="prod-card">
+                <div class="p-img-wrapper">
+                    <span class="p-tag">Mais Vendido</span>
+                    <img class="p-img"
+                        src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=800&fit=crop"
+                        alt="Sérum Renovador">
+                    <div class="add-cart-mini"><i data-lucide="plus" style="width:20px;height:20px"></i></div>
+                </div>
+                <div class="p-info">
+                    <h3 class="p-name">Sérum Botanical Glow</h3>
+                    <p class="p-type">Tratamento Facial</p>
+                    <p class="p-price">R$ 289</p>
+                </div>
+            </a>
+
+            <a href="#" class="prod-card">
+                <div class="p-img-wrapper">
+                    <span class="p-tag">Novo</span>
+                    <img class="p-img"
+                        src="https://images.unsplash.com/photo-1599305090598-fe179d501227?w=600&h=800&fit=crop"
+                        alt="Creme Hidratante">
+                    <div class="add-cart-mini"><i data-lucide="plus" style="width:20px;height:20px"></i></div>
+                </div>
+                <div class="p-info">
+                    <h3 class="p-name">Hidratante Cloud Cream</h3>
+                    <p class="p-type">Hidratação Profunda</p>
+                    <p class="p-price">R$ 195</p>
+                </div>
+            </a>
+
+            <a href="#" class="prod-card">
+                <div class="p-img-wrapper" style="background:#e8eceb">
+                    <span class="p-tag">Corpo</span>
+                    <img class="p-img"
+                        src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=800&fit=crop"
+                        alt="Óleo Corporal">
+                    <div class="add-cart-mini"><i data-lucide="plus" style="width:20px;height:20px"></i></div>
+                </div>
+                <div class="p-info">
+                    <h3 class="p-name">Óleo Corporal Infusion</h3>
+                    <p class="p-type">Nutrição</p>
+                    <p class="p-price">R$ 150</p>
+                </div>
+            </a>
+
+            <a href="#" class="prod-card">
+                <div class="p-img-wrapper" style="background:#ece5e3">
+                    <span class="p-tag">Essencial</span>
+                    <img class="p-img"
+                        src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?w=600&h=800&fit=crop"
+                        alt="Gel de Limpeza">
+                    <div class="add-cart-mini"><i data-lucide="plus" style="width:20px;height:20px"></i></div>
+                </div>
+                <div class="p-info">
+                    <h3 class="p-name">Purifying Cleanser</h3>
+                    <p class="p-type">Limpeza Facial</p>
+                    <p class="p-price">R$ 120</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
+

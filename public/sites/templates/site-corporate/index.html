@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Corp — Innovation Partners</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        /* Corporate Stripes/Shapes Background */
+        .bg-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+            transform: skewY(-6deg);
+            transform-origin: top left
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            opacity: 0.05
+        }
+
+        .s1 {
+            width: 200%;
+            height: 400px;
+            top: 20%;
+            left: -50%
+        }
+
+        .s2 {
+            width: 150%;
+            height: 200px;
+            top: 60%;
+            left: -25%;
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8)
+        }
+
+        /* Header */
+        .header {
+            padding: 24px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #0f172a
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color .3s
+        }
+
+        .nav-link:hover {
+            color: #2563eb
+        }
+
+        .header-btns {
+            display: flex;
+            gap: 16px;
+            align-items: center
+        }
+
+        .btn-login {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 14px
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            background: #2563eb;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.39);
+            transition: all .3s
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            transform: translateY(-2px)
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 8% 60px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 1
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px
+        }
+
+        .corp-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 24px
+        }
+
+        .h-title {
+            font-size: 56px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: #0f172a;
+            margin-bottom: 24px
+        }
+
+        .h-desc {
+            font-size: 18px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 40px
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center
+        }
+
+        .btn-secondary {
+            padding: 12px 24px;
+            background: #f8fafc;
+            color: #0f172a;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid #e2e8f0;
+            transition: all .3s
+        }
+
+        .btn-secondary:hover {
+            background: #f1f5f9
+        }
+
+        /* Hero Image/Stats */
+        .hero-visual {
+            flex: 1;
+            position: relative
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15)
+        }
+
+        .stat-card {
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            background: #fff;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid #f1f5f9;
+            animation: float 6s ease-in-out infinite
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .stat-info span {
+            display: block;
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a
+        }
+
+        .stat-info p {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 2px
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        /* Trust & Companies */
+        .trust {
+            padding: 60px 8%;
+            text-align: center;
+            border-top: 1px solid #f1f5f9;
+            margin-top: 60px;
+            background: #fafafa
+        }
+
+        .t-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 32px
+        }
+
+        .companies {
+            display: flex;
+            justify-content: space-center;
+            gap: 60px;
+            flex-wrap: wrap;
+            align-items: center;
+            opacity: 0.6
+        }
+
+        .comp-logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        /* Services Grid */
+        .services {
+            padding: 100px 8%
+        }
+
+        .s-header {
+            text-align: center;
+            margin-bottom: 60px
+        }
+
+        .s-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 16px
+        }
+
+        .s-header p {
+            font-size: 16px;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        .s-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px
+        }
+
+        .s-card {
+            padding: 40px 32px;
+            background: #fff;
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.03);
+            transition: all .3s
+        }
+
+        .s-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.1);
+            border-color: #bfdbfe
+        }
+
+        .sc-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px
+        }
+
+        .sc-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0f172a
+        }
+
+        .sc-desc {
+            font-size: 15px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 24px
+        }
+
+        .sc-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        /* Mobile Adjustments */
+        @media(max-width:900px) {
+            .nav-menu {
+                display: none
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 60px
+            }
+
+            .hero-actions {
+                justify-content: center
+            }
+
+            .stat-card {
+                left: 20px;
+                right: 20px;
+                bottom: -20px
+            }
+
+            .s-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* Responsive Mobile First Tweaks (< 380px) */
+        @media (max-width: 380px) {
+            .header {
+                padding: 16px;
+            }
+
+            .hero {
+                padding: 40px 16px;
+            }
+
+            .h-title {
+                font-size: 34px;
+            }
+
+            .h-desc {
+                font-size: 14px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-img {
+                height: 300px;
+            }
+
+            .stat-card {
+                padding: 16px;
+                left: 10px;
+                right: 10px;
+            }
+
+            .stat-info span {
+                font-size: 20px;
+            }
+
+            .trust {
+                padding: 40px 16px;
+            }
+
+            .companies {
+                gap: 24px;
+            }
+
+            .services {
+                padding: 60px 16px;
+            }
+
+            .s-header h2 {
+                font-size: 28px;
+            }
+
+            .s-card {
+                padding: 24px 20px;
+            }
+        }
+    </style></head>
+
+<body>
+    <div class="bg-shapes">
+        <div class="shape s1"></div>
+        <div class="shape s2"></div>
+    </div>
+
+    <header class="header">
+        <div class="brand">
+            <i data-lucide="box" style="width:28px;height:28px;color:#2563eb"></i>
+            Nexus Corp
+        </div>
+        <div class="nav-menu">
+            <a href="#" class="nav-link">Soluções</a>
+            <a href="#" class="nav-link">Indústrias</a>
+            <a href="#" class="nav-link">Casos de Sucesso</a>
+            <a href="#" class="nav-link">Empresa</a>
+        </div>
+        <div class="header-btns">
+            <a href="#" class="btn-login">Entrar</a>
+            <a href="#" class="btn-primary">Fale Conosco</a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-text">
+            <div class="corp-badge">Consultoria Estratégica & Tech</div>
+            <h1 class="h-title">Transforme a operação.<br>Escale os resultados.</h1>
+            <p class="h-desc">A Nexus ajuda empresas globais a modernizar sua infraestrutura financeira e tecnológica
+                com estratégias data-driven sólidas.</p>
+            <div class="hero-actions">
+                <a href="#" class="btn-primary">Agendar Consultoria</a>
+                <a href="#" class="btn-secondary">Conheça os Serviços</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img class="hero-img"
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=1000&fit=crop"
+                alt="Corporate Team">
+            <div class="stat-card">
+                <div class="stat-icon"><i data-lucide="trending-up" style="width:24px;height:24px"></i></div>
+                <div class="stat-info">
+                    <span>94%</span>
+                    <p>Clientes Retidos em 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="trust">
+        <h3 class="t-title">Empresas que confiam na Nexus</h3>
+        <div class="companies">
+            <div class="comp-logo"><i data-lucide="slack" style="width:24px;height:24px"></i> Slack</div>
+            <div class="comp-logo"><i data-lucide="figma" style="width:24px;height:24px"></i> Figma</div>
+            <div class="comp-logo"><i data-lucide="github" style="width:24px;height:24px"></i> GitHub</div>
+            <div class="comp-logo"><i data-lucide="framer" style="width:24px;height:24px"></i> Framer</div>
+            <div class="comp-logo"><i data-lucide="trello" style="width:24px;height:24px"></i> Trello</div>
+        </div>
+    </div>
+
+    <div class="services">
+        <div class="s-header">
+            <h2>Expertise de ponta a ponta.</h2>
+            <p>Nossa equipe multidisciplinar trabalha lado a lado com seus líderes para entregar valor tangível no
+                primeiro trimestre.</p>
+        </div>
+
+        <div class="s-grid">
+            <div class="s-card">
+                <div class="sc-icon"><i data-lucide="pie-chart" style="width:28px;height:28px"></i></div>
+                <h3 class="sc-title">Finanças e M&A</h3>
+                <p class="sc-desc">Reestruturação financeira, preparação para IPOs e estratégias profundas de fusões e
+                    aquisições (Buy-side/Sell-side).</p>
+                <a href="#" class="sc-link">Saber mais <i data-lucide="arrow-right"
+                        style="width:16px;height:16px"></i></a>
+            </div>
+
+            <div class="s-card">
+                <div class="sc-icon"><i data-lucide="cpu" style="width:28px;height:28px"></i></div>
+                <h3 class="sc-title">Transformação Digital</h3>
+                <p class="sc-desc">Modernização de stack legado, implementação de dados em nuvem e arquitetura de
+                    sistemas escaláveis.</p>
+                <a href="#" class="sc-link">Saber mais <i data-lucide="arrow-right"
+                        style="width:16px;height:16px"></i></a>
+            </div>
+
+            <div class="s-card">
+                <div class="sc-icon"><i data-lucide="users" style="width:28px;height:28px"></i></div>
+                <h3 class="sc-title">Operações Ágeis</h3>
+                <p class="sc-desc">Mapeamento de processos ineficientes e implementação de metodologias OKR/Agile em
+                    escala corporativa.</p>
+                <a href="#" class="sc-link">Saber mais <i data-lucide="arrow-right"
+                        style="width:16px;height:16px"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
+

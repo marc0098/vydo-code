@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sync — App de Produtividade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0e0e0e;
+            color: #ececec;
+            min-height: 100vh;
+            display: flex
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #141414;
+            border-right: 1px solid #222;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 32px;
+            padding: 0 8px
+        }
+
+        .b-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #5e6ad2, #97a1f5);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(94, 106, 210, 0.5)
+        }
+
+        .nav-group {
+            margin-bottom: 24px
+        }
+
+        .nav-title {
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            padding: 0 8px
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            border-radius: 6px;
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all .2s;
+            cursor: pointer
+        }
+
+        .nav-item:hover {
+            background: #1f1f1f;
+            color: #ececec
+        }
+
+        .nav-item.active {
+            background: #1a1d27;
+            color: #8590f0
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .nav-count {
+            font-size: 11px;
+            background: #222;
+            color: #888;
+            padding: 2px 6px;
+            border-radius: 10px
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            background: #0e0e0e;
+            padding: 40px 60px;
+            overflow-y: auto;
+            position: relative
+        }
+
+        /* Subtle Glow Top */
+        .main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20%;
+            width: 60%;
+            height: 200px;
+            background: radial-gradient(ellipse at top, rgba(94, 106, 210, 0.15) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none
+        }
+
+        /* Header Bar */
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 1
+        }
+
+        .view-title {
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid #222;
+            background: transparent;
+            color: #a0a0a0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s;
+            cursor: pointer
+        }
+
+        .btn-icon:hover {
+            background: #1f1f1f;
+            color: #fff
+        }
+
+        .btn-primary {
+            padding: 8px 16px;
+            background: #5e6ad2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background .2s;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2)
+        }
+
+        .btn-primary:hover {
+            background: #6f7bea
+        }
+
+        /* Task Filters */
+        .filters {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 16px;
+            position: relative;
+            z-index: 1
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all .2s
+        }
+
+        .filter-btn:hover {
+            color: #ececec;
+            background: #1a1a1a
+        }
+
+        .filter-btn.active {
+            color: #ececec;
+            background: #222
+        }
+
+        /* Task List */
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: #222;
+            border: 1px solid #222;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: #0e0e0e;
+            transition: background .2s;
+            cursor: pointer;
+            gap: 16px
+        }
+
+        .task-item:hover {
+            background: #141414
+        }
+
+        .t-checkbox {
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid #555;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .2s
+        }
+
+        .task-item:hover .t-checkbox {
+            border-color: #5e6ad2
+        }
+
+        .t-id {
+            font-size: 12px;
+            color: #555;
+            width: 60px;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums
+        }
+
+        .t-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid transparent
+        }
+
+        .status-todo {
+            color: #888;
+            border-color: #333;
+            background: #1a1a1a
+        }
+
+        .status-prog {
+            color: #cb8b39;
+            border-color: rgba(203, 139, 57, 0.2);
+            background: rgba(203, 139, 57, 0.1)
+        }
+
+        .status-done {
+            color: #5e6ad2;
+            border-color: rgba(94, 106, 210, 0.2);
+            background: rgba(94, 106, 210, 0.1)
+        }
+
+        .t-title {
+            font-size: 14px;
+            color: #ececec;
+            flex: 1;
+            font-weight: 500
+        }
+
+        .t-priority {
+            color: #555;
+            display: flex;
+            align-items: center
+        }
+
+        .t-priority.high {
+            color: #cb4f39
+        }
+
+        .t-priority.med {
+            color: #cb8b39
+        }
+
+        .t-date {
+            font-size: 12px;
+            color: #666;
+            width: 80px;
+            text-align: right
+        }
+
+        .t-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #222
+        }
+
+        /* Command Palette Hint */
+        .cmd-hint {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #2a2a2a;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 12px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5)
+        }
+
+        .kbd {
+            background: #2a2a2a;
+            color: #ececec;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 10px;
+            border: 1px solid #333
+        }
+
+        @media(max-width:900px) {
+            .sidebar {
+                display: none
+            }
+
+            .main {
+                padding: 24px
+            }
+
+            .t-date,
+            .t-id,
+            .t-avatar {
+                display: none
+            }
+        }
+
+        /* Responsive Mobile First Tweaks (< 380px) */
+        @media (max-width: 380px) {
+            .main {
+                padding: 16px;
+            }
+
+            .header-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .view-title {
+                font-size: 20px;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .filters {
+                overflow-x: auto;
+                padding-bottom: 12px;
+                white-space: nowrap;
+                margin-bottom: 16px;
+            }
+
+            /* Ocultando scrollbar na barra de filtros mobile */
+            .filters::-webkit-scrollbar {
+                display: none;
+            }
+
+            .task-item {
+                padding: 12px;
+                gap: 12px;
+            }
+
+            .t-title {
+                font-size: 13px;
+            }
+
+            .t-status {
+                padding: 2px 4px;
+                font-size: 10px;
+            }
+
+            .cmd-hint {
+                display: none;
+                /* Ocultar dica de teclado no mobile */
+            }
+
+            .btn-primary {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+    </style></head>
+
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="b-icon"><i data-lucide="layers" style="width:14px;height:14px"></i></div>
+            Sync
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Sua Área</div>
+            <a class="nav-item">
+                <div class="nav-left"><i data-lucide="check-circle" style="width:16px;height:16px"></i> Minhas Tarefas
+                </div>
+                <span class="nav-count">4</span>
+            </a>
+            <a class="nav-item active">
+                <div class="nav-left"><i data-lucide="inbox" style="width:16px;height:16px"></i> Entrada</div>
+                <span class="nav-count" style="background:rgba(94,106,210,0.2);color:#8590f0">12</span>
+            </a>
+            <a class="nav-item">
+                <div class="nav-left"><i data-lucide="clock" style="width:16px;height:16px"></i> Recentes</div>
+            </a>
+        </div>
+
+        <div class="nav-group">
+            <div class="nav-title">Projetos</div>
+            <a class="nav-item">
+                <div class="nav-left"><i data-lucide="hash" style="width:16px;height:16px;color:#cb8b39"></i> Frontend
+                    v2</div>
+            </a>
+            <a class="nav-item">
+                <div class="nav-left"><i data-lucide="hash" style="width:16px;height:16px;color:#cb4f39"></i> API Auth
+                </div>
+            </a>
+            <a class="nav-item">
+                <div class="nav-left"><i data-lucide="hash" style="width:16px;height:16px;color:#5e6ad2"></i> Design
+                    System</div>
+            </a>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="header-bar">
+            <div class="view-title">
+                <i data-lucide="inbox" style="width:24px;height:24px;color:#8590f0"></i>
+                Entrada
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon"><i data-lucide="sliders-horizontal"
+                        style="width:16px;height:16px"></i></button>
+                <button class="btn-primary"><i data-lucide="edit-2" style="width:14px;height:14px"></i> Nova
+                    Tarefa</button>
+            </div>
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active">Tudo</button>
+            <button class="filter-btn">Não lido</button>
+            <button class="filter-btn">Para mim</button>
+            <button class="filter-btn">Menções</button>
+        </div>
+
+        <div class="task-list">
+            <!-- Task 1 -->
+            <div class="task-item">
+                <div class="t-checkbox"></div>
+                <div class="t-id">SYN-142</div>
+                <div class="t-status status-prog"><i data-lucide="circle-dashed" style="width:12px;height:12px"></i> Em
+                    Andamento</div>
+                <div class="t-title">Refatorar fluxo de autenticação para usar tokens JWT</div>
+                <div class="t-priority high"><i data-lucide="arrow-up" style="width:14px;height:14px"></i></div>
+                <div class="t-date">Hoje</div>
+                <img class="t-avatar"
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop">
+            </div>
+
+            <!-- Task 2 -->
+            <div class="task-item">
+                <div class="t-checkbox"></div>
+                <div class="t-id">SYN-138</div>
+                <div class="t-status status-todo"><i data-lucide="circle" style="width:12px;height:12px"></i> A Fazer
+                </div>
+                <div class="t-title">Atualizar variantes do design system (outlines e secundários)</div>
+                <div class="t-priority med"><i data-lucide="minus" style="width:14px;height:14px"></i></div>
+                <div class="t-date">Amanhã</div>
+                <img class="t-avatar"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop">
+            </div>
+
+            <!-- Task 3 -->
+            <div class="task-item">
+                <div class="t-checkbox"></div>
+                <div class="t-id">SYN-135</div>
+                <div class="t-status status-prog"><i data-lucide="circle-dashed" style="width:12px;height:12px"></i> Em
+                    Andamento</div>
+                <div class="t-title">Corrigir navegação mobile não fechando ao alterar a rota</div>
+                <div class="t-priority high"><i data-lucide="arrow-up" style="width:14px;height:14px"></i></div>
+                <div class="t-date">24 Out</div>
+                <img class="t-avatar"
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop">
+            </div>
+
+            <!-- Task 4 -->
+            <div class="task-item">
+                <div class="t-checkbox"><i data-lucide="check" style="width:12px;height:12px;color:#5e6ad2"></i></div>
+                <div class="t-id">SYN-120</div>
+                <div class="t-status status-done"><i data-lucide="check-circle-2" style="width:12px;height:12px"></i>
+                    Concluído</div>
+                <div class="t-title" style="color:#666;text-decoration:line-through">Migrar banco de dados para
+                    PostgreSQL 15
+                </div>
+                <div class="t-priority"><i data-lucide="arrow-down" style="width:14px;height:14px"></i></div>
+                <div class="t-date">22 Out</div>
+                <img class="t-avatar"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                    style="opacity:0.5">
+            </div>
+
+            <!-- Task 5 -->
+            <div class="task-item">
+                <div class="t-checkbox"></div>
+                <div class="t-id">SYN-118</div>
+                <div class="t-status status-todo"><i data-lucide="circle" style="width:12px;height:12px"></i> A Fazer
+                </div>
+                <div class="t-title">Adicionar suporte a dark mode para templates de email</div>
+                <div class="t-priority med"><i data-lucide="minus" style="width:14px;height:14px"></i></div>
+                <div class="t-date">20 Out</div>
+                <img class="t-avatar"
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop">
+            </div>
+        </div>
+
+        <div class="cmd-hint">
+            Pressione <span class="kbd">Ctrl</span> <span class="kbd">K</span> para buscar comandos
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
+

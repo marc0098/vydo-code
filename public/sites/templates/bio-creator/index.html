@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah Marques — Social Media</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #030005;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Y2K Lava-Lamp Mesh Background */
+        .bg-mesh {
+            position: fixed;
+            inset: -50%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 40%, rgba(139, 92, 246, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 80% 30%, rgba(236, 72, 153, 0.5) 0%, transparent 40%),
+                radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(139, 92, 246, 0.4) 0%, transparent 40%);
+            filter: blur(80px);
+            mix-blend-mode: screen;
+            animation: lava-flow 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+            opacity: 0.8;
+        }
+
+        @keyframes lava-flow {
+            0% {
+                transform: scale(1) translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: scale(1.1) translate(10%, -5%) rotate(5deg);
+            }
+
+            66% {
+                transform: scale(0.9) translate(-5%, 15%) rotate(-5deg);
+            }
+
+            100% {
+                transform: scale(1.2) translate(5%, 5%) rotate(10deg);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 440px;
+            padding: 50px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Avatar com "Stories" Pulse Effect */
+        .profile-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #ec4899, #8b5cf6, #06b6d4, #ec4899);
+            animation: spin 3s linear infinite;
+            padding: 4px;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .profile-pulse {
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid rgba(236, 72, 153, 0.5);
+            animation: pulse-ring 2s ease-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.95);
+                opacity: 1;
+                border-width: 3px;
+            }
+
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+                border-width: 1px;
+            }
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .profile-pic {
+            width: 104px;
+            height: 104px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #050505;
+            z-index: 2;
+        }
+
+        /* Textos */
+        .name {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            margin-bottom: 8px;
+            text-align: center;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .bio {
+            font-size: 14px;
+            color: #cbd5e1;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 36px;
+            font-weight: 500;
+            max-width: 340px;
+        }
+
+        /* Glass Cards Extremos */
+        .links-grid {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px) saturate(150%);
+            -webkit-backdrop-filter: blur(24px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-150%) skewX(-15deg);
+            transition: transform 0.8s ease;
+        }
+
+        .link-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(236, 72, 153, 0.5);
+            box-shadow: 0 20px 40px -10px rgba(236, 72, 153, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .link-card:hover::before {
+            transform: translateX(150%) skewX(-15deg);
+        }
+
+        .link-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.15) rotate(5deg);
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: #fff;
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+        }
+
+        .link-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .link-title {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .link-desc {
+            font-size: 12px;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+
+        .link-arrow {
+            color: rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            padding: 4px;
+            width: 28px;
+            height: 28px;
+        }
+
+        .link-card:hover .link-arrow {
+            color: #fff;
+            background: rgba(236, 72, 153, 0.8);
+            transform: translate(2px, -2px) scale(1.1);
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+
+        /* Bloco Featured Premium */
+        .featured-glass {
+            width: 100%;
+            margin-top: 32px;
+            border-radius: 32px;
+            padding: 3px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0.1));
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+            transform: translateY(0);
+            transition: transform 0.4s ease;
+        }
+
+        .featured-glass:hover {
+            transform: translateY(-8px);
+        }
+
+        .featured-content {
+            background: rgba(10, 10, 12, 0.7);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-radius: 29px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .featured-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            margin-bottom: 20px;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .featured-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .featured-glass:hover .featured-img {
+            transform: scale(1.08);
+        }
+
+        .featured-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(139, 92, 246, 0.85);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            z-index: 2;
+        }
+
+        .featured-btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #fff, #e2e8f0);
+            color: #0f172a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            width: 100%;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .featured-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            background: #fff;
+        }
+
+        /* Redes Sociais no Bottom */
+        .socials {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .social-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            transform: translateY(-5px) scale(1.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-btn:hover i {
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+        }
+
+        /* Animações de Entrada (Staggering) */
+        .fade-up {
+            animation: fadeUp .8s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .d-1 {
+            animation-delay: 0.1s;
+        }
+
+        .d-2 {
+            animation-delay: 0.2s;
+        }
+
+        .d-3 {
+            animation-delay: 0.3s;
+        }
+
+        .d-4 {
+            animation-delay: 0.4s;
+        }
+
+        /* Responsive Mobile First Tweaks */
+        @media (max-width: 380px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .name {
+                font-size: 24px;
+            }
+
+            .profile-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-pic {
+                width: 86px;
+                height: 86px;
+            }
+
+            .link-card {
+                padding: 14px 16px;
+            }
+
+            .link-icon {
+                width: 36px;
+                height: 36px;
+                margin-right: 12px;
+            }
+
+            .link-title {
+                font-size: 14px;
+            }
+
+            .link-desc {
+                font-size: 11px;
+            }
+
+            .featured-content {
+                padding: 16px;
+            }
+
+            .featured-img-wrap {
+                height: 140px;
+            }
+        }
+    </style></head>
+
+<body>
+    <!-- Background Mesh Cativante -->
+    <div class="bg-mesh"></div>
+
+    <div class="container">
+        <!-- Avatar com Pulsos e Story Ring -->
+        <div class="profile-wrapper fade-up">
+            <div class="profile-pulse"></div>
+            <div class="profile-ring"></div>
+            <img class="profile-pic"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces"
+                alt="Sarah Marques">
+        </div>
+
+        <h1 class="name fade-up d-1">Sarah Marques ✨</h1>
+        <p class="bio fade-up d-1">Estrategista Digital & Relacionamento ✦ Transformo marcas normais em negócios virais
+            com engajamento focado na conversão real.</p>
+
+        <!-- Links Principais - Social Media / Business -->
+        <div class="links-grid fade-up d-2">
+            <a href="#" class="link-card">
+                <div class="link-icon"><i data-lucide="handshake" style="width:20px;height:20px;fill:currentColor"></i>
+                </div>
+                <div class="link-text">
+                    <span class="link-title">Fechamento de Parcerias</span>
+                    <span class="link-desc">Fale comigo no WhatsApp para negócios</span>
+                </div>
+                <div class="link-arrow">
+                    <i data-lucide="arrow-up-right" style="width:20px;height:20px"></i>
+                </div>
+            </a>
+
+            <a href="#" class="link-card">
+                <div class="link-icon"><i data-lucide="briefcase" style="width:20px;height:20px"></i></div>
+                <div class="link-text">
+                    <span class="link-title">Baixe Meu Mídia Kit</span>
+                    <span class="link-desc">Portfólio em PDF com cases de sucesso</span>
+                </div>
+                <div class="link-arrow">
+                    <i data-lucide="download" style="width:20px;height:20px"></i>
+                </div>
+            </a>
+
+            <a href="#" class="link-card">
+                <div class="link-icon"><i data-lucide="bar-chart-2" style="width:20px;height:20px"></i></div>
+                <div class="link-text">
+                    <span class="link-title">Consultoria de Perfil</span>
+                    <span class="link-desc">Agende uma análise estratégica da sua bio e feed</span>
+                </div>
+                <div class="link-arrow">
+                    <i data-lucide="arrow-up-right" style="width:20px;height:20px"></i>
+                </div>
+            </a>
+
+            <a href="#" class="link-card">
+                <div class="link-icon"><i data-lucide="layers" style="width:20px;height:20px"></i></div>
+                <div class="link-text">
+                    <span class="link-title">Pacotes de Gestão</span>
+                    <span class="link-desc">Descubra os planos de assessoria de redes sociais</span>
+                </div>
+                <div class="link-arrow">
+                    <i data-lucide="arrow-up-right" style="width:20px;height:20px"></i>
+                </div>
+            </a>
+        </div>
+
+        <!-- Banner Glass Destacado -->
+        <div class="featured-glass fade-up d-3">
+            <div class="featured-content">
+                <div class="featured-img-wrap">
+                    <div class="featured-tag">🔥 MENTORIA VIP</div>
+                    <img class="featured-img"
+                        src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop"
+                        alt="Reunião">
+                </div>
+
+                <h3 style="font-family:'Syne';font-size:20px;margin-bottom:8px;font-weight:800;letter-spacing:-0.02em;">
+                    Mentoria: Mapa da Conversão</h3>
+                <p style="font-size:13px;color:#cbd5e1;margin-bottom:20px;font-weight:400;">Aprenda a estruturar o funil
+                    completo no seu perfil. Vagas extremamente limitadas neste mês.</p>
+                <a href="#" class="featured-btn">Garantir Minha Vaga no Checkout</a>
+            </div>
+        </div>
+
+        <!-- Redes Sociais Interativas -->
+        <div class="socials fade-up d-4">
+            <a href="#" class="social-btn" aria-label="Instagram"><i data-lucide="instagram"
+                    style="width:22px;height:22px"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin"
+                    style="width:22px;height:22px"></i></a>
+            <a href="#" class="social-btn" aria-label="Twitter"><i data-lucide="twitter"
+                    style="width:22px;height:22px"></i></a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>
+

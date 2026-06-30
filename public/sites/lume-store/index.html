@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumé Fashion Store</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --rose: #f0a0c0;
+            --dark: #08050d;
+            --card: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #faf5ff;
+            --muted: rgba(250, 245, 255, 0.5)
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--rose)
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 60px;
+            background: linear-gradient(to bottom, rgba(8, 5, 13, .95), transparent);
+            transition: all .4s
+        }
+
+        nav.scrolled {
+            backdrop-filter: blur(20px);
+            background: rgba(8, 5, 13, .97);
+            padding: 16px 60px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .nl {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--rose);
+            letter-spacing: .1em
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            transition: color .3s
+        }
+
+        .nav-links a:hover {
+            color: var(--rose)
+        }
+
+        .nc {
+            background: var(--rose);
+            color: var(--dark);
+            padding: 10px 28px;
+            font-size: 12px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all .3s
+        }
+
+        .nc:hover {
+            background: #ffc0da;
+            transform: translateY(-1px)
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #08050d 0%, #150820 50%, #200d30 100%)
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(240, 160, 192, .15) 0%, transparent 60%)
+        }
+
+        .hero-text {
+            position: relative;
+            padding: 0 60px;
+            max-width: 600px
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: .4em;
+            color: var(--rose);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp .8s .2s forwards
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(52px, 8vw, 100px);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--text);
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp .8s .4s forwards
+        }
+
+        .hero-title em {
+            color: var(--rose)
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp .8s .6s forwards
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp .8s .8s forwards
+        }
+
+        .btn-fill {
+            background: var(--rose);
+            color: var(--dark);
+            padding: 14px 40px;
+            font-size: 13px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all .3s
+        }
+
+        .btn-fill:hover {
+            background: #ffc0da;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(240, 160, 192, .3)
+        }
+
+        .btn-line {
+            background: transparent;
+            color: var(--text);
+            padding: 14px 40px;
+            font-size: 13px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border: 1px solid rgba(250, 245, 255, .2);
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .btn-line:hover {
+            border-color: var(--rose);
+            color: var(--rose)
+        }
+
+        .hero-right {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 16px;
+            padding-right: 60px
+        }
+
+        .hpanel {
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--card);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px)
+        }
+
+        .hp1 {
+            width: 200px;
+            height: 320px;
+            background: linear-gradient(135deg, #1a0830 0%, #3d1060 50%, #6b1a90 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            animation: cardFloat 5s ease-in-out infinite
+        }
+
+        .hp2 {
+            width: 160px;
+            height: 240px;
+            background: linear-gradient(135deg, #0a0520 0%, #200a50 50%, #3d0a70 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            animation: cardFloat 5s ease-in-out infinite;
+            animation-delay: -2.5s;
+            align-self: flex-end
+        }
+
+        @keyframes cardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-12px)
+            }
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* FEATURED */
+        .section {
+            padding: 100px 60px
+        }
+
+        .s-tag {
+            font-size: 10px;
+            letter-spacing: .4em;
+            color: var(--rose);
+            text-transform: uppercase;
+            margin-bottom: 12px
+        }
+
+        .s-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 56px
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px
+        }
+
+        .product {
+            cursor: pointer;
+            transition: transform .3s
+        }
+
+        .product:hover {
+            transform: translateY(-6px)
+        }
+
+        .product-img {
+            aspect-ratio: 3/4;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            position: relative
+        }
+
+        .pimg1 {
+            background: linear-gradient(135deg, #1a0830, #4d1080)
+        }
+
+        .pimg2 {
+            background: linear-gradient(135deg, #200d30, #600a60)
+        }
+
+        .pimg3 {
+            background: linear-gradient(135deg, #0d0820, #2d0868)
+        }
+
+        .pimg4 {
+            background: linear-gradient(135deg, #1a0020, #500040)
+        }
+
+        .product-emoji {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            transition: transform .4s
+        }
+
+        .product:hover .product-emoji {
+            transform: scale(1.05)
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--rose);
+            color: var(--dark);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            padding: 4px 10px;
+            text-transform: uppercase
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            color: var(--text);
+            margin-bottom: 4px
+        }
+
+        .product-brand {
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 8px
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--rose)
+        }
+
+        .old-price {
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: line-through;
+            margin-left: 8px
+        }
+
+        /* BANNER */
+        .banner {
+            margin: 0 60px;
+            border-radius: 24px;
+            padding: 80px 60px;
+            background: linear-gradient(135deg, #1a0530 0%, #3d0868 50%, #600a80 100%);
+            position: relative;
+            overflow: hidden;
+            text-align: center
+        }
+
+        .banner::before {
+            content: '✦';
+            position: absolute;
+            font-size: 400px;
+            color: rgba(240, 160, 192, .05);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none
+        }
+
+        .banner-tag {
+            font-size: 10px;
+            letter-spacing: .4em;
+            color: var(--rose);
+            text-transform: uppercase;
+            margin-bottom: 16px
+        }
+
+        .banner-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 400;
+            color: var(--text);
+            margin-bottom: 16px
+        }
+
+        .banner-sub {
+            font-size: 16px;
+            color: rgba(250, 245, 255, .6);
+            margin-bottom: 40px
+        }
+
+        /* LOOKBOOK */
+        .look-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 400px 300px;
+            gap: 16px;
+            margin-top: 56px
+        }
+
+        .look-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            transition: transform .4s;
+            cursor: pointer
+        }
+
+        .look-card:hover {
+            transform: scale(1.02)
+        }
+
+        .lc1 {
+            background: linear-gradient(135deg, #0a0520, #2d1060, #5018a0);
+            grid-row: span 2
+        }
+
+        .lc2 {
+            background: linear-gradient(135deg, #1a0830, #4d0a60)
+        }
+
+        .lc3 {
+            background: linear-gradient(135deg, #0d1830, #0a3066)
+        }
+
+        .lc4 {
+            background: linear-gradient(135deg, #1a1030, #3d2060)
+        }
+
+        .look-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(8, 5, 13, .85), transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px
+        }
+
+        .lo-cat {
+            font-size: 9px;
+            letter-spacing: .3em;
+            color: var(--rose);
+            text-transform: uppercase;
+            margin-bottom: 6px
+        }
+
+        .lo-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--text)
+        }
+
+        footer {
+            padding: 80px 60px 40px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 60px
+        }
+
+        .ft {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start
+        }
+
+        .f-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--rose)
+        }
+
+        .f-sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 8px
+        }
+
+        .f-links {
+            display: flex;
+            gap: 40px;
+            list-style: none
+        }
+
+        .f-links a {
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: .05em;
+            transition: color .3s
+        }
+
+        .f-links a:hover {
+            color: var(--rose)
+        }
+
+        .fb {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all .8s cubic-bezier(.25, .46, .45, .94)
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        @media(max-width:768px) {
+            nav {
+                padding: 20px 24px
+            }
+
+            .nav-links,
+            .nc {
+                display: none
+            }
+
+            .hero-text {
+                padding: 0 24px
+            }
+
+            .hero-right {
+                display: none
+            }
+
+            .section {
+                padding: 72px 24px
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .banner {
+                margin: 0 24px;
+                padding: 48px 24px
+            }
+
+            .look-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto
+            }
+
+            .lc1 {
+                grid-row: auto
+            }
+
+            footer {
+                padding: 60px 24px 40px
+            }
+
+            .ft {
+                flex-direction: column;
+                gap: 32px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+        <div class="nl">Lumé</div>
+        <ul class="nav-links">
+            <li><a href="#">Coleções</a></li>
+            <li><a href="#lookbook">Lookbook</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+        <button class="nc">Comprar Agora</button>
+    </nav>
+    <section class="hero">
+        <div class="hero-text">
+            <p class="eyebrow">Nova Coleção — Outono 2024</p>
+            <h1 class="hero-title">Moda que<br>fala por <em>você</em></h1>
+            <p class="hero-desc">Peças exclusivas que unem estética contemporânea com materiais premium. Para mulheres
+                que não seguem tendências — as criam.</p>
+            <div class="hero-actions">
+                <button class="btn-fill">Explorar Coleção</button>
+                <button class="btn-line">Ver Lookbook</button>
+            </div>
+        </div>
+        <div class="hero-right">
+            <div class="hpanel hp1">👗</div>
+            <div class="hpanel hp2">✨</div>
+        </div>
+    </section>
+    <section class="section" id="products">
+        <p class="s-tag reveal">Destaques</p>
+        <h2 class="s-title reveal">Peças da<br><em>temporada</em></h2>
+        <div class="products reveal">
+            <div class="product">
+                <div class="product-img pimg1">
+                    <div class="product-emoji">👗</div><span class="product-tag">Novo</span>
+                </div>
+                <p class="product-brand">Lumé Studio</p>
+                <p class="product-name">Vestido Aura Midnight</p>
+                <p class="product-price">R$ 890<span class="old-price">R$ 1.200</span></p>
+            </div>
+            <div class="product">
+                <div class="product-img pimg2">
+                    <div class="product-emoji">🧥</div>
+                </div>
+                <p class="product-brand">Lumé Premium</p>
+                <p class="product-name">Blazer Ethereal Rose</p>
+                <p class="product-price">R$ 1.290</p>
+            </div>
+            <div class="product">
+                <div class="product-img pimg3">
+                    <div class="product-emoji">👠</div><span class="product-tag">-30%</span>
+                </div>
+                <p class="product-brand">Lumé Studio</p>
+                <p class="product-name">Sandália Celestial</p>
+                <p class="product-price">R$ 690<span class="old-price">R$ 990</span></p>
+            </div>
+            <div class="product">
+                <div class="product-img pimg4">
+                    <div class="product-emoji">👜</div>
+                </div>
+                <p class="product-brand">Lumé Icons</p>
+                <p class="product-name">Bolsa Velvet Noir</p>
+                <p class="product-price">R$ 2.100</p>
+            </div>
+        </div>
+    </section>
+    <div class="banner reveal">
+        <p class="banner-tag">Oferta Especial</p>
+        <h2 class="banner-title">20% off na<br>primeira compra</h2>
+        <p class="banner-sub">Use o código LUME20 no checkout</p>
+        <button class="btn-fill">Aproveitar Oferta</button>
+    </div>
+    <section class="section" id="lookbook">
+        <p class="s-tag reveal">Lookbook</p>
+        <h2 class="s-title reveal">Inverno 2024</h2>
+        <div class="look-grid reveal">
+            <div class="look-card lc1">🌙<div class="look-overlay">
+                    <p class="lo-cat">Editorial</p>
+                    <p class="lo-name">Night Bloom Collection</p>
+                </div>
+            </div>
+            <div class="look-card lc2">🌸<div class="look-overlay">
+                    <p class="lo-cat">Casual</p>
+                    <p class="lo-name">Blush & Minimal</p>
+                </div>
+            </div>
+            <div class="look-card lc3">⭐<div class="look-overlay">
+                    <p class="lo-cat">Workwear</p>
+                    <p class="lo-name">Power Femme</p>
+                </div>
+            </div>
+            <div class="look-card lc4">💎<div class="look-overlay">
+                    <p class="lo-cat">Evening</p>
+                    <p class="lo-name">Velvet Dreams</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="ft reveal">
+            <div>
+                <div class="f-logo">Lumé</div>
+                <p class="f-sub">Fashion Store · São Paulo, Brasil</p>
+            </div>
+            <ul class="f-links">
+                <li><a href="#">Coleções</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Newsletter</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </div>
+        <div class="fb"><span>© 2024 Lumé Fashion. Todos os direitos reservados.</span><span>Feito com ♥ em São
+                Paulo</span></div>
+    </footer>
+    <script>
+        window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 50));
+        const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible') }), { threshold: .1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+
+</html>

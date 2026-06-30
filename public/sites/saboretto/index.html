@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saboretto Ristorante</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,300;1,400&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --amber: #ff8c42;
+            --gold: #c9761e;
+            --dark: #0a0400;
+            --card: rgba(255, 140, 66, .06);
+            --border: rgba(255, 140, 66, .15);
+            --text: #fdf3e7;
+            --muted: rgba(253, 243, 231, .5)
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--amber)
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 60px;
+            transition: all .4s
+        }
+
+        nav.scrolled {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 4, 0, .95);
+            padding: 16px 60px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .nl {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--amber)
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            transition: color .3s
+        }
+
+        .nav-links a:hover {
+            color: var(--amber)
+        }
+
+        .nc {
+            background: var(--amber);
+            color: var(--dark);
+            padding: 10px 28px;
+            font-size: 12px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all .3s
+        }
+
+        .nc:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 140, 66, .4)
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0400 0%, #1e0a00 40%, #3d1400 70%, #1a0800 100%)
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 60% 50%, rgba(255, 140, 66, .15) 0%, transparent 60%)
+        }
+
+        .hero-text {
+            position: relative;
+            padding: 0 60px;
+            max-width: 620px;
+            z-index: 1
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: .4em;
+            color: var(--amber);
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp .8s .2s forwards
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(52px, 8vw, 96px);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--text);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeUp .8s .4s forwards
+        }
+
+        .hero-title em {
+            color: var(--amber);
+            font-style: italic
+        }
+
+        .hero-sub {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--muted);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp .8s .6s forwards
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            opacity: 0;
+            animation: fadeUp .8s .8s forwards
+        }
+
+        .btn-a {
+            background: var(--amber);
+            color: var(--dark);
+            padding: 14px 40px;
+            font-size: 13px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all .3s
+        }
+
+        .btn-a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 140, 66, .4)
+        }
+
+        .btn-o {
+            background: transparent;
+            color: var(--text);
+            padding: 14px 40px;
+            font-size: 13px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            border: 1px solid rgba(253, 243, 231, .2);
+            cursor: pointer;
+            transition: all .3s
+        }
+
+        .btn-o:hover {
+            border-color: var(--amber);
+            color: var(--amber)
+        }
+
+        .hero-decor {
+            position: absolute;
+            right: 100px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: .15;
+            font-size: 300px;
+            pointer-events: none;
+            user-select: none
+        }
+
+        @keyframes fadeUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* MENU */
+        .section {
+            padding: 100px 60px
+        }
+
+        .s-tag {
+            font-size: 10px;
+            letter-spacing: .4em;
+            color: var(--amber);
+            text-transform: uppercase;
+            margin-bottom: 12px
+        }
+
+        .s-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 56px
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            background: var(--border)
+        }
+
+        .menu-cat {
+            background: var(--dark);
+            padding: 48px 40px
+        }
+
+        .mc-tag {
+            font-size: 10px;
+            letter-spacing: .3em;
+            color: var(--amber);
+            text-transform: uppercase;
+            margin-bottom: 20px
+        }
+
+        .mc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 24px
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .menu-item:last-child {
+            border-bottom: none
+        }
+
+        .mi-name {
+            font-size: 15px;
+            color: var(--text)
+        }
+
+        .mi-desc {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px
+        }
+
+        .mi-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--amber);
+            white-space: nowrap;
+            margin-left: 16px
+        }
+
+        /* AMBIANCE */
+        .ambiance {
+            background: linear-gradient(135deg, #1e0a00, #3d1800, #1a0a00);
+            padding: 100px 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center
+        }
+
+        .amb-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+
+        .amb-img {
+            border-radius: 12px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px
+        }
+
+        .ai1 {
+            background: linear-gradient(135deg, #2d1000, #6b2800);
+            animation: cardFloat 4s ease-in-out infinite
+        }
+
+        .ai2 {
+            background: linear-gradient(135deg, #1a0800, #4d1600);
+            animation: cardFloat 4s ease-in-out infinite;
+            animation-delay: -2s
+        }
+
+        .ai3 {
+            background: linear-gradient(135deg, #200c00, #5a1e00);
+            animation: cardFloat 4s ease-in-out infinite;
+            animation-delay: -1s
+        }
+
+        .ai4 {
+            background: linear-gradient(135deg, #180600, #3d1000);
+            animation: cardFloat 4s ease-in-out infinite;
+            animation-delay: -3s
+        }
+
+        @keyframes cardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-8px)
+            }
+        }
+
+        .amb-tag {
+            font-size: 10px;
+            letter-spacing: .4em;
+            color: var(--amber);
+            text-transform: uppercase;
+            margin-bottom: 16px
+        }
+
+        .amb-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 20px
+        }
+
+        .amb-desc {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.8
+        }
+
+        /* RESERVE */
+        .reserve {
+            padding: 100px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .reserve::before {
+            content: '🍷';
+            position: absolute;
+            font-size: 400px;
+            opacity: .04;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none
+        }
+
+        .res-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            position: relative
+        }
+
+        .res-title em {
+            color: var(--amber)
+        }
+
+        .res-sub {
+            font-size: 16px;
+            color: var(--muted);
+            margin-bottom: 48px;
+            position: relative
+        }
+
+        .res-form {
+            display: inline-flex;
+            gap: 0;
+            max-width: 500px;
+            width: 100%;
+            position: relative
+        }
+
+        .res-input {
+            flex: 1;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-right: none;
+            padding: 16px 20px;
+            font-size: 14px;
+            color: var(--text);
+            outline: none;
+            font-family: 'Inter', sans-serif
+        }
+
+        .res-input::placeholder {
+            color: var(--muted)
+        }
+
+        .res-input:focus {
+            border-color: var(--amber)
+        }
+
+        .res-btn {
+            background: var(--amber);
+            color: var(--dark);
+            border: none;
+            padding: 16px 32px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all .3s;
+            white-space: nowrap
+        }
+
+        .res-btn:hover {
+            background: #ffaa66
+        }
+
+        footer {
+            padding: 60px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px
+        }
+
+        .f-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--amber)
+        }
+
+        .f-info {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.8;
+            text-align: center
+        }
+
+        .f-copy {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all .8s cubic-bezier(.25, .46, .45, .94)
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        @media(max-width:768px) {
+            nav {
+                padding: 20px 24px
+            }
+
+            .nav-links,
+            .nc {
+                display: none
+            }
+
+            .hero-text {
+                padding: 0 24px
+            }
+
+            .hero-decor {
+                display: none
+            }
+
+            .section {
+                padding: 72px 24px
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr
+            }
+
+            .ambiance {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 72px 24px
+            }
+
+            .reserve {
+                padding: 72px 24px
+            }
+
+            footer {
+                padding: 40px 24px;
+                flex-direction: column;
+                text-align: center
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+        <div class="nl">Saboretto</div>
+        <ul class="nav-links">
+            <li><a href="#menu">Cardápio</a></li>
+            <li><a href="#ambiance">Ambiente</a></li>
+            <li><a href="#reserve">Reservas</a></li>
+        </ul>
+        <button class="nc">Reservar Mesa</button>
+    </nav>
+    <section class="hero">
+        <div class="hero-text">
+            <p class="eyebrow">Ristorante Italiano · Jardins, São Paulo</p>
+            <h1 class="hero-title">Sabores que<br>tocam a <em>alma</em></h1>
+            <p class="hero-sub">Uma viagem à culinária italiana de alto padrão</p>
+            <div class="hero-actions">
+                <button class="btn-a">Ver Cardápio</button>
+                <button class="btn-o">Fazer Reserva</button>
+            </div>
+        </div>
+        <div class="hero-decor">🍝</div>
+    </section>
+    <section class="section" id="menu">
+        <p class="s-tag reveal">Cardápio</p>
+        <h2 class="s-title reveal">Tradição italiana,<br><em>ingredientes brasileiros</em></h2>
+        <div class="menu-grid reveal">
+            <div class="menu-cat">
+                <p class="mc-tag">Entradas</p>
+                <h3 class="mc-title">Antipasti</h3>
+                <div class="menu-item">
+                    <div>
+                        <p class="mi-name">Burrata della Casa</p>
+                        <p class="mi-desc">Tomate cereja, manjericão e azeite trufado</p>
+                    </div>
+                    <p class="mi-price">R$ 68</p>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <p class="mi-name">Carpaccio di Filetto</p>
+                        <p class="mi-desc">Filé mignon, rúcula e parmesão 24 meses</p>
+                    </div>
+                    <p class="mi-price">R$ 82</p>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <p class="mi-name">Focaccia Trufada</p>
+                        <p class="mi-desc">Azeitona preta, alecrim e trufa negra</p>
+                    </div>
+                    <p class="mi-price">R$ 56</p>
+                </div>
+            </div>
+            <div class="menu-cat">
+                <p class="mc-tag">Principais</p>
+                <h3 class="mc-title">Secondi Piatti</h3>
+                <div class="menu-item">
+                    <div>
+                        <p class="mi-name">Risotto ai Funghi Porcini</p>
+                        <p class="mi-desc">Funghi porcini importados, vinho branco e parmesão</p>
+                    </div>
+                    <p class="mi-price">R$ 112</p>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <p class="mi-name">Tagliatelle al Tartufo</p>
+                        <p class="mi-desc">Massa fresca, manteiga de trufa e bottarga</p>
+                    </div>
+                    <p class="mi-price">R$ 128</p>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <p class="mi-name">Ossobuco alla Milanese</p>
+                        <p class="mi-desc">Pernil de vitela braseado, gremolata e polenta</p>
+                    </div>
+                    <p class="mi-price">R$ 154</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="ambiance" id="ambiance">
+        <div class="amb-visual reveal">
+            <div class="amb-img ai1">🕯️</div>
+            <div class="amb-img ai2">🍷</div>
+            <div class="amb-img ai3">🌿</div>
+            <div class="amb-img ai4">🎻</div>
+        </div>
+        <div class="reveal">
+            <p class="amb-tag">Ambiente</p>
+            <h2 class="amb-title">Uma experiência completa dos sentidos</h2>
+            <p class="amb-desc">Nosso salão foi projetado por um designer italiano para criar uma atmosfera de
+                intimidade e elegância. Música ao vivo às sextas e sábados, adega com mais de 400 rótulos e o melhor
+                serviço à mesa de São Paulo.</p>
+        </div>
+    </section>
+    <section class="reserve" id="reserve">
+        <h2 class="res-title reveal">Reserve sua<br>mesa <em>agora</em></h2>
+        <p class="res-sub reveal">Capacidade limitada. Atendemos de terça a domingo, das 12h às 23h.</p>
+        <div class="res-form reveal">
+            <input class="res-input" type="tel" placeholder="Seu WhatsApp com DDD">
+            <button class="res-btn">Reservar</button>
+        </div>
+    </section>
+    <footer>
+        <div class="f-logo">Saboretto</div>
+        <div class="f-info">R. Oscar Freire, 1234 - Jardins, São Paulo<br>Reservas: (11) 9 9999-9999</div>
+        <p class="f-copy">© 2024 Saboretto Ristorante</p>
+    </footer>
+    <script>
+        window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('scrolled', scrollY > 50));
+        const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible') }), { threshold: .1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    </script>
+</body>
+
+</html>
