@@ -3,120 +3,109 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Clínica Saúde — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#22d3ee}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#0891b2;--acc-10:#0891b21a;--acc-20:#0891b233;--acc-60:#0891b299;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#fff;padding:.85rem 0;box-shadow:0 1px 10px rgba(0,0,0,.05)}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:800;color:#0891b2;letter-spacing:.01em}
+.nav-links{display:flex;gap:1.6rem;font-size:.82rem;color:#525252;font-weight:600}
+.hero{display:grid;grid-template-columns:1fr 1.1fr;gap:3rem;align-items:center;padding:5rem 0}
+.hero-kicker{color:#0891b2;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
+.hero h1{font-size:clamp(2.2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-.02em;margin-top:.7rem}
+.hero h1 .hl{color:#0891b2}
+.hero p{color:#525252;margin:1rem 0 2rem;max-width:500px}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:2.5rem;font-weight:700;font-size:.9rem;background:#0891b2;color:#fff;transition:all .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(8,145,178,.3)}
+.hero-imgs img{border-radius:1.5rem}
+.hero-imgs .main{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero-imgs .sub{position:absolute;bottom:-1.5rem;right:1rem;width:42%;border-radius:1rem;aspect-ratio:3/2;object-fit:cover;box-shadow:0 20px 50px rgba(0,0,0,.15);border:5px solid #fff}
+.hero-imgs{position:relative}
+.serv{padding:4.5rem 0;background:#ecfeff}
+.sect-title{text-align:center;font-size:2rem;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.3rem;margin-top:2.5rem}
+.svc{background:#fff;border-radius:1.2rem;padding:1.8rem;text-align:center;transition:all .25s ease}
+.svc:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(8,145,178,.12)}
+.svc-icon{font-size:2rem;margin-bottom:.8rem}
+.svc h3{font-weight:800;font-size:1.02rem}
+.svc p{color:#737373;font-size:.85rem;margin-top:.35rem}
+.prof{padding:4.5rem 0}
+.doctors{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2.5rem}
+.doc{background:#fff;border:1px solid #e5e7eb;border-radius:1.2rem;overflow:hidden;text-align:center}
+.doc img{width:100%;aspect-ratio:1;object-fit:cover}
+.doc-body{padding:1.2rem 1rem}
+.doc h3{font-weight:800}
+.doc p{color:#0891b2;font-size:.85rem;font-weight:600}
+.agenda{background:#0e7490;color:#fff;border-radius:1.5rem;padding:3.5rem 2rem;text-align:center;margin:0 1.5rem 4.5rem}
+.agenda h2{font-size:1.9rem;font-weight:800}
+.agenda p{color:#cffafe;margin:.5rem auto 2rem;max-width:460px}
+.btn--wa{background:#16a34a}
+.btn--wa:hover{background:#15803d}
+@media(max-width:768px){.hero{grid-template-columns:1fr}.hero-imgs .sub{display:none}}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Vida Plena</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">Vida Plena</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Especialidades</a><a href="https://vydo-code.vercel.app/">Equipe</a><a href="https://vydo-code.vercel.app/">Convênios</a></div>
+</div></nav>
+<section class="wrap hero">
+  <div>
+    <p class="hero-kicker">Clínica multidisciplinar</p>
+    <h1>Saúde que <span class="hl">cuida</span> de verdade</h1>
+    <p>Atendimento humanizado, agenda online em poucos cliques e equipe qualificada para acompanhar você e sua família.</p>
+    <a class="btn" href="https://vydo-code.vercel.app/">📅 Agendar consulta</a>
   </div>
-</nav>
-<section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
-  <h1>Vida Plena<br><span class="grad">saúde que cuida de você</span></h1>
-  <p>Clínica multidisciplinar com agendamento online em poucos cliques.</p>
-  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
-    <a class="btn" style="background:#22d3ee;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
-    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
+  <div class="hero-imgs">
+    <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=1400&q=80" alt="Atendimento" loading="lazy" class="main">
+    <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=700&q=80" alt="Consultório" loading="lazy" class="sub">
   </div>
 </section>
-
-<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+<section class="serv">
   <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Nossas especialidades</h2>
-    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Cuidado completo em um só lugar, com corpo clínico experiente.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
-
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">🦷</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Odontologia</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Limpeza, clareamento, lentes de contato e implantes.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">👁️</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Oftalmologia</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Exames de vista, lentes e cirurgia refrativa.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">🧠</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Psicologia</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Acompanhamento terapêutico presencial e online.</p>
-      </div>
+    <h2 class="sect-title">Nossas especialidades</h2>
+    <div class="grid">
+      <div class="svc"><div class="svc-icon">🩺</div><h3>Clínica geral</h3><p>Check-ups completos e acompanhamento contínuo.</p></div>
+      <div class="svc"><div class="svc-icon">🥗</div><h3>Nutrologia</h3><p>Planos alimentares personalizados e emagrecimento saudável.</p></div>
+      <div class="svc"><div class="svc-icon">🧠</div><h3>Psicologia</h3><p>Terapia online e presencial com horários flexíveis.</p></div>
+      <div class="svc"><div class="svc-icon">🫀</div><h3>Cardiologia</h3><p>Prevenção, exames e acompanhamento do coração.</p></div>
     </div>
   </div>
-</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
-        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">+15</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">especialistas</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
-        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">8k+</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">pacientes atendidos</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
-        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">4.9★</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">avaliação média</div>
-      </div>
-    </div></div>
-</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem">
-        <h3 style="font-weight:700;margin-bottom:.5rem">Agendamento online</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Escolha a especialidade, o dia e o horário em poucos cliques.</p>
-        <a class="btn" style="background:var(--accent);color:#fff;margin-top:1rem;font-size:.85rem" href="https://vydo-code.vercel.app/">Agendar consulta</a>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem">
-        <h3 style="font-weight:700;margin-bottom:.5rem">Convênios aceitos</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Trabalhamos com os principais planos de saúde da região.</p>
-        <a class="btn btn--ghost" style="margin-top:1rem;font-size:.85rem" href="https://vydo-code.vercel.app/">Ver convênios</a>
-      </div>
-    </div></div>
 </section>
-
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Cl%C3%ADnica%20Sa%C3%BAde%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+<section class="wrap prof">
+  <h2 class="sect-title">Conheça a equipe</h2>
+  <div class="doctors">
+    <div class="doc"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="Dra. Camila Reis" loading="lazy"><div class="doc-body"><h3>Dra. Camila Reis</h3><p>Clínica geral · CRM 12345</p></div></div><div class="doc"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="Dr. Pedro Linhares" loading="lazy"><div class="doc-body"><h3>Dr. Pedro Linhares</h3><p>Nutrologia · CRM 67890</p></div></div><div class="doc"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt="Dra. Joana Martins" loading="lazy"><div class="doc-body"><h3>Dra. Joana Martins</h3><p>Psicologia · CRP 05/123</p></div></div>
   </div>
 </section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
+<section class="agenda">
+  <h2>Agende sem ligar, sem esperar</h2>
+  <p>Resposta em menos de 5 minutos nos horários comerciais. Atendemos 30+ convênios.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Cl%C3%ADnica%20Sa%C3%BAde%20no%20site%20da%20VYDO%20CODE.">Agendar pelo WhatsApp</a>
+</section>
 
+<div class="demo-banner" style="--acc:#0891b2">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Cl%C3%ADnica%20Sa%C3%BAde%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

@@ -3,117 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Tech Shop — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#22d3ee}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#22d3ee;--acc-10:#22d3ee1a;--acc-20:#22d3ee33;--acc-60:#22d3ee99;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#0b1019;border-bottom:1px solid #1e2a3a;padding:.85rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:800;letter-spacing:.12em;color:#67e8f9}
+.nav-links{display:flex;gap:1.6rem;font-size:.8rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.1em}
+.nav-links a:hover{color:#fff}
+.hero{background:radial-gradient(ellipse 80% 60% at 50% 0%,#0e749040 0%,#0b1019 70%);padding:4.5rem 1.5rem 4rem;text-align:center}
+.hero-img{max-width:520px;margin:0 auto 2rem;border-radius:1.5rem;box-shadow:0 30px 80px rgba(34,211,238,.18)}
+.hero-kicker{color:#67e8f9;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.4rem);font-weight:800;letter-spacing:-.03em;margin-top:.6rem}
+.hero h1 .hl{color:#22d3ee}
+.hero p{color:#94a3b8;max-width:520px;margin:.9rem auto 2rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:.9rem;font-weight:700;font-size:.9rem;background:#22d3ee;color:#083344;transition:all .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(34,211,238,.35)}
+.btn--ghost{background:transparent;color:#fff;border:1px solid #334155}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:-1rem;padding-bottom:4.5rem}
+.feat{background:#111a26;border:1px solid #1e2a3a;border-radius:1.2rem;padding:1.5rem}
+.feat img{border-radius:.9rem;aspect-ratio:4/3;object-fit:cover;margin-bottom:1rem}
+.feat h3{font-size:1rem;font-weight:700}
+.feat p{color:#94a3b8;font-size:.85rem;margin-top:.3rem}
+.feat .price{color:#22d3ee;font-weight:800;font-size:1.05rem;margin-top:.7rem}
+.stats{background:#0f172a;border-top:1px solid #1e2a3a;display:grid;grid-template-columns:repeat(4,1fr);text-align:center;padding:2.5rem 0}
+.stats div b{display:block;font-size:1.6rem;color:#22d3ee;font-weight:800}
+.stats div span{color:#64748b;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em}
+.btn--wa{background:#16a34a;color:#fff}
+.btn--wa:hover{background:#15803d;color:#fff}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">NEXUS</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Produtos</a><a href="#">Ofertas</a><a href="#">Sobre</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Pedir</a>
-  </div>
-</nav>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">NEXUS</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Produtos</a><a href="https://vydo-code.vercel.app/">Ofertas</a><a href="https://vydo-code.vercel.app/">Suporte</a></div>
+</div></nav>
 <section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:.8rem">OFERTAS DA SEMANA</p>
-  <h1>NEXUS <span class="grad">conectado ao futuro</span></h1>
-  <p>Produtos selecionados, checkout rápido e entrega para todo o Brasil.</p>
-  <a class="btn" style="background:#22d3ee;color:#fff" href="https://vydo-code.vercel.app/">Comprar agora</a>
+  <img src="https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=1400&q=80" alt="Tecnologia" loading="lazy" class="hero-img">
+  <p class="hero-kicker">Black Week · Até 40% OFF</p>
+  <h1>Tecnologia que <span class="hl">conecta</span> seu dia</h1>
+  <p>Produtos selecionados com garantia nacional, entrega expressa e parcelamento em até 12x.</p>
+  <a class="btn" href="https://vydo-code.vercel.app/">Ver ofertas</a> &nbsp; <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Mais vendidos</a>
 </section>
-<section>
-  <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:1.5rem">Destaques da semana</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem">
-
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#22d3ee33 0%,#22d3ee0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">📱</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Smart X Pro</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">512GB · Câmera 108MP</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#22d3ee">R$ 3.299</span>
-            <button class="btn" style="background:#22d3ee26;color:#22d3ee;border:1px solid #22d3ee55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#22d3ee33 0%,#22d3ee0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">💻</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Notebook Titan</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">16GB RAM · SSD 1TB</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#22d3ee">R$ 4.899</span>
-            <button class="btn" style="background:#22d3ee26;color:#22d3ee;border:1px solid #22d3ee55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#22d3ee33 0%,#22d3ee0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🎧</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Fone Pulse ANC</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Cancelamento de ruído ativo</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#22d3ee">R$ 599</span>
-            <button class="btn" style="background:#22d3ee26;color:#22d3ee;border:1px solid #22d3ee55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#22d3ee33 0%,#22d3ee0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">⌚</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Smartwatch Flow</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Monitoramento completo de saúde</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#22d3ee">R$ 899</span>
-            <button class="btn" style="background:#22d3ee26;color:#22d3ee;border:1px solid #22d3ee55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
+<section class="wrap">
+  <div class="features"><div class="feat"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&q=80" alt="Fone Pulse Pro" loading="lazy"><h3>Fone Pulse Pro</h3><p>Cancelamento de ruído, 40h de bateria</p><p class="price">R$ 459</p></div><div class="feat"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700&q=80" alt="Smartwatch Edge" loading="lazy"><h3>Smartwatch Edge</h3><p>Monitoramento 24h, GPS integrado</p><p class="price">R$ 689</p></div><div class="feat"><img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=700&q=80" alt="Relógio Smart" loading="lazy"><h3>Relógio Smart</h3><p>Tela AMOLED, 7 dias de autonomia</p><p class="price">R$ 329</p></div><div class="feat"><img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=700&q=80" alt="Notebook Lite" loading="lazy"><h3>Notebook Lite</h3><p>Ultraleve 1.1kg, 12h de bateria</p><p class="price">R$ 3.899</p></div></div>
+</section>
+<section class="stats">
+  <div><b>12x</b><span>sem juros</span></div><div><b>24h</b><span>envio expresso</span></div><div><b>1 ano</b><span>de garantia</span></div><div><b>4.9★</b><span>+8 mil avaliações</span></div>
 </section>
 
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Tech%20Shop%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
-  </div>
-</section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
-
+<div class="demo-banner" style="--acc:#22d3ee">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Tech%20Shop%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

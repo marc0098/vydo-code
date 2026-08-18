@@ -3,106 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Fitness & Gym — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#34d399}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#4ade80;--acc-10:#4ade801a;--acc-20:#4ade8033;--acc-60:#4ade8099;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Oswald',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#0a0a0acc;backdrop-filter:blur(12px);border-bottom:1px solid #1f3d2e;padding:.9rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:900;color:#4ade80;letter-spacing:.1em;text-transform:uppercase;font-size:1.1rem}
+.nav-links{display:flex;gap:1.6rem;font-size:.8rem;color:#a3a3a3;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.nav-links a:hover{color:#4ade80}
+.hero{position:relative;text-align:center;padding:5.5rem 1.5rem 6rem;background:#0a0a0a;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 20%,#4ade8018 0%,transparent 65%)}
+.hero>*{position:relative}
+.hero-kicker{color:#4ade80;font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;font-weight:800}
+.hero h1{font-size:clamp(2.6rem,6.5vw,4.2rem);font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-top:.8rem}
+.hero h1 em{font-style:normal;color:#4ade80}
+.hero p{color:#a3a3a3;max-width:500px;margin:.9rem auto 2.2rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.9rem;font-weight:800;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s ease}
+.btn--solid{background:#4ade80;color:#0a0a0a}
+.btn--solid:hover{background:#22c55e;transform:translateY(-2px);box-shadow:0 12px 30px rgba(74,222,128,.3)}
+.btn--ghost{border:1px solid #3f3f46;color:#fff}
+.btn--ghost:hover{border-color:#4ade80;color:#4ade80}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-top:-2rem;max-width:1120px;padding:0 1.5rem;position:relative;z-index:2}
+.phase{position:relative;border-radius:1rem;overflow:hidden;aspect-ratio:16/10}
+.phase img{width:100%;height:100%;object-fit:cover;filter:brightness(.65)}
+.phase span{position:absolute;bottom:1rem;left:1.2rem;color:#fff;font-weight:800;font-size:1.1rem;text-transform:uppercase;letter-spacing:.08em}
+.phase b{position:absolute;top:1rem;right:1.2rem;background:#4ade80;color:#0a0a0a;font-weight:900;padding:.3rem .8rem;border-radius:.4rem;font-size:.75rem}
+.plans{padding:5rem 0}
+.sect-title{text-align:center;font-size:2rem;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+.sect-title em{color:#4ade80;font-style:normal}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin-top:2.5rem}
+.plan{background:#141414;border:1px solid #262626;border-radius:1rem;padding:2rem;transition:all .25s ease}
+.plan--featured{border-color:#4ade80;background:#0f2618}
+.plan h3{font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.plan .price{font-size:2.2rem;font-weight:900;margin:.6rem 0}
+.plan .price span{font-size:.9rem;color:#a3a3a3;font-weight:500}
+.plan ul{list-style:none;margin:1.2rem 0}
+.plan li{color:#a3a3a3;font-size:.88rem;padding:.4rem 0;border-bottom:1px solid #262626;display:flex;gap:.5rem}
+.plan li::before{content:"✓";color:#4ade80;font-weight:800}
+.cta{text-align:center;padding:5rem 1.5rem;background:#0f2618;border-top:1px solid #1f3d2e}
+.cta h2{font-size:2rem;font-weight:900;text-transform:uppercase}
+.cta p{color:#a3a3a3;margin:.6rem auto 2rem;max-width:440px}
+.btn--wa{background:#16a34a;color:#fff}
+.btn--wa:hover{background:#15803d}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Iron Forge</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
-  </div>
-</nav>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">Iron Forge</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Modalidades</a><a href="https://vydo-code.vercel.app/">Planos</a><a href="https://vydo-code.vercel.app/">Aulas</a></div>
+</div></nav>
 <section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#34d399;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
-  <h1>Iron Forge<br><span class="grad">supere seus limites</span></h1>
-  <p>Estrutura completa, professores certificados e resultados reais.</p>
-  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
-    <a class="btn" style="background:#34d399;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
-    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
+  <p class="hero-kicker">Academia · Treino funcional · Cross</p>
+  <h1>Supere seus <em>limites</em></h1>
+  <p>Estrutura completa, professores certificados e uma comunidade que te empurra para o próximo nível.</p>
+  <a class="btn btn--solid" href="https://vydo-code.vercel.app/">Testar grátis 3 dias</a> &nbsp; <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Conhecer planos</a>
+</section>
+<div class="phases">
+  <div class="phase"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=700&q=80" alt="Musculação" loading="lazy"><b>LIVRE</b><span>Musculação</span></div><div class="phase"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=700&q=80" alt="Funcional" loading="lazy"><b>EM GRUPO</b><span>Funcional</span></div><div class="phase"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=700&q=80" alt="Cross Training" loading="lazy"><b>COACHING</b><span>Cross Training</span></div>
+</div>
+<section class="wrap plans">
+  <h2 class="sect-title">Planos <em>transparentes</em></h2>
+  <div class="grid">
+    <div class="plan"><h3>Start</h3><p class="price">R$ 99<span>/mês</span></p><ul><li>Acesso à musculação</li><li>Horário livre</li><li>Avaliação física mensal</li></ul><a class="btn btn--ghost" style="width:100%;justify-content:center" href="https://vydo-code.vercel.app/">Começar</a></div>
+    <div class="plan plan--featured"><h3>Pro · Mais vendido</h3><p class="price">R$ 159<span>/mês</span></p><ul><li>Tudo do Start</li><li>Aulas em grupo ilimitadas</li><li>App de treino personalizado</li><li>1 sessão com personal/mês</li></ul><a class="btn btn--solid" style="width:100%;justify-content:center" href="https://vydo-code.vercel.app/">Quero o Pro</a></div>
+    <div class="plan"><h3>Elite</h3><p class="price">R$ 299<span>/mês</span></p><ul><li>Tudo do Pro</li><li>Personal 3x por semana</li><li>Plano nutricional incluso</li><li>Avaliação com InBody</li></ul><a class="btn btn--ghost" style="width:100%;justify-content:center" href="https://vydo-code.vercel.app/">Começar</a></div>
   </div>
 </section>
-
-<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Escolha o seu plano</h2>
-    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Todos incluem acesso à musculação, aula coletiva e app de treino.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
-
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">⚡</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Plano Mensal — R$ 129</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Sem fidelidade, cancele quando quiser.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">🔥</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Plano Semestral — R$ 99/mês</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Economize 23% com o plano de 6 meses.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">💪</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Plano Anual — R$ 79/mês</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">O melhor custo-benefício, com 1 mês grátis.</p>
-      </div>
-    </div>
-  </div>
-</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
-        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">2.400m²</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">de área de treino</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
-        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">40+</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">aulas por semana</div>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
-        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">24h</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">aberto todos os dias</div>
-      </div>
-    </div></div>
+<section class="cta">
+  <h2>Primeira semana por R$ 10</h2>
+  <p>Chega de enrolação. Vem treinar e sentir a diferença na primeira semana — sem fidelidade.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Fitness%20%26%20Gym%20no%20site%20da%20VYDO%20CODE.">Garantir minha vaga</a>
 </section>
 
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Fitness%20%26%20Gym%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
-  </div>
-</section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
-
+<div class="demo-banner" style="--acc:#4ade80">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Fitness%20%26%20Gym%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

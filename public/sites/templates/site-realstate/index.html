@@ -3,102 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Imobiliária Luxo — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair Display&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit+Playfair+Display:ital,wght@0,500;0,700;1,500:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#d4af37}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#d4af37;--acc-10:#d4af371a;--acc-20:#d4af3733;--acc-60:#d4af3799;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Playfair Display',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit+Playfair+Display:ital,wght@0,500;0,700;1,500',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#0b0b0bcc;backdrop-filter:blur(12px);border-bottom:1px solid #2a2415;padding:.9rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.5rem;color:#d4af37;letter-spacing:.1em}
+.nav-links{display:flex;gap:1.6rem;font-size:.8rem;color:#a8a29e;text-transform:uppercase;letter-spacing:.12em}
+.nav-links a:hover{color:#d4af37}
+.hero{position:relative;text-align:center;padding:5.5rem 1.5rem 6rem;background:#0b0b0b;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 20%,#d4af3715 0%,transparent 65%)}
+.hero>*{position:relative}
+.hero-kicker{color:#d4af37;font-size:.72rem;letter-spacing:.35em;text-transform:uppercase;font-weight:700}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,6vw,4rem);font-weight:500;margin-top:.8rem}
+.hero h1 em{font-style:italic;color:#d4af37}
+.hero p{color:#a8a29e;max-width:520px;margin:.9rem auto 2.2rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.9rem;font-weight:700;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;transition:all .2s ease}
+.btn--solid{background:#d4af37;color:#0b0b0b}
+.btn--solid:hover{background:#e9c557;transform:translateY(-2px)}
+.btn--ghost{border:1px solid #3f3a2d;color:#fff}
+.btn--ghost:hover{border-color:#d4af37;color:#d4af37}
+.props{padding:5rem 0}
+.sect-kicker{color:#d4af37;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
+.sect-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:500;margin-top:.4rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.6rem;margin-top:2.5rem}
+.prop{background:#141410;border:1px solid #2a2415;border-radius:.5rem;overflow:hidden;transition:all .3s ease}
+.prop:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4);border-color:#d4af3766}
+.prop-img{aspect-ratio:16/10;object-fit:cover}
+.prop-body{padding:1.4rem}
+.prop-tag{display:inline-block;color:#d4af37;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+.prop h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:500;margin-top:.4rem}
+.prop p{color:#a8a29e;font-size:.85rem;margin-top:.3rem}
+.prop-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #2a2415;margin-top:1rem;padding-top:1rem}
+.prop-price{color:#d4af37;font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:600}
+.prop-feats{color:#a8a29e;font-size:.8rem}
+.testimonial{background:#141410;border:1px solid #2a2415;border-radius:.5rem;padding:3rem 1.5rem;text-align:center;margin:0 1.5rem 4.5rem}
+.testimonial .quote{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:#e7e5e4;max-width:640px;margin:0 auto}
+.testimonial .who{color:#d4af37;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:1.2rem}
+.cta{text-align:center;padding:5rem 1.5rem;background:#0b0b0b;border-top:1px solid #2a2415}
+.cta h2{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:500}
+.cta p{color:#a8a29e;margin:.6rem auto 2rem;max-width:440px}
+.btn--wa{background:#16a34a;color:#fff}
+.btn--wa:hover{background:#15803d}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Elite Imóveis</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
-  </div>
-</nav>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">Elite Imóveis</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Imóveis</a><a href="https://vydo-code.vercel.app/">Lançamentos</a><a href="https://vydo-code.vercel.app/">Contato</a></div>
+</div></nav>
 <section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#d4af37;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
-  <h1>Elite Imóveis<br><span class="grad">o endereço dos seus sonhos</span></h1>
-  <p>Imóveis selecionados para quem busca exclusividade e conforto.</p>
-  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
-    <a class="btn" style="background:#d4af37;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
-    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
-  </div>
+  <p class="hero-kicker">Imóveis selecionados</p>
+  <h1>O endereço dos seus <em>sonhos</em></h1>
+  <p>Curadoria exclusiva de imóveis de alto padrão. Atendimento discreto, consultivo e sob medida.</p>
+  <a class="btn btn--solid" href="https://vydo-code.vercel.app/">Ver imóveis</a> &nbsp; <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Falar com consultor</a>
+</section>
+<section class="wrap props">
+  <p class="sect-kicker">Destaques da curadoria</p>
+  <h2 class="sect-title">Selecionados para você</h2>
+  <div class="grid"><div class="prop"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80" alt="Residência Vista Mar" loading="lazy" class="prop-img"><div class="prop-body"><span class="prop-tag">Exclusivo</span><h3>Residência Vista Mar</h3><p>Jurerê Internacional · 4 suítes · 380 m²</p><div class="prop-foot"><p class="prop-price">R$ 2.850.000</p><p class="prop-feats">4 · 5 · 380 m²</p></div></div></div><div class="prop"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80" alt="Cobertura Duplex" loading="lazy" class="prop-img"><div class="prop-body"><span class="prop-tag">Exclusivo</span><h3>Cobertura Duplex</h3><p>Centro · Terraço privativo · Vista 360°</p><div class="prop-foot"><p class="prop-price">R$ 1.950.000</p><p class="prop-feats">3 · 4 · 240 m²</p></div></div></div><div class="prop"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80" alt="Casa Contemporânea" loading="lazy" class="prop-img"><div class="prop-body"><span class="prop-tag">Exclusivo</span><h3>Casa Contemporânea</h3><p>Condomínio fechado · Piscina · 600 m²</p><div class="prop-foot"><p class="prop-price">R$ 3.400.000</p><p class="prop-feats">4 · 6 · 600 m²</p></div></div></div></div>
+</section>
+<section class="testimonial">
+  <p class="quote">"Encontraram a casa que procurávamos há 3 anos em menos de um mês. O atendimento foi impecável do início ao fim."</p>
+  <p class="who">Fernanda & Marcos · Clientes desde 2022</p>
+</section>
+<section class="cta">
+  <h2>Vamos encontrar o seu imóvel</h2>
+  <p>Conte o que busca — nossa equipe faz a busca completa e apresenta apenas o que faz sentido.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Imobili%C3%A1ria%20Luxo%20no%20site%20da%20VYDO%20CODE.">Falar com um consultor</a>
 </section>
 
-<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Imóveis em destaque</h2>
-    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Seleção curada das melhores oportunidades do momento.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
-
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">🏙️</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Cobertura Duplex — 280m²</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Vista panorâmica, 4 suítes, piscina privativa.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">🏡</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Casa em Condomínio — 420m²</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Jardim amplo, 5 quartos, área gourmet.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">🏢</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Sala Comercial — 95m²</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Centro empresarial, 3 salas, estacionamento.</p>
-      </div>
-    </div>
-  </div>
-</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <div style="background:linear-gradient(120deg,var(--accent)22,transparent);border:1px solid var(--accent)33;border-radius:1.25rem;padding:2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap">
-      <div>
-        <h3 style="font-size:1.35rem;font-weight:800">Busca personalizada</h3>
-        <p style="color:rgba(255,255,255,.55);font-size:.9rem">Conte o que você procura e nossa equipe encontra para você.</p>
-      </div>
-      <a class="btn" style="background:var(--accent);color:#fff" href="https://vydo-code.vercel.app/">Falar com um corretor</a>
-    </div></div>
-</section>
-
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Imobili%C3%A1ria%20Luxo%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
-  </div>
-</section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
-
+<div class="demo-banner" style="--acc:#d4af37">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Imobili%C3%A1ria%20Luxo%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

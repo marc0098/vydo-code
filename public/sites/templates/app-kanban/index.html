@@ -3,115 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>K-Board — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#0052cc}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#2563eb;--acc-10:#2563eb1a;--acc-20:#2563eb33;--acc-60:#2563eb99;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#001a4d;border-bottom:1px solid #002a6e;padding:.85rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:800;color:#fff;letter-spacing:.02em}
+.nav-brand span{color:#4da3ff}
+.nav-links{display:flex;gap:1.6rem;font-size:.82rem;color:#93c5fd;font-weight:600}
+.nav-links a:hover{color:#fff}
+.hero{background:linear-gradient(160deg,#001a4d 0%,#003380 100%);color:#fff;padding:5rem 0;text-align:center}
+.hero-kicker{color:#7db8ff;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
+.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);font-weight:800;margin-top:.7rem;letter-spacing:-.02em}
+.hero h1 .hl{color:#7db8ff}
+.hero p{color:#bfdbfe;max-width:520px;margin:.9rem auto 2rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:.6rem;font-weight:700;font-size:.9rem;transition:all .2s ease}
+.btn--solid{background:#2563eb;color:#fff}
+.btn--solid:hover{background:#1d4ed8;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,99,235,.4)}
+.btn--ghost{background:transparent;color:#fff;border:1px solid #3b6cb5}
+.btn--ghost:hover{border-color:#7db8ff;color:#7db8ff}
+.board{max-width:1000px;margin:-3rem auto 4rem;padding:0 1.5rem;position:relative;z-index:2}
+.board-frame{background:#f1f5f9;border:1px solid #cbd5e1;border-radius:1rem;padding:1.2rem;box-shadow:0 40px 80px rgba(0,0,0,.2)}
+.board-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.board-top b{font-weight:800;color:#0f172a}
+.board-top span{background:#2563eb;color:#fff;font-size:.72rem;padding:.3rem .8rem;border-radius:2rem;font-weight:700}
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
+.col{background:#e2e8f0;border-radius:.7rem;padding:.8rem;min-height:220px}
+.col h4{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#475569;margin-bottom:.6rem}
+.card{background:#fff;border:1px solid #cbd5e1;border-radius:.5rem;padding:.65rem .75rem;font-size:.76rem;font-weight:600;margin-bottom:.5rem;color:#1e293b;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.card small{display:block;color:#94a3b8;font-weight:500;margin-top:.25rem;font-size:.68rem}
+.tag{display:inline-block;font-size:.62rem;font-weight:800;padding:.1rem .45rem;border-radius:2rem;margin-top:.4rem}
+.t-blue{background:#dbeafe;color:#1d4ed8}
+.t-amber{background:#fef3c7;color:#b45309}
+.t-green{background:#dcfce7;color:#15803d}
+.t-rose{background:#ffe4e6;color:#be123c}
+.avatars{display:flex;margin-top:.45rem}
+.avatars span{width:18px;height:18px;border-radius:50%;border:2px solid #fff;margin-left:-6px;font-size:.5rem;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.features{padding:4rem 0 5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;margin-top:2.5rem}
+.f{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;padding:1.7rem;transition:all .25s ease}
+.f:hover{border-color:#2563eb;transform:translateY(-3px)}
+.f-icon{font-size:1.5rem;margin-bottom:.7rem}
+.f h3{font-weight:800;font-size:.98rem}
+.f p{color:#737373;font-size:.84rem;margin-top:.3rem}
+.cta{background:#001a4d;color:#fff;text-align:center;padding:4.5rem 1.5rem}
+.cta h2{font-size:1.9rem;font-weight:800}
+.cta p{color:#bfdbfe;margin:.5rem auto 2rem;max-width:460px}
+.btn--wa{background:#16a34a;color:#fff}
+.btn--wa:hover{background:#15803d}
+@media(max-width:700px){.cols{grid-template-columns:repeat(2,1fr)}}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">K-Board</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Recursos</a><a href="#">Planos</a><a href="#">Contato</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Criar app</a>
-  </div>
-</nav>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">K-<span>Board</span></a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Recursos</a><a href="https://vydo-code.vercel.app/">Preços</a><a href="https://vydo-code.vercel.app/">Contato</a></div>
+</div></nav>
 <section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#0052cc;font-weight:700;margin-bottom:.8rem">App Web — Demonstração</p>
-  <h1>K-Board<br><span class="grad">gestão visual de projetos</span></h1>
-  <p>Aplicações web rápidas, organizadas e feitas sob medida para o seu negócio.</p>
-  <a class="btn" style="background:#0052cc;color:#fff" href="https://vydo-code.vercel.app/">Ver demonstração do app</a>
+  <p class="hero-kicker">Gestão visual de projetos</p>
+  <h1>Projetos que <span class="hl">andam</span>, equipes que entregam</h1>
+  <p>O quadro Kanban que sua equipe realmente usa. Simples de configurar, poderoso para crescer.</p>
+  <a class="btn btn--solid" href="https://vydo-code.vercel.app/">Criar quadro grátis</a> &nbsp; <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Ver demonstração</a>
 </section>
-<section>
-  <div class="wrap">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.45)">
-      <div style="display:flex;align-items:center;gap:.5rem;padding:.8rem 1rem;border-bottom:1px solid var(--border)">
-        <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span>
-        <span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span>
-        <span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        <span style="margin-left:auto;font-size:.75rem;color:rgba(255,255,255,.4)">K-Board</span>
+<div class="board">
+  <div class="board-frame">
+    <div class="board-top"><b>Projeto · Lançamento do App</b><span>4 membros</span></div>
+    <div class="cols">
+      <div class="col"><h4>Backlog · 2</h4>
+        <div class="card">Pesquisa de concorrentes<small>Prazo: 12 set</small><span class="tag t-blue">Estratégia</span><div class="avatars"><span style="background:#2563eb">M</span><span style="background:#7c3aed">L</span></div></div>
+        <div class="card">Definir escopo v1<small>Prazo: 15 set</small><span class="tag t-amber">Produto</span></div>
       </div>
-      <div style="display:grid;grid-template-columns:170px 1fr;min-height:380px">
-        <aside style="background:rgba(0,0,0,.3);padding:1.25rem;border-right:1px solid var(--border)">
-          <div style="width:34px;height:34px;border-radius:.6rem;background:#0052cc;margin-bottom:1.4rem"></div>
-          <div style="display:flex;flex-direction:column;gap:.55rem;font-size:.8rem;color:rgba(255,255,255,.55)">
-            <div style="color:#fff;font-weight:700">▸ Painel</div><div>Tarefas</div><div>Equipe</div><div>Relatórios</div><div>Configurações</div>
-          </div>
-        </aside>
-        <main style="padding:1.4rem">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem">
-            <h3 style="font-weight:700">Meu quadro</h3>
-            <span class="btn" style="background:#0052cc;color:#fff;padding:.4rem .9rem;font-size:.75rem">+ Novo item</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
-            
-            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
-                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Backlog</span>
-                <span style="background:#0052cc33;color:#0052cc;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">3</span>
-              </div>
-              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Pesquisa de mercado</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Definir escopo</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Wireframes</div>
-            </div>
-            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
-                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Em progresso</span>
-                <span style="background:#0052cc33;color:#0052cc;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">2</span>
-              </div>
-              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Frontend dashboard</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Integração API</div>
-            </div>
-            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
-                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Feito</span>
-                <span style="background:#0052cc33;color:#0052cc;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">2</span>
-              </div>
-              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Design system</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Autenticação</div>
-            </div>
-          </div>
-        </main>
+      <div class="col"><h4>A fazer · 2</h4>
+        <div class="card">Wireframes do app<small>Prazo: 18 set</small><span class="tag t-blue">Design</span><div class="avatars"><span style="background:#db2777">A</span></div></div>
+        <div class="card">Copy das telas principais<small>Prazo: 20 set</small><span class="tag t-green">Conteúdo</span></div>
+      </div>
+      <div class="col"><h4>Em andamento · 2</h4>
+        <div class="card">Desenvolvimento do MVP<small>8 de 12 tarefas</small><span class="tag t-rose">Dev</span><div class="avatars"><span style="background:#059669">R</span><span style="background:#d97706">P</span><span style="background:#2563eb">M</span></div></div>
+        <div class="card">Integração com pagamentos<small>Aguardando API</small><span class="tag t-rose">Dev</span></div>
+      </div>
+      <div class="col"><h4>Concluído · 3</h4>
+        <div class="card">Logo e identidade<small>Entregue em 2 set</small><span class="tag t-green">Design</span></div>
+        <div class="card">Setup do repositório<small>Entregue em 28 ago</small><span class="tag t-blue">Dev</span></div>
       </div>
     </div>
   </div>
-</section>
-
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20K-Board%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+</div>
+<section class="wrap features">
+  <h2 class="sect-title" style="text-align:center;font-size:2rem;font-weight:800">Feito para times de verdade</h2>
+  <div class="grid">
+    <div class="f"><div class="f-icon">⚡</div><h3>Automações</h3><p>Regras simples que movem cartões e avisam responsáveis.</p></div>
+    <div class="f"><div class="f-icon">🔗</div><h3>Integrações</h3><p>Conecte Slack, WhatsApp e Google Calendar.</p></div>
+    <div class="f"><div class="f-icon">📱</div><h3>Mobile nativo</h3><p>Atualize o quadro de qualquer lugar, offline incluso.</p></div>
+    <div class="f"><div class="f-icon">🔒</div><h3>Seguro</h3><p>Backups diários e permissões granulares por projeto.</p></div>
   </div>
 </section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
+<section class="cta">
+  <h2>Implante sem dor de cabeça</h2>
+  <p>Nossa equipe configura seu quadro, importa seus projetos e treina seu time — gratuitamente.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20K-Board%20no%20site%20da%20VYDO%20CODE.">Falar com o time</a>
+</section>
 
+<div class="demo-banner" style="--acc:#2563eb">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20K-Board%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

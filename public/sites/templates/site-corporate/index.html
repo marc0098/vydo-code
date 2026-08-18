@@ -3,117 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Corporate Tech — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#3b82f6}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#1d4ed8;--acc-10:#1d4ed81a;--acc-20:#1d4ed833;--acc-60:#1d4ed899;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb;padding:.85rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:800;color:#1d4ed8;letter-spacing:.02em}
+.nav-links{display:flex;gap:1.6rem;font-size:.82rem;color:#525252;font-weight:600}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;padding:5rem 0}
+.hero-kicker{color:#1d4ed8;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
+.hero h1{font-size:clamp(2.2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-.02em;margin-top:.7rem}
+.hero h1 .hl{color:#1d4ed8}
+.hero p{color:#525252;margin:1rem 0 2rem;max-width:520px}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:.7rem;font-weight:700;font-size:.9rem;background:#1d4ed8;color:#fff;transition:all .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(29,78,216,.3)}
+.btn--ghost{background:#f8fafc;color:#1d4ed8;border:1px solid #bfdbfe}
+.hero img{border-radius:1rem;box-shadow:0 25px 60px rgba(29,78,216,.15)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;padding:3.5rem 0;border-top:1px solid #e5e7eb}
+.stat b{font-size:2.2rem;font-weight:900;color:#1d4ed8}
+.stat p{color:#737373;font-size:.85rem}
+.services{padding:4.5rem 0;background:#f8fafc}
+.sect-title{text-align:center;font-size:2rem;font-weight:800;letter-spacing:-.01em}
+.sect-sub{text-align:center;color:#737373;max-width:520px;margin:.5rem auto 2.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem}
+.svc{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;padding:1.8rem;transition:all .25s ease}
+.svc:hover{border-color:#1d4ed8;transform:translateY(-4px);box-shadow:0 18px 40px rgba(29,78,216,.1)}
+.svc-icon{width:48px;height:48px;border-radius:.8rem;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1rem}
+.svc h3{font-size:1.05rem;font-weight:800}
+.svc p{color:#737373;font-size:.87rem;margin-top:.4rem}
+.team{padding:4.5rem 0}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:2.5rem}
+.member{text-align:center}
+.member img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:1rem;margin-bottom:1rem}
+.member h3{font-weight:800;font-size:1rem}
+.member p{color:#737373;font-size:.85rem}
+.cta{background:#1d4ed8;color:#fff;text-align:center;padding:4.5rem 1.5rem;border-radius:1.5rem;margin:0 1.5rem 4.5rem}
+.cta h2{font-size:1.9rem;font-weight:800}
+.cta p{color:#bfdbfe;margin:.5rem auto 2rem;max-width:460px}
+.btn--wa{background:#16a34a}
+.btn--wa:hover{background:#15803d}
+@media(max-width:768px){.hero{grid-template-columns:1fr}}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Vertex</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">Vertex</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Serviços</a><a href="https://vydo-code.vercel.app/">Sobre</a><a href="https://vydo-code.vercel.app/">Contato</a></div>
+</div></nav>
+<section class="wrap hero">
+  <div>
+    <p class="hero-kicker">Consultoria em Tecnologia</p>
+    <h1>Sua empresa <span class="hl">acelerada</span> pela tecnologia certa</h1>
+    <p>Diagnóstico, estratégia e implementação para negócios que não podem parar de crescer. Atendimento para PMEs de todo o Brasil.</p>
+    <a class="btn" href="https://vydo-code.vercel.app/">Agendar diagnóstico</a> &nbsp; <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Conhecer serviços</a>
   </div>
-</nav>
-<section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#3b82f6;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
-  <h1>Vertex<br><span class="grad">tecnologia para o seu crescimento</span></h1>
-  <p>Consultoria em tecnologia para empresas que não podem parar.</p>
-  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
-    <a class="btn" style="background:#3b82f6;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
-    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
-  </div>
+  <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80" alt="Equipe" loading="lazy" style="border-radius:1rem;box-shadow:0 25px 60px rgba(29,78,216,.15)">
 </section>
-
-<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+<section class="wrap stats">
+  <div class="stat"><b>120+</b><p>Projetos entregues</p></div>
+  <div class="stat"><b>35%</b><p>Ganho médio de produtividade</p></div>
+  <div class="stat"><b>92%</b><p>Clientes recorrentes</p></div>
+  <div class="stat"><b>9</b><p>Anos de mercado</p></div>
+</section>
+<section class="services">
   <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Soluções que impulsionam negócios</h2>
-    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Tecnologia de ponta para empresas que querem escalar.</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
-
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">☁️</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Infraestrutura Cloud</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Ambientes escaláveis com alta disponibilidade.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">🤖</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Automação & IA</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Processos inteligentes que reduzem custos.</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
-        <div style="font-size:1.5rem;margin-bottom:.6rem">📊</div>
-        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Dados & BI</h3>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Dashboards que transformam dados em decisão.</p>
-      </div>
+    <h2 class="sect-title">Como podemos ajudar</h2>
+    <p class="sect-sub">Soluções sob medida para cada fase do seu negócio</p>
+    <div class="grid">
+      <div class="svc"><div class="svc-icon">📊</div><h3>Transformação digital</h3><p>Automatize processos e reduza custos operacionais com as ferramentas certas.</p></div>
+      <div class="svc"><div class="svc-icon">☁️</div><h3>Infraestrutura em nuvem</h3><p>Migração segura, escalável e com economia média de 30% em TI.</p></div>
+      <div class="svc"><div class="svc-icon">🛡️</div><h3>Segurança da informação</h3><p>Proteja dados, equipe e reputação com políticas e monitoramento 24/7.</p></div>
     </div>
   </div>
-</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem">
-
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.6rem">
-        <div style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.8rem">CFO · Fintech</div>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.75)">Reduzimos o tempo de onboarding em 70%.</p>
-        <p style="font-size:.8rem;font-weight:700;color:var(--accent);margin-top:.8rem">Fernanda Alencar</p>
-      </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.6rem">
-        <div style="font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.8rem">CTO · Varejo</div>
-        <p style="font-size:.9rem;color:rgba(255,255,255,.75)">A plataforma se integrou a tudo que precisávamos.</p>
-        <p style="font-size:.8rem;font-weight:700;color:var(--accent);margin-top:.8rem">Ricardo Sato</p>
-      </div>
-    </div></div>
-</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
-  <div class="wrap">
-    <div style="background:linear-gradient(120deg,var(--accent)22,transparent);border:1px solid var(--accent)33;border-radius:1.25rem;padding:2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap">
-      <div>
-        <h3 style="font-size:1.35rem;font-weight:800">Pronto para transformar sua operação?</h3>
-        <p style="color:rgba(255,255,255,.55);font-size:.9rem">Agende uma conversa sem compromisso.</p>
-      </div>
-      <a class="btn" style="background:var(--accent);color:#fff" href="https://vydo-code.vercel.app/">Falar com um especialista</a>
-    </div></div>
 </section>
-
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Corporate%20Tech%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+<section class="wrap team">
+  <h2 class="sect-title">Quem está por trás</h2>
+  <div class="team-grid">
+    <div class="member"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80" alt="Fundador" loading="lazy"><h3>Diego Moraes</h3><p>CEO · Arquiteto de soluções</p></div>
+    <div class="member"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80" alt="Equipe" loading="lazy" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:1rem"><h3>Time Vertex</h3><p>14 especialistas certificados</p></div>
   </div>
 </section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
+<section class="cta">
+  <h2>Pronto para crescer com segurança?</h2>
+  <p>Agende um diagnóstico gratuito de 30 minutos e descubra onde está o gargalo da sua operação.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Corporate%20Tech%20no%20site%20da%20VYDO%20CODE.">Falar com um consultor</a>
+</section>
 
+<div class="demo-banner" style="--acc:#1d4ed8">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Corporate%20Tech%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

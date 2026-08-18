@@ -3,69 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Doce Confeitaria — Demonstração VYDO CODE</title>
+<meta name="robots" content="noindex">
+<title>Food Blogger — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#ea580c;--acc-10:#ea580c1a;--acc-20:#ea580c33;--acc-60:#ea580c99;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Quicksand',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.bio{min-height:100vh;background:#fef9ec;padding:3rem 1.25rem 4rem}
+.bio-card{max-width:440px;margin:0 auto;background:#fff;border-radius:2rem;overflow:hidden;box-shadow:0 24px 60px rgba(234,88,12,.12)}
+.bio-cover{width:100%;height:200px;object-fit:cover}
+.bio-inner{padding:1.8rem 2rem 2rem;text-align:center}
+.bio-avatar{width:100px;height:100px;border-radius:50%;object-fit:cover;margin:-3.5rem auto .8rem;border:5px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.bio-name{font-size:1.5rem;font-weight:800}
+.bio-role{color:#ea580c;font-weight:700;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-top:.2rem}
+.bio-bio{color:var(--muted);font-size:.92rem;margin:.7rem auto 1.4rem}
+.bio-links{display:flex;flex-direction:column;gap:.7rem}
+.bio-link{padding:.95rem 1.2rem;border-radius:1rem;font-weight:700;font-size:.95rem;background:#fff7ed;border:1.5px solid rgba(234,88,12,.15);transition:all .2s ease}
+.bio-link:hover{background:#ea580c;color:#fff;transform:translateY(-2px);box-shadow:0 10px 24px rgba(234,88,12,.25)}
+.bio-link--primary{background:#ea580c;color:#fff;border:none}
 
-  .bio-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.25rem 3rem;
-    background:radial-gradient(ellipse 80% 60% at 50% -10%,#fb718530 0%,transparent 65%),var(--bg)}
-  .avatar{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;margin-bottom:1rem;
-    border:3px solid #fb7185;background:#fb718526}
-  .links{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.8rem}
-  .link{display:flex;align-items:center;gap:.75rem;padding:1rem 1.1rem;border-radius:1rem;font-weight:600;font-size:.95rem;
-    background:rgba(255,255,255,.045);border:1px solid var(--border);transition:transform .25s ease,border-color .25s ease}
-  .link:hover{transform:translateY(-2px);border-color:#fb718566}
-  .link--main{background:linear-gradient(120deg,#fb7185e6,#fb7185b3);color:#fff;border:none;box-shadow:0 8px 28px #fb718540;justify-content:center}
-  .ic{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;background:#fb718522;flex-shrink:0}
-  .link--main .ic{background:rgba(255,255,255,.22)}
-  .socials{display:flex;gap:.9rem;margin-top:1.6rem}
-  .socials a{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:1rem}
-  .socials a:hover{border-color:#fb718566;transform:translateY(-2px)}
 </style>
 </head>
 <body>
-<div class="bio-wrap"><div class="avatar">D</div><h2 style="font-size:1.4rem;font-weight:800;margin-bottom:.3rem">Doce Afeto</h2><p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:2rem">Doces artesanais · Delivery</p><div class="links">
-  <a class="link link--main" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
-    <span class="ic">🍰</span>Pedir no WhatsApp
-  </a>
-  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
-    <span class="ic">📋</span>Ver Cardápio
-  </a>
-  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
-    <span class="ic">🛵</span>Pedir no iFood
-  </a>
-  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
-    <span class="ic">📍</span>Endereço
-  </a>
-  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
-    <span class="ic">🎉</span>Novidades
-  </a><div class="socials"><a href="#" aria-label="Rede social 1">◎</a><a href="#" aria-label="Rede social 2">◎</a><a href="#" aria-label="Rede social 3">◎</a></div></div></div>
 
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Doce%20Confeitaria%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+<div class="bio">
+  <div class="bio-card">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&q=80" alt="Capa" loading="lazy" class="bio-cover">
+    <div class="bio-inner">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="Clara Forno" loading="lazy" class="bio-avatar">
+      <p class="bio-name">Clara Forno</p>
+      <p class="bio-role">Receitas · Food Blogger</p>
+      <p class="bio-bio">Receitas afetivas que cabem na rotina. Mais de 300 receitas testadas e aprovadas.</p>
+      <div class="bio-links">
+        <a class="bio-link bio-link--primary" href="https://vydo-code.vercel.app/">📖 E-book de receitas grátis</a>
+        <a class="bio-link" href="https://vydo-code.vercel.app/">🍰 Receitas da semana</a>
+        <a class="bio-link" href="https://vydo-code.vercel.app/">🛒 Minha lista de utensílios</a>
+        <a class="bio-link" href="https://vydo-code.vercel.app/">📸 Instagram</a>
+      </div>
+    </div>
   </div>
-</section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
+</div>
 
+<div class="demo-banner" style="--acc:#ea580c">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Food%20Blogger%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

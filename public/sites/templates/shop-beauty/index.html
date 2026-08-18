@@ -3,117 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Beauty & Cosmetics — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit+Playfair+Display:ital,wght@0,500;0,700;1,500:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#d946ef}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#db2777;--acc-10:#db27771a;--acc-20:#db277733;--acc-60:#db277799;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit+Playfair+Display:ital,wght@0,500;0,700;1,500',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#fffdfc;border-bottom:1px solid #fce7f3;padding:.9rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;letter-spacing:.1em;color:#9d174d}
+.nav-links{display:flex;gap:1.6rem;font-size:.82rem;color:#9d174d;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center;padding:4rem 0;background:linear-gradient(135deg,#fdf2f8,#fff1f2)}
+.hero-txt h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.2rem);font-weight:500;line-height:1.15}
+.hero-txt h1 em{color:#db2777;font-style:italic}
+.hero-txt p{color:#83184399;margin:1rem 0 1.8rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.8rem;border-radius:3rem;font-weight:700;font-size:.9rem;background:#db2777;color:#fff;box-shadow:0 12px 28px rgba(219,39,119,.3);transition:all .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.hero-imgs{position:relative;height:460px}
+.hero-imgs img{position:absolute;border-radius:1.5rem;box-shadow:0 25px 60px rgba(219,39,119,.25)}
+.hero-imgs .a{width:62%;top:0;left:0;transform:rotate(-3deg)}
+.hero-imgs .b{width:58%;bottom:0;right:0;transform:rotate(2deg)}
+.cat{text-align:center;padding:4.5rem 0 5rem}
+.cat-title{font-family:'Playfair Display',serif;font-size:2rem;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;margin-top:2.5rem}
+.card{background:#fff;border:1px solid #fce7f3;border-radius:1.4rem;padding:1.2rem;text-align:center;transition:all .25s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(219,39,119,.12);border-color:#f9a8d4}
+.card img{aspect-ratio:1;border-radius:1rem;object-fit:cover;margin-bottom:1rem}
+.card h3{font-size:.98rem;font-weight:700}
+.card p{color:#9d174d99;font-size:.82rem;margin-top:.2rem}
+.card .price{color:#db2777;font-weight:800;font-size:1.05rem;margin-top:.6rem}
+.trust{background:#831843;color:#fff;text-align:center;padding:3rem 1.5rem;border-radius:2rem;margin:0 1.5rem 4rem}
+.trust h3{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:500}
+.trust p{color:#fbcfe8;margin:.5rem auto 1.5rem;max-width:460px}
+.btn--wa{background:#16a34a}
+.btn--wa:hover{background:#15803d}
+@media(max-width:768px){.hero{grid-template-columns:1fr}.hero-imgs{height:340px}}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">LUMIÈRE</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Produtos</a><a href="#">Ofertas</a><a href="#">Sobre</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Pedir</a>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">LUMIÈRE</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Skincare</a><a href="https://vydo-code.vercel.app/">Maquiagem</a><a href="https://vydo-code.vercel.app/">Perfumaria</a></div>
+</div></nav>
+<section class="wrap hero">
+  <div class="hero-txt">
+    <h1>Beleza que <em>ilumina</em><br>sua rotina</h1>
+    <p>Cosméticos veganos, cruelty-free e dermatologicamente testados. Entregamos para todo o Brasil.</p>
+    <a class="btn" href="https://vydo-code.vercel.app/">Comprar agora</a>
   </div>
-</nav>
-<section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#d946ef;font-weight:700;margin-bottom:.8rem">NOVIDADES</p>
-  <h1>LUMIÈRE <span class="grad">beleza que ilumina</span></h1>
-  <p>Produtos selecionados, checkout rápido e entrega para todo o Brasil.</p>
-  <a class="btn" style="background:#d946ef;color:#fff" href="https://vydo-code.vercel.app/">Comprar agora</a>
-</section>
-<section>
-  <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:1.5rem">Destaques da semana</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem">
-
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#d946ef33 0%,#d946ef0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🧴</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Sérum Glow</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Vitamina C + ácido hialurônico</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#d946ef">R$ 129</span>
-            <button class="btn" style="background:#d946ef26;color:#d946ef;border:1px solid #d946ef55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#d946ef33 0%,#d946ef0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">💄</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Batom Matte Longa Duração</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">16h de fixação, 20 cores</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#d946ef">R$ 59</span>
-            <button class="btn" style="background:#d946ef26;color:#d946ef;border:1px solid #d946ef55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#d946ef33 0%,#d946ef0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🌸</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Perfume Floral</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Notas de jasmim e baunilha</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#d946ef">R$ 249</span>
-            <button class="btn" style="background:#d946ef26;color:#d946ef;border:1px solid #d946ef55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#d946ef33 0%,#d946ef0d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">✨</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Kit Skincare Completo</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Rotina dia e noite em 4 passos</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#d946ef">R$ 319</span>
-            <button class="btn" style="background:#d946ef26;color:#d946ef;border:1px solid #d946ef55;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-    </div>
+  <div class="hero-imgs">
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1400&q=80" alt="Beleza" loading="lazy" class="a">
+    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=700&q=80" alt="Produto" loading="lazy" class="b">
   </div>
 </section>
-
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Beauty%20%26%20Cosmetics%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
-  </div>
+<section class="wrap cat">
+  <h2 class="cat-title">Os queridinhos</h2>
+  <div class="grid"><div class="card"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=700&q=80" alt="Sérum Vitamina C" loading="lazy"><h3>Sérum Vitamina C</h3><p>Ilumina e uniformiza o tom</p><p class="price">R$ 89</p></div><div class="card"><img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=700&q=80" alt="Kit Skincare Noturno" loading="lazy"><h3>Kit Skincare Noturno</h3><p>Limpeza, tônico e hidratante</p><p class="price">R$ 159</p></div><div class="card"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=700&q=80" alt="Paleta Nude Lux" loading="lazy"><h3>Paleta Nude Lux</h3><p>12 tons, pigmentação alta</p><p class="price">R$ 129</p></div><div class="card"><img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=700&q=80" alt="Perfume Floral" loading="lazy"><h3>Perfume Floral</h3><p>Notas de jasmim e baunilha</p><p class="price">R$ 219</p></div></div>
 </section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
+<section class="trust">
+  <h3>Sua pele merece cuidado real</h3>
+  <p>Fórmulas limpas, embalagem reciclável e suporte humano para tirar suas dúvidas.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Beauty%20%26%20Cosmetics%20no%20site%20da%20VYDO%20CODE.">Falar no WhatsApp</a>
+</section>
 
+<div class="demo-banner" style="--acc:#db2777">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Beauty%20%26%20Cosmetics%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

@@ -3,117 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Fashion Store — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit+Playfair+Display:ital,wght@0,500;0,700;1,500:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#f472b6}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#be185d;--acc-10:#be185d1a;--acc-20:#be185d33;--acc-60:#be185d99;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit+Playfair+Display:ital,wght@0,500;0,700;1,500',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee;padding:.9rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;letter-spacing:.14em}
+.nav-links{display:flex;gap:1.8rem;font-size:.85rem;color:#525252;letter-spacing:.08em;text-transform:uppercase}
+.nav-links a:hover{color:var(--acc)}
+.hero{position:relative;text-align:center;padding:4.5rem 1.5rem 5rem;background:#f8f5f2}
+.hero img{max-height:52vh;object-fit:cover;margin:0 auto 2.5rem;max-width:900px;width:100%}
+.hero-kicker{color:var(--acc);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700;margin-bottom:.8rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4rem);font-weight:500;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--acc)}
+.hero p{color:#737373;margin:1rem auto 2rem;max-width:480px}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.8rem;border-radius:0;font-weight:700;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:#fff;transition:all .2s ease}
+.btn:hover{background:var(--acc);transform:translateY(-2px)}
+.cat-title{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:500;text-align:center;margin:4rem 0 .4rem}
+.cat-sub{text-align:center;color:#a1a1aa;font-size:.9rem;margin-bottom:2rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem 1.2rem}
+.card{background:#fff}
+.card-img{aspect-ratio:3/4;overflow:hidden;background:#f5f5f5}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.card:hover .card-img img{transform:scale(1.05)}
+.card-body{padding:1rem .2rem;display:flex;justify-content:space-between;align-items:flex-start}
+.card-name{font-weight:600;font-size:.95rem}
+.card-desc{color:#a1a1aa;font-size:.82rem;margin-top:.15rem}
+.card-price{font-weight:800;color:var(--acc);white-space:nowrap}
+.promo{margin-top:4.5rem;background:#18181b;color:#fff;text-align:center;padding:3.5rem 1.5rem}
+.promo h3{font-family:'Playfair Display',serif;font-size:2rem;font-weight:500}
+.promo p{color:#a1a1aa;margin:.6rem auto 1.6rem;max-width:440px}
+.btn--wa{background:#16a34a}
+.btn--wa:hover{background:#15803d}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">AURORA</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Produtos</a><a href="#">Ofertas</a><a href="#">Sobre</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Pedir</a>
-  </div>
-</nav>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">AURORA</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Novidades</a><a href="https://vydo-code.vercel.app/">Coleções</a><a href="https://vydo-code.vercel.app/">Sale</a></div>
+</div></nav>
 <section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#f472b6;font-weight:700;margin-bottom:.8rem">COLEÇÃO OUTONO/INVERNO</p>
-  <h1>AURORA <span class="grad">que veste você</span></h1>
-  <p>Produtos selecionados, checkout rápido e entrega para todo o Brasil.</p>
-  <a class="btn" style="background:#f472b6;color:#fff" href="https://vydo-code.vercel.app/">Comprar agora</a>
+  <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1400&q=80" alt="Coleção Aurora" loading="lazy">
+  <p class="hero-kicker">Coleção Outono · Edição Limitada</p>
+  <h1>Moda que <em>veste</em> quem você é</h1>
+  <p>Peças autorais em tecidos naturais, produzidas em pequenas tiragens no Brasil.</p>
+  <a class="btn" href="https://vydo-code.vercel.app/">Explorar coleção</a>
 </section>
-<section>
-  <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:1.5rem">Destaques da semana</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem">
-
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#f472b633 0%,#f472b60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">👗</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Vestido Essência</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Tecido premium, caimento perfeito</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#f472b6">R$ 289</span>
-            <button class="btn" style="background:#f472b626;color:#f472b6;border:1px solid #f472b655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#f472b633 0%,#f472b60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">👟</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Tênis Urban Flow</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Conforto e estilo para o dia a dia</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#f472b6">R$ 459</span>
-            <button class="btn" style="background:#f472b626;color:#f472b6;border:1px solid #f472b655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#f472b633 0%,#f472b60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">👜</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Bolsa Minimal</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Couro sintético de alta durabilidade</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#f472b6">R$ 199</span>
-            <button class="btn" style="background:#f472b626;color:#f472b6;border:1px solid #f472b655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#f472b633 0%,#f472b60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🕶️</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Óculos Aurora</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Proteção UV400 com design autoral</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#f472b6">R$ 149</span>
-            <button class="btn" style="background:#f472b626;color:#f472b6;border:1px solid #f472b655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
+<section class="wrap">
+  <h2 class="cat-title">Destaques da semana</h2>
+  <p class="cat-sub">As peças mais desejadas da temporada</p>
+  <div class="grid"><div class="card"><div class="card-img"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=80" alt="Vestido Midi Rosé" loading="lazy"></div><div class="card-body"><div><p class="card-name">Vestido Midi Rosé</p><p class="card-desc">Fluido, midi, viscose premium</p></div><p class="card-price">R$ 289</p></div></div><div class="card"><div class="card-img"><img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=700&q=80" alt="Blazer Alfaiataria" loading="lazy"></div><div class="card-body"><div><p class="card-name">Blazer Alfaiataria</p><p class="card-desc">Corte estruturado off-white</p></div><p class="card-price">R$ 359</p></div></div><div class="card"><div class="card-img"><img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?w=700&q=80" alt="Saia Plissada" loading="lazy"></div><div class="card-body"><div><p class="card-name">Saia Plissada</p><p class="card-desc">Cintura alta, caimento leve</p></div><p class="card-price">R$ 179</p></div></div><div class="card"><div class="card-img"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=700&q=80" alt="Conjunto Verão" loading="lazy"></div><div class="card-body"><div><p class="card-name">Conjunto Verão</p><p class="card-desc">Top + short em linho</p></div><p class="card-price">R$ 249</p></div></div></div>
+</section>
+<section class="promo">
+  <h3>10% OFF na primeira compra</h3>
+  <p>Assine nossa newsletter e receba o cupom + novidades em primeira mão.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Fashion%20Store%20no%20site%20da%20VYDO%20CODE.">Falar no WhatsApp</a>
 </section>
 
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Fashion%20Store%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
-  </div>
-</section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
-
+<div class="demo-banner" style="--acc:#be185d">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Fashion%20Store%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

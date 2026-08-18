@@ -3,115 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>TaskFlow — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#6366f1}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#6366f1;--acc-10:#6366f11a;--acc-20:#6366f133;--acc-60:#6366f199;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb;padding:.85rem 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:800;color:#6366f1}
+.nav-links{display:flex;gap:1.6rem;font-size:.82rem;color:#525252;font-weight:600}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding:5rem 0}
+.hero-kicker{color:#6366f1;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
+.hero h1{font-size:clamp(2.2rem,4.5vw,3.2rem);font-weight:900;letter-spacing:-.03em;margin-top:.7rem}
+.hero h1 .hl{background:linear-gradient(120deg,#818cf8,#6366f1,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:#525252;margin:1rem 0 2rem;max-width:480px}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:.8rem;font-weight:700;font-size:.9rem;background:#6366f1;color:#fff;transition:all .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(99,102,241,.35)}
+.btn--ghost{background:#eef2ff;color:#4f46e5}
+.phone{position:relative;max-width:300px;margin:0 auto;background:#111;border-radius:2.5rem;padding:12px;box-shadow:0 40px 80px rgba(99,102,241,.25)}
+.phone-screen{background:#0b0b10;border-radius:2rem;overflow:hidden;padding:1.4rem;color:#fff;min-height:480px}
+.ps-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem}
+.ps-head b{font-weight:800;font-size:.95rem}
+.ps-head span{background:#6366f1;font-size:.7rem;padding:.2rem .6rem;border-radius:1rem;font-weight:800}
+.ps-col b{color:#a5b4fc;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem}
+.ps-list{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
+.ps-item{background:#181824;border:1px solid #262638;border-radius:.6rem;padding:.6rem .7rem;font-size:.78rem;display:flex;align-items:center;gap:.5rem}
+.ps-item.done{opacity:.45;text-decoration:line-through}
+.ps-dot{width:8px;height:8px;border-radius:50%;flex:none}
+.feat{padding:4.5rem 0;background:#fafafa}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;margin-top:2.5rem}
+.f{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;padding:1.7rem;transition:all .25s ease}
+.f:hover{border-color:#6366f1;transform:translateY(-3px)}
+.f-icon{font-size:1.5rem;margin-bottom:.7rem}
+.f h3{font-weight:800;font-size:.98rem}
+.f p{color:#737373;font-size:.84rem;margin-top:.3rem}
+.plans{padding:4.5rem 0}
+.sect-title{text-align:center;font-size:2rem;font-weight:900}
+.pricing{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem;margin-top:2.5rem;max-width:900px;margin-left:auto;margin-right:auto}
+.plan{background:#fff;border:1px solid #e5e7eb;border-radius:1.2rem;padding:2rem;text-align:center}
+.plan--featured{border-color:#6366f1;background:#eef2ff}
+.plan h3{font-weight:800}
+.plan .price{font-size:2rem;font-weight:900;margin:.5rem 0;color:#4f46e5}
+.plan .price span{font-size:.85rem;color:#737373;font-weight:500}
+.plan ul{list-style:none;margin:1rem 0;text-align:left}
+.plan li{font-size:.85rem;color:#525252;padding:.35rem 0;border-bottom:1px solid #f1f5f9}
+.cta{background:#4f46e5;color:#fff;text-align:center;padding:4.5rem 1.5rem;border-radius:1.5rem;margin:0 1.5rem 4.5rem}
+.cta h2{font-size:1.9rem;font-weight:900}
+.cta p{color:#c7d2fe;margin:.5rem auto 2rem;max-width:460px}
+.btn--wa{background:#16a34a}
+.btn--wa:hover{background:#15803d}
+@media(max-width:768px){.hero{grid-template-columns:1fr}.hero-imgs{order:-1}}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">TaskFlow</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Recursos</a><a href="#">Planos</a><a href="#">Contato</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Criar app</a>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">TaskFlow</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Recursos</a><a href="https://vydo-code.vercel.app/">Planos</a><a href="https://vydo-code.vercel.app/">Contato</a></div>
+</div></nav>
+<section class="wrap hero">
+  <div>
+    <p class="hero-kicker">App de produtividade</p>
+    <h1>Sua equipe <span class="hl">no mesmo quadro</span>, todo dia</h1>
+    <p>Tarefas, prazos e responsáveis em um só lugar. Feito para pequenas equipes que precisam de simplicidade — não de mais uma ferramenta complicada.</p>
+    <a class="btn" href="https://vydo-code.vercel.app/">Testar grátis</a> &nbsp; <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Ver planos</a>
   </div>
-</nav>
-<section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#6366f1;font-weight:700;margin-bottom:.8rem">App Web — Demonstração</p>
-  <h1>TaskFlow<br><span class="grad">tarefas organizadas, dia vencido</span></h1>
-  <p>Aplicações web rápidas, organizadas e feitas sob medida para o seu negócio.</p>
-  <a class="btn" style="background:#6366f1;color:#fff" href="https://vydo-code.vercel.app/">Ver demonstração do app</a>
-</section>
-<section>
-  <div class="wrap">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.45)">
-      <div style="display:flex;align-items:center;gap:.5rem;padding:.8rem 1rem;border-bottom:1px solid var(--border)">
-        <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span>
-        <span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span>
-        <span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
-        <span style="margin-left:auto;font-size:.75rem;color:rgba(255,255,255,.4)">TaskFlow</span>
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="ps-head"><b>Meu quadro</b><span>+ Novo</span></div>
+      <div class="ps-col"><b>Para fazer · 4</b></div>
+      <div class="ps-list">
+        <div class="ps-item"><span class="ps-dot" style="background:#f472b6"></span>Preparar proposta comercial</div>
+        <div class="ps-item"><span class="ps-dot" style="background:#fbbf24"></span>Atualizar portfólio</div>
+        <div class="ps-item"><span class="ps-dot" style="background:#34d399"></span>Responder e-mails do dia</div>
       </div>
-      <div style="display:grid;grid-template-columns:170px 1fr;min-height:380px">
-        <aside style="background:rgba(0,0,0,.3);padding:1.25rem;border-right:1px solid var(--border)">
-          <div style="width:34px;height:34px;border-radius:.6rem;background:#6366f1;margin-bottom:1.4rem"></div>
-          <div style="display:flex;flex-direction:column;gap:.55rem;font-size:.8rem;color:rgba(255,255,255,.55)">
-            <div style="color:#fff;font-weight:700">▸ Painel</div><div>Tarefas</div><div>Equipe</div><div>Relatórios</div><div>Configurações</div>
-          </div>
-        </aside>
-        <main style="padding:1.4rem">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem">
-            <h3 style="font-weight:700">Meu quadro</h3>
-            <span class="btn" style="background:#6366f1;color:#fff;padding:.4rem .9rem;font-size:.75rem">+ Novo item</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
-            
-            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
-                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Para fazer</span>
-                <span style="background:#6366f133;color:#6366f1;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">4</span>
-              </div>
-              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Estudar novos clientes</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Preparar proposta</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Atualizar portfólio</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Responder e-mails</div>
-            </div>
-            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
-                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Em andamento</span>
-                <span style="background:#6366f133;color:#6366f1;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">2</span>
-              </div>
-              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Site da confeitaria</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Campanha de anúncios</div>
-            </div>
-            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
-                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Concluído</span>
-                <span style="background:#6366f133;color:#6366f1;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">3</span>
-              </div>
-              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Logo rebrand</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Landing page</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">App de pedidos</div>
-            </div>
-          </div>
-        </main>
+      <div class="ps-col"><b>Em andamento · 2</b></div>
+      <div class="ps-list">
+        <div class="ps-item"><span class="ps-dot" style="background:#60a5fa"></span>Site da confeitaria</div>
+        <div class="ps-item"><span class="ps-dot" style="background:#a78bfa"></span>Campanha de anúncios</div>
+      </div>
+      <div class="ps-col"><b>Concluído · 3</b></div>
+      <div class="ps-list">
+        <div class="ps-item done">Logo rebrand</div>
+        <div class="ps-item done">Landing page</div>
+        <div class="ps-item done">App de pedidos</div>
       </div>
     </div>
   </div>
 </section>
-
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+<section class="feat">
   <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20TaskFlow%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+    <h2 class="sect-title" style="text-align:center">Tudo que sua equipe precisa</h2>
+    <div class="grid">
+      <div class="f"><div class="f-icon">📋</div><h3>Quadros visuais</h3><p>Organize tarefas em colunas: a fazer, em andamento e feito.</p></div>
+      <div class="f"><div class="f-icon">🔔</div><h3>Lembretes automáticos</h3><p>Ninguém esquece prazo — alertas no app e no WhatsApp.</p></div>
+      <div class="f"><div class="f-icon">👥</div><h3>Equipe ilimitada</h3><p>Convide quantas pessoas precisar, sem custo extra.</p></div>
+      <div class="f"><div class="f-icon">📊</div><h3>Relatórios simples</h3><p>Veja o progresso da semana em um glance.</p></div>
+    </div>
   </div>
 </section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
+<section class="wrap plans">
+  <h2 class="sect-title">Planos e preços</h2>
+  <div class="pricing">
+    <div class="plan"><h3>Grátis</h3><p class="price">R$ 0<span>/mês</span></p><ul><li>Até 5 usuários</li><li>3 quadros</li><li>Histórico de 30 dias</li></ul><a class="btn btn--ghost" style="width:100%;justify-content:center" href="https://vydo-code.vercel.app/">Começar</a></div>
+    <div class="plan plan--featured"><h3>Pro</h3><p class="price">R$ 29<span>/mês</span></p><ul><li>Usuários ilimitados</li><li>Quadros ilimitados</li><li>Relatórios e lembretes</li></ul><a class="btn" style="width:100%;justify-content:center" href="https://vydo-code.vercel.app/">Assinar Pro</a></div>
+  </div>
+</section>
+<section class="cta">
+  <h2>Comece grátis, hoje</h2>
+  <p>Sem cartão de crédito. Configure seu primeiro quadro em menos de 2 minutos.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20TaskFlow%20no%20site%20da%20VYDO%20CODE.">Falar no WhatsApp</a>
+</section>
 
+<div class="demo-banner" style="--acc:#6366f1">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20TaskFlow%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>

@@ -3,117 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Digital Products — Demonstração VYDO CODE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--accent:#14b8a6}
-
-:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+:root{--acc:#0d9488;--acc-10:#0d94881a;--acc-20:#0d948833;--acc-60:#0d948899;--ink:#0b0b0e;--paper:#fff;--muted:rgba(11,11,14,.55);--line:rgba(11,11,14,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
-.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+ 
+.nav{position:sticky;top:0;z-index:50;background:#fff;padding:.85rem 0;box-shadow:0 1px 10px rgba(0,0,0,.05)}
+.nav-in{display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-weight:900;color:#0d9488;letter-spacing:.02em}
+.nav-links{display:flex;gap:1.5rem;font-size:.82rem;color:#525252;font-weight:600}
+.hero{background:linear-gradient(180deg,#f0fdfa,#fff);padding:4.5rem 1.5rem 4rem;text-align:center}
+.hero h1{font-size:clamp(2.2rem,5vw,3.1rem);font-weight:900;letter-spacing:-.02em}
+.hero h1 .hl{color:#0d9488}
+.hero p{color:#525252;max-width:520px;margin:.8rem auto 1.8rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:.9rem;font-weight:700;font-size:.9rem;background:#0d9488;color:#fff;transition:all .2s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(13,148,136,.3)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;margin:4rem auto;max-width:1120px;padding:0 1.5rem}
+.course{background:#fff;border:1px solid #e7e5e4;border-radius:1.3rem;overflow:hidden;display:flex;flex-direction:column;transition:all .25s ease}
+.course:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.09)}
+.course-img{aspect-ratio:16/9;object-fit:cover}
+.course-body{padding:1.3rem;flex:1;display:flex;flex-direction:column}
+.course-tag{display:inline-block;background:#ccfbf1;color:#0f766e;font-size:.7rem;font-weight:800;padding:.25rem .7rem;border-radius:2rem;letter-spacing:.08em;text-transform:uppercase;width:fit-content}
+.course h3{font-size:1.05rem;font-weight:800;margin-top:.6rem}
+.course p{color:#737373;font-size:.85rem;margin-top:.3rem;flex:1}
+.course-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+.course-price{font-weight:900;color:#0d9488;font-size:1.1rem}
+.course-old{color:#a1a1aa;font-size:.82rem;text-decoration:line-through;margin-right:.5rem}
+.guarantee{background:#f0fdfa;border:1px dashed #0d9488;border-radius:1.3rem;padding:2rem 1.5rem;margin:1rem 1.5rem 4.5rem;display:flex;align-items:center;gap:1.2rem}
+.guarantee b{font-size:1.1rem}
+.guarantee p{color:#525252;font-size:.9rem}
 
-
-.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
-background:
-  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
-  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
-.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
-.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
-.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 </style>
 </head>
 <body>
 
-
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
-  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
-    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Criativo Hub</a>
-    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
-      <a href="#">Produtos</a><a href="#">Ofertas</a><a href="#">Sobre</a>
-    </div>
-    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Pedir</a>
-  </div>
-</nav>
+<nav class="nav"><div class="wrap nav-in">
+  <a class="nav-brand" href="https://vydo-code.vercel.app/">Criativo Hub</a>
+  <div class="nav-links"><a href="https://vydo-code.vercel.app/">Cursos</a><a href="https://vydo-code.vercel.app/">E-books</a><a href="https://vydo-code.vercel.app/">Templates</a></div>
+</div></nav>
 <section class="hero">
-  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#14b8a6;font-weight:700;margin-bottom:.8rem">APRENDA HOJE</p>
-  <h1>Criativo Hub <span class="grad">conhecimento que transforma</span></h1>
-  <p>Produtos selecionados, checkout rápido e entrega para todo o Brasil.</p>
-  <a class="btn" style="background:#14b8a6;color:#fff" href="https://vydo-code.vercel.app/">Comprar agora</a>
+  <h1>Conhecimento que <span class="hl">transforma</span> em resultado</h1>
+  <p>Materiais digitais prontos para você aplicar hoje e vender mais amanhã. Download imediato após a compra.</p>
+  <a class="btn" href="https://vydo-code.vercel.app/">Ver materiais</a>
 </section>
-<section>
-  <div class="wrap">
-    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:1.5rem">Destaques da semana</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem">
-
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">📘</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Curso Design do Zero</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">40h de vídeo + comunidade</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#14b8a6">R$ 397</span>
-            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">📙</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">E-book Marketing Digital</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">PDF completo, 230 páginas</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#14b8a6">R$ 47</span>
-            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🎨</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Pack de Templates</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">300 artes editáveis no Canva</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#14b8a6">R$ 97</span>
-            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
-        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🧰</div>
-        <div style="padding:1.1rem">
-          <h3 style="font-size:.95rem;font-weight:700">Dashboard de Métricas</h3>
-          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Planilha automatizada + tutorial</p>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <span style="font-weight:800;color:#14b8a6">R$ 67</span>
-            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
+<section class="grid"><div class="course"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=700&q=80" alt="E-book Marketing Digital" loading="lazy" class="course-img"><div class="course-body"><span class="course-tag">Acesso imediato</span><h3>E-book Marketing Digital</h3><p>PDF completo com 230 páginas e checklists</p><div class="course-foot"><p><span class="course-old">R$ 97</span><span class="course-price">R$ 47</span></p><a class="btn" style="padding:.55rem 1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Comprar</a></div></div></div><div class="course"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=700&q=80" alt="Pack de Templates Canva" loading="lazy" class="course-img"><div class="course-body"><span class="course-tag">Acesso imediato</span><h3>Pack de Templates Canva</h3><p>300 artes editáveis para redes sociais</p><div class="course-foot"><p><span class="course-old">R$ 197</span><span class="course-price">R$ 97</span></p><a class="btn" style="padding:.55rem 1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Comprar</a></div></div></div><div class="course"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="Dashboard de Métricas" loading="lazy" class="course-img"><div class="course-body"><span class="course-tag">Acesso imediato</span><h3>Dashboard de Métricas</h3><p>Planilha automatizada + tutorial em vídeo</p><div class="course-foot"><p><span class="course-old">R$ 127</span><span class="course-price">R$ 67</span></p><a class="btn" style="padding:.55rem 1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Comprar</a></div></div></div><div class="course"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=700&q=80" alt="Curso Tráfego Pago" loading="lazy" class="course-img"><div class="course-body"><span class="course-tag">Acesso imediato</span><h3>Curso Tráfego Pago</h3><p>12 módulos do zero à primeira campanha</p><div class="course-foot"><p><span class="course-old">R$ 497</span><span class="course-price">R$ 297</span></p><a class="btn" style="padding:.55rem 1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Comprar</a></div></div></div></section>
+<section class="wrap guarantee">
+  <div style="font-size:2.4rem">🛡️</div>
+  <div><b>Garantia de 7 dias, sem burocracia</b><p>Se o material não for para você, devolvemos 100% do valor. Simples assim.</p></div>
 </section>
 
-<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
-  <div class="wrap">
-    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
-    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
-    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
-    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Digital%20Products%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
-  </div>
-</section>
-<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
-  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
-</footer>
-
+<div class="demo-banner" style="--acc:#0d9488">
+  <p class="demo-banner__tag">DEMONSTRAÇÃO</p>
+  <h3>Gostou deste estilo? Ele é 100% seu.</h3>
+  <p>Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+  <a class="btn btn--wa" target="_blank" rel="noopener" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Quero%20o%20template%20Digital%20Products%20para%20o%20meu%20neg%C3%B3cio.%20Vi%20a%20demonstra%C3%A7%C3%A3o%20do%20template%20no%20site%20da%20VYDO%20CODE.">Quero esse site — falar no WhatsApp</a>
+  <p class="demo-banner__credit">Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">VYDO CODE</a></p>
+</div>
 </body>
 </html>
