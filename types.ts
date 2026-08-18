@@ -8,15 +8,17 @@ export interface LinkItem {
   icon: LucideIcon | React.ElementType;
   featured?: boolean;
   type: 'primary' | 'secondary' | 'social';
+  hint?: string;
+  description?: string;
 }
 
 export interface DemoItem {
   id: string;
   title: string;
   description: string;
-  imageUrl: string;
   demoUrl: string;
   purchaseUrl?: string;
+  accentColor: string;
 }
 
 export interface FeatureItem {
@@ -27,18 +29,23 @@ export interface FeatureItem {
 
 export type TemplateCategory = 'linknabio' | 'ecommerce' | 'sites' | 'webapp';
 
+export type MockupKind =
+  | 'bio'        // avatar + linhas de links
+  | 'shop'       // grade de produtos
+  | 'site'       // hero de site com seções
+  | 'app';       // painel de app
+
 export interface TemplateItem {
   id: string;
   title: string;
   description: string;
   category: TemplateCategory;
-  gradient: string;
   accentColor: string;
   tags: string[];
   badge?: string;
-  imageUrl: string; // cover image
-  logoUrl?: string; // optional profile or logo image for internal mockups
-  mockupElements: string[]; // visual elements to render in the mockup
+  mockupKind: MockupKind; // tipo de mockup CSS vivo
+  mockupLines?: string[]; // linhas de texto do mockup (títulos/botões)
+  mockupExtra?: string;   // rótulo extra do mockup
 }
 
 export interface ShowcasePageData {

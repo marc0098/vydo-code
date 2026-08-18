@@ -1,551 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaaSpace — AI Tools Delivery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Digital Products — Demonstração VYDO CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#14b8a6}
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #030305;
-            color: #f8fafc;
-            min-height: 100vh
-        }
+:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
-        /* Cyber Neon Grid BG */
-        .bg-grid {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            background-image: linear-gradient(rgba(124, 58, 237, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse at top, black 20%, transparent 70%)
-        }
 
-        .bg-blob {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
-            filter: blur(60px);
-            z-index: -1
-        }
-
-        /* Top Nav */
-        .nav {
-            padding: 24px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05)
-        }
-
-        .brand {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(to right, #fff, #8b5cf6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent
-        }
-
-        .nav-center {
-            display: flex;
-            gap: 32px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 10px 24px;
-            border-radius: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.05)
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #94a3b8;
-            font-size: 13px;
-            font-weight: 600;
-            transition: color .3s
-        }
-
-        .nav-link:hover {
-            color: #fff
-        }
-
-        .nav-btns {
-            display: flex;
-            gap: 12px;
-            align-items: center
-        }
-
-        .login-btn {
-            text-decoration: none;
-            color: #f8fafc;
-            font-size: 14px;
-            font-weight: 600
-        }
-
-        .cta-btn {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, #8b5cf6, #bbf7d0);
-            color: #0f172a;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 700;
-            box-shadow: 0 10px 20px -10px rgba(139, 92, 246, 0.6);
-            transition: all .3s
-        }
-
-        .cta-btn:hover {
-            box-shadow: 0 15px 30px -10px rgba(139, 92, 246, 0.8);
-            transform: translateY(-2px)
-        }
-
-        /* Hero */
-        .hero {
-            padding: 100px 5% 60px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            background: rgba(124, 58, 237, 0.1);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 100px;
-            color: #c4b5fd;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 32px
-        }
-
-        .badge-glow {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #8b5cf6;
-            box-shadow: 0 0 10px #8b5cf6, 0 0 20px #8b5cf6;
-            animation: pulse .5s alternate infinite
-        }
-
-        @keyframes pulse {
-            to {
-                opacity: 0.5;
-                transform: scale(0.8)
-            }
-        }
-
-        .h-title {
-            font-size: 64px;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            max-width: 800px;
-            background: linear-gradient(to bottom right, #fff, #fff, rgba(255, 255, 255, 0.5));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent
-        }
-
-        .h-desc {
-            font-size: 18px;
-            color: #94a3b8;
-            max-width: 600px;
-            line-height: 1.5;
-            margin-bottom: 48px;
-            font-weight: 500
-        }
-
-        /* Pricing/Digital Goods Cards */
-        .marketplace {
-            padding: 40px 5% 100px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto
-        }
-
-        .saas-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 32px;
-            position: relative;
-            transition: all .4s;
-            display: flex;
-            flex-direction: column
-        }
-
-        .saas-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(139, 92, 246, 0.1), transparent 40%);
-            border-radius: inherit;
-            z-index: 0;
-            opacity: 0;
-            transition: opacity .3s
-        }
-
-        .saas-card:hover::before {
-            opacity: 1
-        }
-
-        .saas-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(139, 92, 246, 0.3);
-            box-shadow: 0 20px 40px -20px rgba(124, 58, 237, 0.3)
-        }
-
-        .c-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 1
-        }
-
-        .c-icon.purple {
-            background: rgba(139, 92, 246, 0.1);
-            color: #a78bfa;
-            border: 1px solid rgba(139, 92, 246, 0.2)
-        }
-
-        .c-icon.cyan {
-            background: rgba(6, 182, 212, 0.1);
-            color: #22d3ee;
-            border: 1px solid rgba(6, 182, 212, 0.2)
-        }
-
-        .c-icon.emerald {
-            background: rgba(16, 185, 129, 0.1);
-            color: #34d399;
-            border: 1px solid rgba(16, 185, 129, 0.2)
-        }
-
-        .c-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            position: relative;
-            z-index: 1
-        }
-
-        .c-desc {
-            font-size: 14px;
-            color: #94a3b8;
-            line-height: 1.5;
-            margin-bottom: 24px;
-            flex: 1;
-            position: relative;
-            z-index: 1
-        }
-
-        .c-price {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-            position: relative;
-            z-index: 1
-        }
-
-        .c-price span {
-            font-size: 14px;
-            color: #64748b;
-            font-weight: 500
-        }
-
-        .c-features {
-            list-style: none;
-            margin-bottom: 32px;
-            position: relative;
-            z-index: 1
-        }
-
-        .feat-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 13px;
-            color: #cbd5e1;
-            margin-bottom: 12px;
-            font-weight: 500
-        }
-
-        .feat-icon {
-            color: #10b981
-        }
-
-        .c-btn {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all .3s;
-            position: relative;
-            z-index: 1
-        }
-
-        .c-btn:hover {
-            background: #fff;
-            color: #0f172a
-        }
-
-        /* Popular Badge for middle card */
-        .saas-card.popular {
-            border-color: rgba(139, 92, 246, 0.4);
-            background: rgba(15, 23, 42, 0.8);
-            transform: scale(1.05);
-            z-index: 10
-        }
-
-        .saas-card.popular .c-btn {
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            border: none;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 10px 20px -10px rgba(139, 92, 246, 0.5)
-        }
-
-        .saas-card.popular .c-btn:hover {
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 15px 30px -10px rgba(139, 92, 246, 0.7);
-            color: #fff
-        }
-
-        .pop-label {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg, #8b5cf6, #06b6d4);
-            color: #fff;
-            padding: 4px 16px;
-            border-radius: 100px;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4)
-        }
-
-        @media(max-width:900px) {
-            .marketplace {
-                grid-template-columns: 1fr
-            }
-
-            .nav-center {
-                display: none
-            }
-
-            .saas-card.popular {
-                transform: scale(1)
-            }
-        }
-
-        /* Responsive Mobile First Tweaks (< 380px) */
-        @media (max-width: 380px) {
-            .nav {
-                padding: 16px;
-            }
-
-            .hero {
-                padding: 80px 16px 40px;
-            }
-
-            .h-title {
-                font-size: 40px;
-            }
-
-            .h-desc {
-                font-size: 14px;
-            }
-
-            .badge {
-                font-size: 11px;
-                padding: 4px 12px;
-            }
-
-            .marketplace {
-                padding: 40px 16px 80px;
-                gap: 16px;
-            }
-
-            .saas-card {
-                padding: 24px;
-            }
-
-            .c-title {
-                font-size: 18px;
-            }
-
-            .c-desc {
-                font-size: 13px;
-            }
-
-            .c-price {
-                font-size: 28px;
-            }
-
-            .feat-item {
-                font-size: 12px;
-            }
-        }
-    </style></head>
-
+.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
+background:
+  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
+  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
+.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
+.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="bg-blob"></div>
 
-    <nav class="nav">
-        <div class="brand">
-            <i data-lucide="blocks" style="width:24px;height:24px;color:#a78bfa"></i>
-            SaaSpace
-        </div>
-        <div class="nav-center">
-            <a href="#" class="nav-link">Plugins</a>
-            <a href="#" class="nav-link">Templates</a>
-            <a href="#" class="nav-link">UI Kits</a>
-            <a href="#" class="nav-link" style="color:#fff">Preços</a>
-        </div>
-        <div class="nav-btns">
-            <a href="#" class="login-btn">Entrar</a>
-            <a href="#" class="cta-btn">Acessar</a>
-        </div>
-    </nav>
 
-    <div class="hero">
-        <div class="badge">
-            <div class="badge-glow"></div>
-            Modelos IA GPT-4 integrado
-        </div>
-        <h1 class="h-title">Acelere seu workflow.<br>Escale sua receita.</h1>
-        <p class="h-desc">Acesso instantâneo a +200 ferramentas, templates React e componentes de IA criados para
-            desenvolvedores SaaS.</p>
+<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
+    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Criativo Hub</a>
+    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+      <a href="#">Produtos</a><a href="#">Ofertas</a><a href="#">Sobre</a>
     </div>
+    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Pedir</a>
+  </div>
+</nav>
+<section class="hero">
+  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#14b8a6;font-weight:700;margin-bottom:.8rem">APRENDA HOJE</p>
+  <h1>Criativo Hub <span class="grad">conhecimento que transforma</span></h1>
+  <p>Produtos selecionados, checkout rápido e entrega para todo o Brasil.</p>
+  <a class="btn" style="background:#14b8a6;color:#fff" href="https://vydo-code.vercel.app/">Comprar agora</a>
+</section>
+<section>
+  <div class="wrap">
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:1.5rem">Destaques da semana</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.25rem">
 
-    <div class="marketplace" id="cards">
-        <!-- Starter Card -->
-        <div class="saas-card">
-            <div class="c-icon cyan">
-                <i data-lucide="code" style="width:24px;height:24px"></i>
-            </div>
-            <h3 class="c-title">Starter Kit</h3>
-            <p class="c-desc">Ideal para devs independentes que querem lançar seu primeiro MVP do zero.</p>
-            <div class="c-price">$49 <span>/único</span></div>
-
-            <ul class="c-features">
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i> 50+
-                    Componentes React</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i> Auth
-                    com Supabase configurado</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i>
-                    Tailwind Setup Avançado</li>
-                <li class="feat-item" style="color:#64748b"><i data-lucide="minus" style="width:16px;height:16px"></i>
-                    Modelos IA prontos</li>
-            </ul>
-
-            <button class="c-btn">Comprar Starter</button>
+      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
+        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">📘</div>
+        <div style="padding:1.1rem">
+          <h3 style="font-size:.95rem;font-weight:700">Curso Design do Zero</h3>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">40h de vídeo + comunidade</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-weight:800;color:#14b8a6">R$ 397</span>
+            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
+          </div>
         </div>
-
-        <!-- Pro Card -->
-        <div class="saas-card popular">
-            <div class="pop-label">Mais Popular</div>
-            <div class="c-icon purple">
-                <i data-lucide="zap" style="width:24px;height:24px"></i>
-            </div>
-            <h3 class="c-title">Pro Bundle</h3>
-            <p class="c-desc">Tudo o que você precisa para buildar no nível de startups apoiadas por VCs.</p>
-            <div class="c-price">$129 <span>/único</span></div>
-
-            <ul class="c-features">
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i> Tudo
-                    no Starter Kit</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i>
-                    Checkout Stripe implementado</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i>
-                    Integração OpenAI GPT-4</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i>
-                    Dashboard Admin Completo</li>
-            </ul>
-
-            <button class="c-btn">Comprar Pro</button>
+      </article>
+      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
+        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">📙</div>
+        <div style="padding:1.1rem">
+          <h3 style="font-size:.95rem;font-weight:700">E-book Marketing Digital</h3>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">PDF completo, 230 páginas</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-weight:800;color:#14b8a6">R$ 47</span>
+            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
+          </div>
         </div>
-
-        <!-- Enterprise Card -->
-        <div class="saas-card">
-            <div class="c-icon emerald">
-                <i data-lucide="layers" style="width:24px;height:24px"></i>
-            </div>
-            <h3 class="c-title">SaaS Lifetime</h3>
-            <p class="c-desc">Licença comercial vitalícia com acesso a todas as atualizações futuras e plugins.</p>
-            <div class="c-price">$299 <span>/único</span></div>
-
-            <ul class="c-features">
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i> Tudo
-                    no Pro Bundle</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i>
-                    Código fonte Figma Files</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i>
-                    Prioridade de Suporte</li>
-                <li class="feat-item"><i data-lucide="check" class="feat-icon" style="width:16px;height:16px"></i> +10
-                    Templates Novos / Ano</li>
-            </ul>
-
-            <button class="c-btn">Comprar Lifetime</button>
+      </article>
+      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
+        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🎨</div>
+        <div style="padding:1.1rem">
+          <h3 style="font-size:.95rem;font-weight:700">Pack de Templates</h3>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">300 artes editáveis no Canva</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-weight:800;color:#14b8a6">R$ 97</span>
+            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
+          </div>
         </div>
+      </article>
+      <article style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:transform .25s ease;border-color:transparent">
+        <div style="height:170px;background:linear-gradient(135deg,#14b8a633 0%,#14b8a60d 100%);display:flex;align-items:center;justify-content:center;font-size:2.2rem">🧰</div>
+        <div style="padding:1.1rem">
+          <h3 style="font-size:.95rem;font-weight:700">Dashboard de Métricas</h3>
+          <p style="font-size:.8rem;color:rgba(255,255,255,.45);margin:.3rem 0 .8rem">Planilha automatizada + tutorial</p>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-weight:800;color:#14b8a6">R$ 67</span>
+            <button class="btn" style="background:#14b8a626;color:#14b8a6;border:1px solid #14b8a655;padding:.45rem .9rem;font-size:.78rem">+ Carrinho</button>
+          </div>
+        </div>
+      </article>
     </div>
+  </div>
+</section>
 
-    <script>
-        lucide.createIcons();
+<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+  <div class="wrap">
+    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
+    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
+    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Digital%20Products%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+  </div>
+</section>
+<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
+  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
+</footer>
 
-        // Glow Effect on cards matching mouse position
-        document.getElementById("cards").onmousemove = e => {
-            for (const card of document.getElementsByClassName("saas-card")) {
-                const rect = card.getBoundingClientRect(),
-                    x = e.clientX - rect.left,
-                    y = e.clientY - rect.top;
-                card.style.setProperty("--mouse-x", `${x}px`);
-                card.style.setProperty("--mouse-y", `${y}px`);
-            }
-        }
-    </script>
 </body>
-
 </html>
-

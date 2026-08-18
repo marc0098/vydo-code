@@ -1,634 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elevation — Imóveis de Luxo</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap"
-        rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #050505;
-            color: #fdfdfd;
-            min-height: 100vh
-        }
-
-        .serif {
-            font-family: 'Playfair Display', serif
-        }
-
-        /* Transparent Top Nav */
-        .nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 99;
-            padding: 32px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
-            transition: background .3s
-        }
-
-        .nav.scrolled {
-            background: rgba(5, 5, 5, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 20px 5%;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05)
-        }
-
-        .brand {
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            opacity: 0.8;
-            transition: opacity .3s
-        }
-
-        .nav-link:hover {
-            opacity: 1
-        }
-
-        .contact-btn {
-            padding: 14px 32px;
-            border: 1px solid #fff;
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all .4s
-        }
-
-        .contact-btn:hover {
-            background: #fff;
-            color: #050505
-        }
-
-        /* Fullscreen Hero Mansions */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            padding: 60px 5%
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            filter: brightness(0.85)
-        }
-
-        .hero-gradient {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, #050505 0%, transparent 60%);
-            z-index: -1
-        }
-
-        .hero-text {
-            max-width: 800px;
-            position: relative;
-            z-index: 10;
-            animation: fadeUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) backwards
-        }
-
-        .hero-subtitle {
-            font-size: 12px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: #d4af37;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px
-        }
-
-        .hero-subtitle::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: #d4af37
-        }
-
-        .hero-title {
-            font-size: 80px;
-            line-height: 1.1;
-            margin-bottom: 32px;
-            font-weight: 400
-        }
-
-        .hero-title i {
-            font-style: italic;
-            color: #ddd
-        }
-
-        /* Advanced Search Bar (Glass) */
-        .search-glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            max-width: 900px;
-            margin-bottom: 20px
-        }
-
-        .s-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            padding: 0 16px;
-            border-right: 1px solid rgba(255, 255, 255, 0.1)
-        }
-
-        .s-group:last-child {
-            border-right: none
-        }
-
-        .sg-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: #aaa;
-            margin-bottom: 6px
-        }
-
-        .sg-input {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-family: 'Plus Jakarta Sans';
-            font-size: 16px;
-            outline: none;
-            font-weight: 500
-        }
-
-        .sg-input option {
-            background: #050505;
-            color: #fff
-        }
-
-        .btn-search {
-            padding: 16px 32px;
-            background: #d4af37;
-            color: #000;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background .3s
-        }
-
-        .btn-search:hover {
-            background: #eed27a
-        }
-
-        @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(40px)
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        /* Exclusives Properties */
-        .properties {
-            padding: 120px 5%
-        }
-
-        .prop-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 60px
-        }
-
-        .ph-title {
-            font-size: 48px;
-            font-weight: 400
-        }
-
-        .ph-link {
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            border-bottom: 1px solid #fff;
-            padding-bottom: 4px;
-            transition: color .3s, border-color .3s
-        }
-
-        .ph-link:hover {
-            color: #d4af37;
-            border-color: #d4af37
-        }
-
-        .prop-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px
-        }
-
-        .prop-card {
-            position: relative;
-            text-decoration: none;
-            color: #fff;
-            display: block
-        }
-
-        .prop-img-box {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            margin-bottom: 24px
-        }
-
-        .prop-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform .8s ease
-        }
-
-        .prop-card:hover .prop-img {
-            transform: scale(1.05)
-        }
-
-        .prop-badge {
-            position: absolute;
-            top: 24px;
-            left: 24px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            padding: 8px 16px;
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase
-        }
-
-        .prop-fav {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background .3s
-        }
-
-        .prop-card:hover .prop-fav {
-            background: #fff;
-            color: #000
-        }
-
-        .prop-price {
-            font-size: 28px;
-            font-weight: 400;
-            margin-bottom: 8px;
-            color: #d4af37;
-            font-family: 'Playfair Display'
-        }
-
-        .prop-title {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 12px
-        }
-
-        .prop-location {
-            font-size: 13px;
-            color: #aaa;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em
-        }
-
-        .prop-data {
-            display: flex;
-            gap: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px
-        }
-
-        .data-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: #ddd
-        }
-
-        /* Stats */
-        .stats {
-            padding: 80px 5%;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: space-between;
-            background: #030303
-        }
-
-        .stat-box {
-            text-align: center
-        }
-
-        .sb-num {
-            font-family: 'Playfair Display';
-            font-size: 56px;
-            color: #d4af37;
-            margin-bottom: 8px
-        }
-
-        .sb-label {
-            font-size: 12px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #888
-        }
-
-        @media(max-width:1024px) {
-            .hero-title {
-                font-size: 56px
-            }
-
-            .search-glass {
-                flex-direction: column;
-                align-items: stretch
-            }
-
-            .s-group {
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                padding: 12px 0
-            }
-
-            .s-group:last-child {
-                border-bottom: none
-            }
-
-            .prop-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        /* Responsive Mobile First Tweaks (< 380px) */
-        @media (max-width: 380px) {
-            .nav {
-                padding: 16px;
-            }
-
-            .hero {
-                padding: 80px 16px 40px;
-            }
-
-            .hero-title {
-                font-size: 40px;
-            }
-
-            .hero-subtitle {
-                font-size: 10px;
-            }
-
-            .search-glass {
-                padding: 12px;
-            }
-
-            .s-group {
-                padding: 8px 0;
-            }
-
-            .sg-input {
-                font-size: 14px;
-            }
-
-            .btn-search {
-                padding: 12px;
-                font-size: 13px;
-                justify-content: center;
-            }
-
-            .properties {
-                padding: 60px 16px;
-            }
-
-            .ph-title {
-                font-size: 32px;
-            }
-
-            .prop-grid {
-                gap: 24px;
-            }
-
-            .prop-img-box {
-                height: 300px;
-            }
-
-            .prop-price {
-                font-size: 24px;
-            }
-
-            .prop-title {
-                font-size: 18px;
-            }
-
-            .prop-data {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .stats {
-                padding: 60px 16px;
-                flex-direction: column;
-                gap: 32px;
-            }
-
-            .sb-num {
-                font-size: 42px;
-            }
-        }
-    </style></head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Imobiliária Luxo — Demonstração VYDO CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair Display&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#d4af37}
+
+:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Playfair Display',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+
+.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
+background:
+  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
+  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
+.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
+.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
 <body>
-    <nav class="nav" id="nav">
-        <div class="brand">Elevation.</div>
-        <div class="nav-links">
-            <a href="#" class="nav-link">Comprar</a>
-            <a href="#" class="nav-link">Alugar</a>
-            <a href="#" class="nav-link">Agentes</a>
-            <a href="#" class="nav-link">Notícias</a>
-        </div>
-        <a href="#" class="contact-btn">Contato</a>
-    </nav>
 
-    <div class="hero">
-        <img class="hero-bg" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=1000&fit=crop"
-            alt="Luxury Mansion">
-        <div class="hero-gradient"></div>
 
-        <div class="hero-text">
-            <div class="hero-subtitle">A Coleção Privada</div>
-            <h1 class="hero-title serif">Descubra o extraordinário em <i>Beverly Hills</i>.</h1>
-
-            <div class="search-glass">
-                <div class="s-group">
-                    <span class="sg-label">Localização</span>
-                    <select class="sg-input">
-                        <option>Beverly Hills, CA</option>
-                        <option>Malibu, CA</option>
-                        <option>Miami Beach, FL</option>
-                    </select>
-                </div>
-                <div class="s-group">
-                    <span class="sg-label">Tipo</span>
-                    <select class="sg-input">
-                        <option>Todas as Residências</option>
-                        <option>Mansões</option>
-                        <option>Penthouses</option>
-                    </select>
-                </div>
-                <div class="s-group">
-                    <span class="sg-label">Preço Mín.</button>
-                        <select class="sg-input">
-                            <option>$ 5M+</option>
-                            <option>$ 10M+</option>
-                            <option>$ 25M+</option>
-                        </select>
-                </div>
-                <button class="btn-search"><i data-lucide="search" style="width:18px;height:18px"></i> Buscar
-                    Imóveis</button>
-            </div>
-        </div>
+<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
+    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Elite Imóveis</a>
+    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
     </div>
+    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
+  </div>
+</nav>
+<section class="hero">
+  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#d4af37;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
+  <h1>Elite Imóveis<br><span class="grad">o endereço dos seus sonhos</span></h1>
+  <p>Imóveis selecionados para quem busca exclusividade e conforto.</p>
+  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+    <a class="btn" style="background:#d4af37;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
+    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
+  </div>
+</section>
 
-    <div class="properties">
-        <div class="prop-header">
-            <h2 class="ph-title serif">Propriedades Exclusivas</h2>
-            <a href="#" class="ph-link">Ver todo o catálogo</a>
-        </div>
+<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Imóveis em destaque</h2>
+    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Seleção curada das melhores oportunidades do momento.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
 
-        <div class="prop-grid">
-            <a href="#" class="prop-card">
-                <div class="prop-img-box">
-                    <div class="prop-badge">À Venda</div>
-                    <div class="prop-fav"><i data-lucide="heart" style="width:18px;height:18px"></i></div>
-                    <img class="prop-img"
-                        src="https://images.unsplash.com/photo-1628624747186-a941c476b7ef?w=800&h=600&fit=crop"
-                        alt="The Modern Glass">
-                </div>
-                <div class="prop-price">$24,500,000</div>
-                <h3 class="prop-title">The Modern Glass Villa</h3>
-                <div class="prop-location"><i data-lucide="map-pin" style="width:14px;height:14px"></i> 1042 Sunset
-                    Blvd, Los Angeles</div>
-                <div class="prop-data">
-                    <span class="data-item"><i data-lucide="bed" style="width:18px;height:18px;color:#d4af37"></i> 6
-                        Quartos</span>
-                    <span class="data-item"><i data-lucide="bath" style="width:18px;height:18px;color:#d4af37"></i> 8
-                        Banhos</span>
-                    <span class="data-item"><i data-lucide="maximize" style="width:18px;height:18px;color:#d4af37"></i>
-                        1.100 m²</span>
-                </div>
-            </a>
-
-            <a href="#" class="prop-card">
-                <div class="prop-img-box">
-                    <div class="prop-badge">À Venda</div>
-                    <div class="prop-fav"><i data-lucide="heart" style="width:18px;height:18px"></i></div>
-                    <img class="prop-img"
-                        src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop"
-                        alt="Malibu Estate">
-                </div>
-                <div class="prop-price">$32,000,000</div>
-                <h3 class="prop-title">Oceanfront Malibu Estate</h3>
-                <div class="prop-location"><i data-lucide="map-pin" style="width:14px;height:14px"></i> 4400 Pacific
-                    Coast Hwy, Malibu</div>
-                <div class="prop-data">
-                    <span class="data-item"><i data-lucide="bed" style="width:18px;height:18px;color:#d4af37"></i> 5
-                        Quartos</span>
-                    <span class="data-item"><i data-lucide="bath" style="width:18px;height:18px;color:#d4af37"></i> 6
-                        Banhos</span>
-                    <span class="data-item"><i data-lucide="maximize" style="width:18px;height:18px;color:#d4af37"></i>
-                        880 m²</span>
-                </div>
-            </a>
-        </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🏙️</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Cobertura Duplex — 280m²</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Vista panorâmica, 4 suítes, piscina privativa.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🏡</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Casa em Condomínio — 420m²</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Jardim amplo, 5 quartos, área gourmet.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🏢</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Sala Comercial — 95m²</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Centro empresarial, 3 salas, estacionamento.</p>
+      </div>
     </div>
+  </div>
+</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div style="background:linear-gradient(120deg,var(--accent)22,transparent);border:1px solid var(--accent)33;border-radius:1.25rem;padding:2.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap">
+      <div>
+        <h3 style="font-size:1.35rem;font-weight:800">Busca personalizada</h3>
+        <p style="color:rgba(255,255,255,.55);font-size:.9rem">Conte o que você procura e nossa equipe encontra para você.</p>
+      </div>
+      <a class="btn" style="background:var(--accent);color:#fff" href="https://vydo-code.vercel.app/">Falar com um corretor</a>
+    </div></div>
+</section>
 
-    <div class="stats">
-        <div class="stat-box">
-            <div class="sb-num">$1.2B+</div>
-            <div class="sb-label">Vendas Anuais</div>
-        </div>
-        <div class="stat-box">
-            <div class="sb-num">450+</div>
-            <div class="sb-label">Mansões Exclusivas</div>
-        </div>
-        <div class="stat-box">
-            <div class="sb-num">15</div>
-            <div class="sb-label">Anos de Excelência</div>
-        </div>
-    </div>
+<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+  <div class="wrap">
+    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
+    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
+    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Imobili%C3%A1ria%20Luxo%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+  </div>
+</section>
+<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
+  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
+</footer>
 
-    <script>
-        lucide.createIcons();
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('nav');
-            if (window.scrollY > 50) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        });
-    </script>
 </body>
-
 </html>
-

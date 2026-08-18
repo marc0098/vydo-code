@@ -1,640 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Aura — Alta Gastronomia</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap"
-        rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #0a0a09;
-            color: #e8dcca;
-            min-height: 100vh;
-            overflow-x: hidden
-        }
-
-        /* Premium Cursive/Serif Typography */
-        h1,
-        h2,
-        h3,
-        h4,
-        .serif {
-            font-family: 'Playfair Display', serif
-        }
-
-        .signature {
-            font-family: 'Great Vibes', cursive;
-            color: #c9a45c;
-            font-size: 42px;
-            line-height: 1;
-            margin-bottom: -10px;
-            transform: rotate(-5deg);
-            display: inline-block
-        }
-
-        /* Navigation Overlay */
-        .nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100;
-            padding: 32px 64px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-            transition: background .4s
-        }
-
-        .nav.scrolled {
-            background: rgba(10, 10, 9, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 24px 64px;
-            border-bottom: 1px solid rgba(201, 164, 92, 0.1)
-        }
-
-        .brand {
-            font-size: 24px;
-            font-family: 'Playfair Display';
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #fff
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 48px
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #e8dcca;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            transition: color .3s;
-            position: relative
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #c9a45c;
-            transition: width .4s
-        }
-
-        .nav-link:hover {
-            color: #c9a45c
-        }
-
-        .nav-link:hover::after {
-            width: 100%
-        }
-
-        .nav-btn {
-            padding: 12px 24px;
-            border: 1px solid #c9a45c;
-            color: #c9a45c;
-            background: transparent;
-            text-decoration: none;
-            font-size: 11px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            transition: all .4s
-        }
-
-        .nav-btn:hover {
-            background: #c9a45c;
-            color: #0a0a09
-        }
-
-        /* Cinematic Hero */
-        .hero {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center
-        }
-
-        .hero-video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            filter: brightness(0.6)
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-            background: radial-gradient(circle at center, transparent 0%, #0a0a09 100%)
-        }
-
-        .hero-content {
-            z-index: 1;
-            max-width: 800px;
-            display: flex;
-            flex-direction: column;
-            align-items: center
-        }
-
-        .hero-title {
-            font-size: 96px;
-            font-weight: 400;
-            line-height: 1;
-            margin-bottom: 24px;
-            color: #fff;
-            animation: fadeUp 1s 0.2s cubic-bezier(0.16, 1, 0.3, 1) backwards
-        }
-
-        .hero-subtitle {
-            font-size: 14px;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            font-weight: 300;
-            margin-bottom: 48px;
-            animation: fadeUp 1s 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards
-        }
-
-        .hero-cta {
-            display: inline-block;
-            padding: 18px 48px;
-            background: #c9a45c;
-            color: #0a0a09;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            animation: fadeUp 1s 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-            transition: all .4s
-        }
-
-        .hero-cta:hover {
-            background: #fff;
-            transform: translateY(-2px)
-        }
-
-        @keyframes fadeUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px)
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        /* Tasting Menu Section */
-        .menu-section {
-            padding: 120px 10%;
-            background: #0a0a09;
-            position: relative
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px
-        }
-
-        .sh-pre {
-            font-size: 11px;
-            color: #c9a45c;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 16px
-        }
-
-        .sh-title {
-            font-size: 48px;
-            font-weight: 400
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px
-        }
-
-        .menu-col {
-            display: flex;
-            flex-direction: column;
-            gap: 32px
-        }
-
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            position: relative
-        }
-
-        .menu-item::after {
-            content: '';
-            position: absolute;
-            bottom: 6px;
-            left: 0;
-            width: 100%;
-            border-bottom: 1px dotted rgba(232, 220, 202, 0.2);
-            z-index: -1
-        }
-
-        .m-info {
-            background: #0a0a09;
-            padding-right: 16px;
-            z-index: 2
-        }
-
-        .m-name {
-            font-family: 'Playfair Display';
-            font-size: 22px;
-            color: #fff;
-            margin-bottom: 8px
-        }
-
-        .m-desc {
-            font-size: 13px;
-            color: #888;
-            max-width: 300px;
-            line-height: 1.6
-        }
-
-        .m-price {
-            font-family: 'Playfair Display';
-            font-size: 20px;
-            color: #c9a45c;
-            background: #0a0a09;
-            padding-left: 16px;
-            z-index: 2
-        }
-
-        /* Immersive Gallery / Experience */
-        .experience {
-            height: 80vh;
-            display: flex
-        }
-
-        .exp-text {
-            flex: 1;
-            background: #141412;
-            padding: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center
-        }
-
-        .exp-text .signature {
-            margin-bottom: 24px
-        }
-
-        .exp-title {
-            font-size: 42px;
-            line-height: 1.2;
-            margin-bottom: 32px
-        }
-
-        .exp-desc {
-            font-size: 15px;
-            color: #aaa;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            max-width: 400px
-        }
-
-        .exp-img {
-            flex: 1;
-            position: relative;
-            overflow: hidden
-        }
-
-        .exp-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 10s
-        }
-
-        .exp-img:hover img {
-            transform: scale(1.1)
-        }
-
-        /* Reservation Bar */
-        .reservation {
-            background: #111;
-            padding: 80px 10%;
-            border-top: 1px solid rgba(201, 164, 92, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center
-        }
-
-        .res-form {
-            display: flex;
-            gap: 16px;
-            margin-top: 40px;
-            width: 100%;
-            max-width: 900px
-        }
-
-        .res-input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #333;
-            color: #fff;
-            padding: 16px 0;
-            font-family: 'Montserrat';
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            outline: none;
-            transition: border-color .3s
-        }
-
-        .res-input:focus {
-            border-color: #c9a45c
-        }
-
-        .res-input::placeholder {
-            color: #666;
-            text-transform: uppercase;
-            font-size: 11px
-        }
-
-        .res-btn {
-            padding: 16px 48px;
-            background: #c9a45c;
-            color: #000;
-            border: none;
-            font-family: 'Montserrat';
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all .3s
-        }
-
-        .res-btn:hover {
-            background: #fff
-        }
-
-        /* Responsive */
-        @media(max-width:900px) {
-            .nav {
-                padding: 24px
-            }
-
-            .nav-links {
-                display: none
-            }
-
-            .hero-title {
-                font-size: 56px
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr
-            }
-
-            .experience {
-                flex-direction: column;
-                height: auto
-            }
-
-            .res-form {
-                flex-direction: column
-            }
-        }
-
-        /* Responsive Mobile First Tweaks (< 380px) */
-        @media (max-width: 380px) {
-            .nav {
-                padding: 16px;
-            }
-
-            .brand {
-                font-size: 20px;
-            }
-
-            .nav-btn {
-                padding: 10px 16px;
-                font-size: 10px;
-            }
-
-            .hero-title {
-                font-size: 42px;
-            }
-
-            .hero-subtitle {
-                font-size: 10px;
-                letter-spacing: 0.2em;
-            }
-
-            .hero-cta {
-                padding: 14px 32px;
-                font-size: 11px;
-            }
-
-            .menu-section {
-                padding: 60px 16px;
-            }
-
-            .sh-title {
-                font-size: 32px;
-            }
-
-            .menu-col {
-                gap: 24px;
-            }
-
-            .m-name {
-                font-size: 18px;
-            }
-
-            .m-desc {
-                font-size: 12px;
-            }
-
-            .exp-text {
-                padding: 40px 16px;
-            }
-
-            .signature {
-                font-size: 36px;
-            }
-
-            .exp-title {
-                font-size: 32px;
-            }
-
-            .exp-desc {
-                font-size: 14px;
-            }
-
-            .reservation {
-                padding: 60px 16px;
-            }
-
-            .reservation h2 {
-                font-size: 28px !important;
-                text-align: center;
-            }
-
-            .res-btn {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style></head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Restaurante Premium — Demonstração VYDO CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair Display&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#fb923c}
+
+:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Playfair Display',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+
+.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
+background:
+  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
+  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
+.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
+.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
 <body>
-    <nav class="nav" id="nav">
-        <div class="brand">L'Aura</div>
-        <div class="nav-links">
-            <a href="#" class="nav-link">Menu</a>
-            <a href="#" class="nav-link">Chef</a>
-            <a href="#" class="nav-link">Vinhos</a>
-            <a href="#" class="nav-link">Experiência</a>
-        </div>
-        <a href="#" class="nav-btn">Reservar Mesa</a>
-    </nav>
 
-    <div class="hero">
-        <img class="hero-video" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600&h=900&fit=crop"
-            alt="Premium Dining">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Uma Sinfonia<br>de <i>Sentidos</i></h1>
-            <p class="hero-subtitle">Est. 2024 • Alta Gastronomia Michelin</p>
-            <a href="#" class="hero-cta">Descobrir Menu</a>
-        </div>
+
+<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
+    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Corte & Brasa</a>
+    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
     </div>
+    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
+  </div>
+</nav>
+<section class="hero">
+  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#fb923c;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
+  <h1>Corte & Brasa<br><span class="grad">sabor que cria memórias</span></h1>
+  <p>Gastronomia de autor com ambiente sofisticado. Reservamos sua experiência.</p>
+  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+    <a class="btn" style="background:#fb923c;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
+    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
+  </div>
+</section>
 
-    <div class="menu-section">
-        <div class="section-header">
-            <div class="sh-pre">Menu Degustação</div>
-            <h2 class="sh-title serif">Coleção Exclusiva de Outono</h2>
-        </div>
+<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Experiências do nosso cardápio</h2>
+    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Pratos autorais com ingredientes frescos e de origem local.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
 
-        <div class="menu-grid">
-            <div class="menu-col">
-                <div class="menu-item">
-                    <div class="m-info">
-                        <h3 class="m-name">Scallop Crudo</h3>
-                        <p class="m-desc">Caviar beluga, infusão cítrica ponzu, neve de trufa negra.</p>
-                    </div>
-                    <div class="m-price">R$ 142</div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="m-info">
-                        <h3 class="m-name">Foie Gras Torchon</h3>
-                        <p class="m-desc">Figo caramelizado, brioche artesanal, crocante de pistache.</p>
-                    </div>
-                    <div class="m-price">R$ 155</div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="m-info">
-                        <h3 class="m-name">Lobster Agnolotti</h3>
-                        <p class="m-desc">Lagosta de Maine, beurre blanc de açafrão, micro manjericão.</p>
-                    </div>
-                    <div class="m-price">R$ 168</div>
-                </div>
-            </div>
-
-            <div class="menu-col">
-                <div class="menu-item">
-                    <div class="m-info">
-                        <h3 class="m-name">Wagyu A5 Striploin</h3>
-                        <p class="m-desc">Carne de Kagoshima, alho-poró tostado, molho de tutano.</p>
-                    </div>
-                    <div class="m-price">R$ 240</div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="m-info">
-                        <h3 class="m-name">Magret de Pato</h3>
-                        <p class="m-desc">Pato maturado, redução de cereja escura, purê de aipo-rábano.</p>
-                    </div>
-                    <div class="m-price">R$ 175</div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="m-info">
-                        <h3 class="m-name">Soufflé Grand Marnier</h3>
-                        <p class="m-desc">Crème anglaise com fava de baunilha, folha de ouro 24k.</p>
-                    </div>
-                    <div class="m-price">R$ 88</div>
-                </div>
-            </div>
-        </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🥩</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Cortes nobres</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Seleção de carnes maturadas grelhadas na brasa.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🍷</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Carta de vinhos</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Mais de 40 rótulos nacionais e importados.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🍰</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Sobremesas autorais</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Confeccionadas diariamente pela nossa pâtisserie.</p>
+      </div>
     </div>
+  </div>
+</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">12</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">anos de história</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">4.9★</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">+2 mil avaliações</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">30k+</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">pratos servidos</div>
+      </div>
+    </div></div>
+</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem">
+        <h3 style="font-weight:700;margin-bottom:.5rem">Reservas</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Garanta sua mesa em 30 segundos. Almoço, jantar e eventos.</p>
+        <a class="btn" style="background:var(--accent);color:#fff;margin-top:1rem;font-size:.85rem" href="https://vydo-code.vercel.app/">Reservar mesa</a>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem">
+        <h3 style="font-weight:700;margin-bottom:.5rem">Delivery</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">O mesmo sabor de sempre, no conforto da sua casa.</p>
+        <a class="btn" style="background:#25D366;color:#fff;margin-top:1rem;font-size:.85rem" href="https://vydo-code.vercel.app/">Pedir agora</a>
+      </div>
+    </div></div>
+</section>
 
-    <div class="experience">
-        <div class="exp-text">
-            <div class="signature">Armand Dubois</div>
-            <h2 class="exp-title serif">Culinary artistry woven with tradition and innovation.</h2>
-            <p class="exp-desc">Nossa filosofia é simples: respeitar o ingrediente em sua forma mais pura e contá-lo
-                através de técnicas meticulosas. Cada prato no L'Aura é uma narrativa de terroir e paixão, projetada não
-                apenas para alimentar, mas para provocar memórias indeléveis.</p>
-            <a href="#"
-                style="color:#c9a45c;text-decoration:none;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;display:flex;align-items:center;gap:8px">Conhecer
-                o
-                Chef <i data-lucide="arrow-right" style="width:16px;height:16px"></i></a>
-        </div>
-        <div class="exp-img">
-            <img src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?w=1000&h=1000&fit=crop"
-                alt="Chef Plating">
-        </div>
-    </div>
+<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+  <div class="wrap">
+    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
+    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
+    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Restaurante%20Premium%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+  </div>
+</section>
+<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
+  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
+</footer>
 
-    <div class="reservation">
-        <h2 class="serif" style="font-size:36px;margin-bottom:16px">Reservas e Eventos Privados</h2>
-        <p style="color:#888;font-size:14px;letter-spacing:0.05em">Um número limitado de mesas é liberado com 60 dias de
-            antecedência.</p>
-
-        <form class="res-form" onsubmit="event.preventDefault()">
-            <input type="text" class="res-input" placeholder="Data (DD/MM/AAAA)">
-            <input type="text" class="res-input" placeholder="Horário">
-            <input type="text" class="res-input" placeholder="Pessoas">
-            <button class="res-btn">Buscar Mesa</button>
-        </form>
-    </div>
-
-    <script>
-        lucide.createIcons();
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('nav');
-            if (window.scrollY > 100) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        });
-    </script>
 </body>
-
 </html>
-

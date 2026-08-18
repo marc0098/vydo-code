@@ -1,524 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doce Encanto — Confeitaria</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doce Confeitaria — Demonstração VYDO CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Nunito', sans-serif;
-            background-color: #fff0f5;
-            /* Lavender blush / Pink clarinho */
-            color: #4a4a4a;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at top right, rgba(255, 182, 193, 0.4), transparent 50%),
-                radial-gradient(circle at bottom left, rgba(255, 105, 180, 0.2), transparent 50%);
-        }
+<style>
 
-        /* Organic Blobs - Tema Doce */
-        .blob {
-            position: fixed;
-            z-index: -1;
-            filter: blur(50px);
-            animation: drift 20s infinite alternate ease-in-out;
-            opacity: 0.6;
-        }
+:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Quicksand',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
-        .blob-1 {
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vw;
-            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            animation-duration: 25s;
-        }
-
-        .blob-2 {
-            bottom: -20%;
-            right: -10%;
-            width: 60vw;
-            height: 60vw;
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation-duration: 22s;
-            animation-delay: -5s;
-        }
-
-        @keyframes drift {
-            0% {
-                transform: scale(1) translate(0, 0) rotate(0deg);
-            }
-
-            50% {
-                transform: scale(1.1) translate(5%, 10%) rotate(10deg);
-                border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%;
-            }
-
-            100% {
-                transform: scale(0.9) translate(-5%, -5%) rotate(-10deg);
-                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            }
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            padding: 50px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Avatar da Loja */
-        .chef-avatar-wrap {
-            position: relative;
-            margin-bottom: 24px;
-        }
-
-        .chef-avatar {
-            width: 130px;
-            height: 130px;
-            border-radius: 40px;
-            object-fit: cover;
-            box-shadow: 0 20px 40px -10px rgba(255, 105, 180, 0.4);
-            border: 4px solid #fff;
-            transform: rotate(3deg);
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            z-index: 2;
-        }
-
-        .chef-avatar-wrap:hover .chef-avatar {
-            transform: rotate(-3deg) scale(1.08);
-        }
-
-        .floating-badge {
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 6px 16px;
-            border-radius: 20px;
-            background: #fff;
-            color: #ff1493;
-            /* Deep Pink */
-            font-size: 13px;
-            font-weight: 900;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            z-index: 3;
-            animation: float-badge 3s ease-in-out infinite;
-        }
-
-        @keyframes float-badge {
-
-            0%,
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-
-            50% {
-                transform: translateX(-50%) translateY(-6px);
-            }
-        }
-
-        .chef-name {
-            font-size: 32px;
-            font-weight: 900;
-            color: #333;
-            margin-bottom: 8px;
-            text-align: center;
-            letter-spacing: -0.02em;
-        }
-
-        .chef-bio {
-            font-size: 15px;
-            color: #666;
-            text-align: center;
-            line-height: 1.6;
-            margin-bottom: 32px;
-            font-weight: 700;
-            max-width: 380px;
-        }
-
-        /* Encomenda CTA */
-        .order-btn-wrap {
-            width: 100%;
-            position: relative;
-            margin-bottom: 32px;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-6px) rotate(1deg);
-            }
-        }
-
-        .order-btn {
-            width: 100%;
-            padding: 22px;
-            border-radius: 36px;
-            background: linear-gradient(135deg, #ff69b4, #ff1493);
-            color: #fff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-size: 18px;
-            font-weight: 900;
-            box-shadow: 0 20px 40px -10px rgba(255, 20, 147, 0.4);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            overflow: hidden;
-            border: 4px solid #fff;
-        }
-
-        .order-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: skewX(-20deg);
-            transition: all 0.6s ease;
-        }
-
-        .order-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 25px 50px -10px rgba(255, 20, 147, 0.5);
-        }
-
-        .order-btn:hover::before {
-            animation: shine 1.5s;
-        }
-
-        @keyframes shine {
-            100% {
-                left: 200%;
-            }
-        }
-
-        /* Sec Links */
-        .links-group {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .sec-link {
-            display: flex;
-            align-items: center;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 800;
-            font-size: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border: 2px solid #fff;
-        }
-
-        .sec-link:hover {
-            transform: translateY(-4px) scale(1.02);
-            border-color: #ff69b4;
-            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.15);
-        }
-
-        .link-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 20px;
-            background: #fff;
-            color: #ff1493;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s;
-        }
-
-        .sec-link:hover .link-icon {
-            background: linear-gradient(135deg, #ff69b4, #ff1493);
-            color: #fff;
-            transform: rotate(-10deg) scale(1.1);
-        }
-
-        /* Galeria / Vitrine */
-        .gallery-wrap {
-            width: 100%;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(20px);
-            padding: 24px;
-            border-radius: 36px;
-            border: 2px solid #fff;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
-        }
-
-        .gallery-title {
-            font-size: 18px;
-            font-weight: 900;
-            color: #333;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .food-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            width: 100%;
-        }
-
-        .food-item {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            aspect-ratio: 1;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            border: 3px solid #fff;
-        }
-
-        .food-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .food-item:hover img {
-            transform: scale(1.15) rotate(2deg);
-        }
-
-        .food-label {
-            position: absolute;
-            bottom: -50px;
-            left: 5px;
-            right: 5px;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            font-size: 12px;
-            font-weight: 800;
-            text-align: center;
-            color: #ff1493;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .food-item:hover .food-label {
-            bottom: 5px;
-        }
-
-        /* Animations */
-        .pop-in {
-            animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
-        }
-
-        @keyframes popIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.8) translateY(30px);
-                filter: blur(10px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: blur(0);
-            }
-        }
-
-        .d-1 {
-            animation-delay: 0.1s;
-        }
-
-        .d-2 {
-            animation-delay: 0.2s;
-        }
-
-        .d-3 {
-            animation-delay: 0.3s;
-        }
-
-        /* Responsive Mobile First Tweaks */
-        @media (max-width: 380px) {
-            .container {
-                padding: 40px 16px;
-            }
-
-            .chef-avatar {
-                width: 100px;
-                height: 100px;
-            }
-
-            .floating-badge {
-                font-size: 11px;
-                padding: 4px 12px;
-                bottom: -8px;
-            }
-
-            .chef-name {
-                font-size: 26px;
-            }
-
-            .chef-bio {
-                font-size: 13px;
-                margin-bottom: 24px;
-            }
-
-            .order-btn {
-                padding: 18px;
-                font-size: 15px;
-            }
-
-            .sec-link {
-                padding: 14px 16px;
-                font-size: 14px;
-            }
-
-            .link-icon {
-                width: 40px;
-                height: 40px;
-                margin-right: 12px;
-            }
-
-            .gallery-wrap {
-                padding: 16px;
-            }
-
-            .gallery-title {
-                font-size: 16px;
-            }
-
-            .food-label {
-                font-size: 10px;
-                padding: 6px;
-            }
-        }
-    </style></head>
-
+  .bio-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 1.25rem 3rem;
+    background:radial-gradient(ellipse 80% 60% at 50% -10%,#fb718530 0%,transparent 65%),var(--bg)}
+  .avatar{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:800;margin-bottom:1rem;
+    border:3px solid #fb7185;background:#fb718526}
+  .links{width:100%;max-width:380px;display:flex;flex-direction:column;gap:.8rem}
+  .link{display:flex;align-items:center;gap:.75rem;padding:1rem 1.1rem;border-radius:1rem;font-weight:600;font-size:.95rem;
+    background:rgba(255,255,255,.045);border:1px solid var(--border);transition:transform .25s ease,border-color .25s ease}
+  .link:hover{transform:translateY(-2px);border-color:#fb718566}
+  .link--main{background:linear-gradient(120deg,#fb7185e6,#fb7185b3);color:#fff;border:none;box-shadow:0 8px 28px #fb718540;justify-content:center}
+  .ic{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;background:#fb718522;flex-shrink:0}
+  .link--main .ic{background:rgba(255,255,255,.22)}
+  .socials{display:flex;gap:.9rem;margin-top:1.6rem}
+  .socials a{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:1px solid var(--border);font-size:1rem}
+  .socials a:hover{border-color:#fb718566;transform:translateY(-2px)}
+</style>
+</head>
 <body>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
+<div class="bio-wrap"><div class="avatar">D</div><h2 style="font-size:1.4rem;font-weight:800;margin-bottom:.3rem">Doce Afeto</h2><p style="color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:2rem">Doces artesanais · Delivery</p><div class="links">
+  <a class="link link--main" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
+    <span class="ic">🍰</span>Pedir no WhatsApp
+  </a>
+  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
+    <span class="ic">📋</span>Ver Cardápio
+  </a>
+  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
+    <span class="ic">🛵</span>Pedir no iFood
+  </a>
+  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
+    <span class="ic">📍</span>Endereço
+  </a>
+  <a class="link" href="https://vydo-code.vercel.app/" target="_blank" rel="noopener">
+    <span class="ic">🎉</span>Novidades
+  </a><div class="socials"><a href="#" aria-label="Rede social 1">◎</a><a href="#" aria-label="Rede social 2">◎</a><a href="#" aria-label="Rede social 3">◎</a></div></div></div>
 
-    <div class="container">
-        <!-- Cabeçalho Doce Encanto -->
-        <div class="chef-avatar-wrap pop-in">
-            <img class="chef-avatar"
-                src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300&h=300&fit=crop"
-                alt="Bolo Decorado">
-            <div class="floating-badge">
-                <i data-lucide="cake" style="width:14px;height:14px;stroke-width:3"></i> Artesanal
-            </div>
-        </div>
+<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+  <div class="wrap">
+    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
+    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
+    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Doce%20Confeitaria%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+  </div>
+</section>
+<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
+  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
+</footer>
 
-        <h1 class="chef-name pop-in d-1">Doce Encanto 🧁</h1>
-        <p class="chef-bio pop-in d-1">Bolos, doces finos e sobremesas feitas com muito amor. Transformamos seu dia em
-            um momento único.</p>
-
-        <!-- CTA Principal: Encomendas WhastApp -->
-        <div class="order-btn-wrap pop-in d-2">
-            <a href="#" class="order-btn">
-                <i data-lucide="message-circle" style="width:24px;height:24px;stroke-width:2.5"></i>
-                Encomendar pelo WhatsApp
-            </a>
-        </div>
-
-        <!-- Links Diversos -->
-        <div class="links-group pop-in d-2">
-            <a href="#" class="sec-link">
-                <div class="link-icon"><i data-lucide="shopping-bag" style="width:22px;height:22px"></i></div>
-                <span style="flex:1">Pedir Agora no iFood</span>
-                <i data-lucide="chevron-right" style="width:20px;height:20px;color:#cbd5e0"></i>
-            </a>
-
-            <a href="#" class="sec-link">
-                <div class="link-icon"><i data-lucide="book-open" style="width:22px;height:22px"></i></div>
-                <span style="flex:1">Menu Completo (PDF)</span>
-                <i data-lucide="chevron-right" style="width:20px;height:20px;color:#cbd5e0"></i>
-            </a>
-
-            <a href="#" class="sec-link">
-                <div class="link-icon"><i data-lucide="instagram" style="width:22px;height:22px"></i></div>
-                <span style="flex:1">Siga nosso Instagram</span>
-                <i data-lucide="chevron-right" style="width:20px;height:20px;color:#cbd5e0"></i>
-            </a>
-        </div>
-
-        <!-- Vitrine de Produtos -->
-        <div class="gallery-wrap pop-in d-3">
-            <h3 class="gallery-title">
-                <i data-lucide="heart" style="width:22px;height:22px;color:#ff1493;fill:#ff1493"></i> Mais Pedidos
-            </h3>
-            <div class="food-gallery">
-                <div class="food-item">
-                    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=400&fit=crop"
-                        alt="Bolo Morango">
-                    <div class="food-label">Bolo de Morango</div>
-                </div>
-                <div class="food-item">
-                    <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400&h=400&fit=crop"
-                        alt="Cupcakes">
-                    <div class="food-label">Cupcakes Premium</div>
-                </div>
-                <div class="food-item">
-                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400&h=400&fit=crop"
-                        alt="Macarons">
-                    <div class="food-label">Caixa de Macarons</div>
-                </div>
-                <div class="food-item">
-                    <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=400&h=400&fit=crop"
-                        alt="Torta Limao">
-                    <div class="food-label">Torta de Limão</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
-
 </html>
-

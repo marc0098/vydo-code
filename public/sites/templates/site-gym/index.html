@@ -1,549 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRON CORE — Elite Training</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Jura:wght@400;600;700&display=swap"
-        rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fitness & Gym — Demonstração VYDO CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#34d399}
 
-        body {
-            font-family: 'Jura', sans-serif;
-            background-color: #050505;
-            color: #f0f0f0;
-            min-height: 100vh;
-            overflow-x: hidden
-        }
+:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Oswald',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
-        /* Grunge/Concrete Texture */
-        .texture {
-            position: fixed;
-            inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1518640061466-00366eb68045?w=1000&h=1000&fit=crop');
-            opacity: 0.04;
-            z-index: -1;
-            filter: grayscale(100%)
-        }
 
-        /* Display Font */
-        .impact-font {
-            font-family: 'Anton', sans-serif;
-            text-transform: uppercase
-        }
-
-        /* Nav */
-        .nav {
-            padding: 20px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            width: 100%;
-            z-index: 50
-        }
-
-        .brand {
-            font-size: 32px;
-            letter-spacing: 0.05em;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px
-        }
-
-        .brand span {
-            color: #e60000
-        }
-
-        /* Primary Red */
-
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            align-items: center
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #aaa;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            transition: color .3s
-        }
-
-        .nav-link:hover {
-            color: #e60000
-        }
-
-        .cta-btn {
-            padding: 14px 32px;
-            background: #e60000;
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all .3s
-        }
-
-        .cta-btn:hover {
-            background: #ff0a0a;
-            transform: translateY(-2px)
-        }
-
-        /* Hero */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-            z-index: -2;
-            filter: brightness(0.5) contrast(1.2)
-        }
-
-        .hero-gradient {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.6) 50%, transparent 100%);
-            z-index: -1
-        }
-
-        .hero-text {
-            padding-left: 5%;
-            max-width: 800px;
-            z-index: 10
-        }
-
-        .hero-title {
-            font-size: 120px;
-            line-height: 0.9;
-            color: #fff;
-            margin-bottom: 24px;
-            text-shadow: 4px 4px 0 #e60000;
-            letter-spacing: 0.02em
-        }
-
-        .hero-desc {
-            font-size: 18px;
-            color: #ccc;
-            font-weight: 600;
-            margin-bottom: 40px;
-            max-width: 500px;
-            line-height: 1.5;
-            border-left: 4px solid #e60000;
-            padding-left: 16px
-        }
-
-        .stats-row {
-            display: flex;
-            gap: 40px;
-            margin-top: 60px
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column
-        }
-
-        .stat-num {
-            font-size: 48px;
-            color: #e60000;
-            line-height: 1
-        }
-
-        .stat-label {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #888;
-            margin-top: 4px
-        }
-
-        /* Programs Marquee */
-        .marquee {
-            width: 100%;
-            background: #e60000;
-            color: #000;
-            padding: 16px 0;
-            overflow: hidden;
-            position: relative;
-            display: flex
-        }
-
-        .m-content {
-            display: flex;
-            gap: 40px;
-            white-space: nowrap;
-            font-size: 24px;
-            letter-spacing: 0.05em;
-            animation: scroll 20s linear infinite
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0)
-            }
-
-            100% {
-                transform: translateX(-50%)
-            }
-        }
-
-        /* Classes Cards */
-        .classes {
-            padding: 100px 5%
-        }
-
-        .sec-title {
-            font-size: 64px;
-            color: #fff;
-            margin-bottom: 60px;
-            text-align: center;
-            letter-spacing: 0.03em
-        }
-
-        .sec-title span {
-            color: transparent;
-            -webkit-text-stroke: 1px #e60000
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px
-        }
-
-        .class-card {
-            height: 450px;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            color: #fff;
-            display: flex;
-            align-items: flex-end;
-            padding: 32px;
-            background: #111;
-            transition: transform .4s
-        }
-
-        .class-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, #000 0%, transparent 80%);
-            z-index: 1
-        }
-
-        .class-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(230, 0, 0, 0.2)
-        }
-
-        .c-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            filter: grayscale(100%) contrast(1.2);
-            transition: filter .5s, transform .5s
-        }
-
-        .class-card:hover .c-img {
-            filter: grayscale(0);
-            transform: scale(1.1)
-        }
-
-        .c-info {
-            position: relative;
-            z-index: 2;
-            width: 100%
-        }
-
-        .c-name {
-            font-size: 36px;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px
-        }
-
-        .c-time {
-            font-size: 12px;
-            font-family: 'Jura';
-            font-weight: 700;
-            color: #e60000;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 6px
-        }
-
-        /* Membership */
-        .pricing {
-            padding: 80px 5%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            align-items: center
-        }
-
-        .p-plan {
-            background: linear-gradient(135deg, #111, #000);
-            border: 1px solid #333;
-            padding: 48px;
-            position: relative;
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%)
-        }
-
-        .p-plan.pro {
-            border-color: #e60000;
-            box-shadow: 0 0 40px rgba(230, 0, 0, 0.15)
-        }
-
-        .p-name {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 16px;
-            letter-spacing: 0.1em
-        }
-
-        .p-price {
-            font-size: 64px;
-            color: #e60000;
-            line-height: 1;
-            margin-bottom: 32px;
-            display: flex;
-            align-items: baseline;
-            gap: 8px
-        }
-
-        .p-price span {
-            font-size: 16px;
-            font-family: 'Jura';
-            color: #888;
-            letter-spacing: 0.1em
-        }
-
-        .p-feat {
-            list-style: none;
-            margin-bottom: 40px
-        }
-
-        .p-feat li {
-            font-size: 14px;
-            font-weight: 600;
-            color: #bbb;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px
-        }
-
-        @media(max-width:900px) {
-            .nav-links {
-                display: none
-            }
-
-            .hero-title {
-                font-size: 80px
-            }
-
-            .grid,
-            .pricing {
-                grid-template-columns: 1fr
-            }
-        }
-
-        /* Responsive Mobile First Tweaks (< 380px) */
-        @media (max-width: 380px) {
-            .nav {
-                padding: 16px;
-                flex-direction: column;
-                gap: 16px;
-            }
-
-            .hero-title {
-                font-size: 56px;
-            }
-
-            .hero-desc {
-                font-size: 14px;
-            }
-
-            .cta-btn {
-                width: 100%;
-                text-align: center;
-                display: block;
-            }
-
-            .stats-row {
-                flex-direction: column;
-                gap: 20px;
-                margin-top: 32px;
-            }
-
-            .sec-title {
-                font-size: 40px;
-            }
-
-            .classes {
-                padding: 60px 16px;
-            }
-
-            .pricing {
-                padding: 60px 16px;
-            }
-
-            .p-plan {
-                padding: 24px;
-            }
-
-            .p-price {
-                font-size: 42px;
-            }
-        }
-    </style></head>
-
+.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
+background:
+  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
+  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
+.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
+.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
 <body>
-    <div class="texture"></div>
 
-    <nav class="nav">
-        <div class="brand impact-font"><i data-lucide="dumbbell"
-                style="width:32px;height:32px;margin-right:8px;color:#e60000"></i> IRON<span>CORE</span></div>
-        <div class="nav-links">
-            <a href="#" class="nav-link">Aulas</a>
-            <a href="#" class="nav-link">Treinadores</a>
-            <a href="#" class="nav-link">Planos</a>
-        </div>
-        <a href="#" class="cta-btn">Matricule-se</a>
-    </nav>
 
-    <div class="hero">
-        <img class="hero-bg" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&h=1000&fit=crop"
-            alt="Gym Workout">
-        <div class="hero-gradient"></div>
-
-        <div class="hero-text">
-            <h1 class="hero-title impact-font">FORJE SEU<br>LEGADO</h1>
-            <p class="hero-desc">Equipamentos de nível olímpico, treinadores de elite e uma atmosfera construída para
-                quebrar limites. Bem-vindo à nova era do fitness.</p>
-
-            <a href="#" class="cta-btn" style="padding:18px 40px;font-size:16px">Aula Experimental</a>
-
-            <div class="stats-row">
-                <div class="stat-item">
-                    <span class="stat-num impact-font">2k+</span>
-                    <span class="stat-label">m² de Estrutura</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-num impact-font">50+</span>
-                    <span class="stat-label">Aulas Semanais</span>
-                </div>
-            </div>
-        </div>
+<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
+    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Iron Forge</a>
+    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
     </div>
+    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
+  </div>
+</nav>
+<section class="hero">
+  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#34d399;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
+  <h1>Iron Forge<br><span class="grad">supere seus limites</span></h1>
+  <p>Estrutura completa, professores certificados e resultados reais.</p>
+  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+    <a class="btn" style="background:#34d399;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
+    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
+  </div>
+</section>
 
-    <div class="marquee impact-font">
-        <div class="m-content">
-            CROSSFIT • HYPERTROPHY • BOXING • POWERLIFTING • HIIT COND • CROSSFIT • HYPERTROPHY • BOXING • POWERLIFTING
-            • HIIT COND •
-            CROSSFIT • HYPERTROPHY • BOXING • POWERLIFTING • HIIT COND • CROSSFIT • HYPERTROPHY • BOXING • POWERLIFTING
-            • HIIT COND •
-        </div>
+<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Escolha o seu plano</h2>
+    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Todos incluem acesso à musculação, aula coletiva e app de treino.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">⚡</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Plano Mensal — R$ 129</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Sem fidelidade, cancele quando quiser.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🔥</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Plano Semestral — R$ 99/mês</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Economize 23% com o plano de 6 meses.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">💪</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Plano Anual — R$ 79/mês</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">O melhor custo-benefício, com 1 mês grátis.</p>
+      </div>
     </div>
+  </div>
+</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">2.400m²</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">de área de treino</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">40+</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">aulas por semana</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">24h</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">aberto todos os dias</div>
+      </div>
+    </div></div>
+</section>
 
-    <div class="classes">
-        <h2 class="sec-title impact-font">PROGRAMAS <span>PREMIUM</span></h2>
+<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+  <div class="wrap">
+    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
+    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
+    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Fitness%20%26%20Gym%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+  </div>
+</section>
+<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
+  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
+</footer>
 
-        <div class="grid">
-            <a href="#" class="class-card">
-                <img class="c-img"
-                    src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=600&h=800&fit=crop"
-                    alt="Crossfit">
-                <div class="c-info">
-                    <h3 class="c-name impact-font">SQUAD WOD</h3>
-                    <div class="c-time"><i data-lucide="clock" style="width:14px;height:14px"></i> 60 MIN COND</div>
-                </div>
-            </a>
-
-            <a href="#" class="class-card">
-                <img class="c-img"
-                    src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=600&h=800&fit=crop"
-                    alt="Weights">
-                <div class="c-info">
-                    <h3 class="c-name impact-font">IRON PUMP</h3>
-                    <div class="c-time"><i data-lucide="clock" style="width:14px;height:14px"></i> 45 MIN HYPERTROPHY
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="class-card">
-                <img class="c-img" src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=600&h=800&fit=crop"
-                    alt="Boxing">
-                <div class="c-info">
-                    <h3 class="c-name impact-font">FIGHT CLUB</h3>
-                    <div class="c-time"><i data-lucide="clock" style="width:14px;height:14px"></i> 50 MIN BOXE</div>
-                </div>
-            </a>
-        </div>
-    </div>
-
-    <div class="pricing">
-        <div>
-            <h2 class="sec-title impact-font" style="text-align:left;margin-bottom:24px">
-                ACESSO<br><span>ILIMITADO</span></h2>
-            <p style="color:#aaa;line-height:1.6;font-size:16px;max-width:400px;margin-bottom:40px;font-weight:600">
-                Planos projetados tanto para inciantes quanto para atletas de alto rendimento. Sem taxas surpresas, sem
-                enrolação.</p>
-        </div>
-
-        <div class="p-plan pro">
-            <div class="p-name impact-font">PASSE ELITE</div>
-            <div class="p-price impact-font">R$199<span>/MÊS</span></div>
-            <ul class="p-feat">
-                <li><i data-lucide="check" style="color:#e60000;width:18px;height:18px"></i> Acesso 24/7 a todas as
-                    áreas</li>
-                <li><i data-lucide="check" style="color:#e60000;width:18px;height:18px"></i> Aulas coletivas Ilimitadas
-                </li>
-                <li><i data-lucide="check" style="color:#e60000;width:18px;height:18px"></i> 1 Avaliação Mensal com
-                    Personal
-                </li>
-                <li><i data-lucide="check" style="color:#e60000;width:18px;height:18px"></i> Vestiário & Área de
-                    Recuperação
-                    (Sauna)</li>
-            </ul>
-            <a href="#" class="cta-btn" style="display:block;text-align:center">ASSINAR AGORA</a>
-        </div>
-    </div>
-
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
-
 </html>
-

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { ArrowRight, ArrowUpRight, MessageCircle, Sparkles } from 'lucide-react';
 import WhatsAppIcon from './components/WhatsAppIcon';
+import { applySeo, HOME_SEO, CATEGORY_SEO } from './seo';
 
 // Components
 import ButtonCard from './components/ButtonCard';
@@ -8,9 +10,11 @@ import ShowcasePage from './components/ShowcasePage';
 import { TemplateCategory } from './types';
 
 // Data
-import { MAIN_LINKS } from './constants';
+import { MAIN_LINKS, DEMOS } from './constants';
 
 const SHOWCASE_IDS: string[] = ['linknabio', 'ecommerce', 'sites', 'webapp'];
+
+const WHATSAPP = 'https://wa.me/5538998802822';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<TemplateCategory | null>(null);
@@ -22,20 +26,13 @@ const App: React.FC = () => {
         const cat = hash.replace('#/categoria/', '') as TemplateCategory;
         if (SHOWCASE_IDS.includes(cat)) {
           setCurrentPage(cat);
-          
-          // SEO title update dynamically per category
-          const categoryNames: Record<string, string> = {
-            linknabio: 'Link na Bio Personalizado',
-            ecommerce: 'E-commerce Premium',
-            sites: 'Sites Impactantes',
-            webapp: 'App Web Sob Medida',
-          };
-          document.title = `VYDO CODE | ${categoryNames[cat] || 'Showcase'}`;
+          applySeo(CATEGORY_SEO[cat] ?? HOME_SEO);
+          window.scrollTo({ top: 0 });
           return;
         }
       }
       setCurrentPage(null);
-      document.title = 'VYDO CODE | Premium Frontend Solutions';
+      applySeo(HOME_SEO);
     };
 
     // Initialize on load
@@ -63,9 +60,12 @@ const App: React.FC = () => {
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] animate-blob mix-blend-screen" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-primary-glow/10 rounded-full blur-[100px] animate-blob animation-delay-4000 mix-blend-screen" />
-        
+
         {/* Subtle Grid Texture */}
         <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+        {/* Noise texture */}
+        <div className="noise-overlay" />
       </div>
 
       {/* Main Content Container */}
@@ -73,17 +73,17 @@ const App: React.FC = () => {
 
         {/* HERO SECTION */}
         <header className="w-full flex flex-col items-center text-center mb-12 animate-fade-in-up">
-          
+
           {/* Logo & Identity */}
-          <div className="mb-10 transform-gpu hover:scale-105 transition-transform duration-500 cursor-none pointer-events-auto">
+          <div className="mb-10 transform-gpu hover:scale-105 transition-transform duration-500">
             <VydoLogo />
           </div>
 
-          {/* Profile Circle - Refined */}
+          {/* Profile Circle */}
           <div className="relative mb-8 group">
-            {/* Spinning Colored Gradient Ring - Restored */}
+            {/* Spinning Colored Gradient Ring */}
             <div className="absolute inset-[-4px] rounded-full overflow-hidden z-0">
-              <div className="absolute inset-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,#25D366,#0066ff,#a855f7,#25D366)] animate-[spin-gradient_3s_linear_infinite]"></div>
+              <div className="absolute inset-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,#25D366,#0066ff,#a855f7,#22d3ee,#25D366)] animate-[spin-gradient_3s_linear_infinite]"></div>
             </div>
 
             <div className="relative z-10 w-28 h-28 rounded-full p-[3px] bg-background">
@@ -99,19 +99,26 @@ const App: React.FC = () => {
 
           {/* Slogan / Headline */}
           <div className="mb-10">
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-primary-glow bg-primary/10 border border-primary/25 mb-5">
+              <Sparkles size={10} />
+              Desenvolvedor Frontend Premium
+            </div>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.05]">
               Que tal criar um <br />
-              <span className="text-primary-glow">projeto</span> comigo?
+              <span className="gradient-text">projeto</span> comigo?
             </h1>
+            <p className="text-sm text-white/45 mt-4 max-w-xs mx-auto leading-relaxed">
+              Landing pages, e-commerces, sites institucionais e apps web sob medida — com design de alta conversão.
+            </p>
           </div>
 
 
           {/* Primary CTA - Glass Button Style */}
           <a
-            href="https://wa.me/5538998802822?text=Ol%C3%A1%2C%20gostaria%20de%20criar%20um%20projeto%20com%20voc%C3%AA!"
+            href={`${WHATSAPP}?text=Ol%C3%A1%2C%20gostaria%20de%20criar%20um%20projeto%20com%20voc%C3%AA!`}
             target="_blank"
             rel="noopener noreferrer"
-            className="glass-button relative group inline-flex items-center gap-4 px-8 py-4 rounded-2xl text-white font-bold text-base overflow-hidden"
+            className="glass-button relative group inline-flex items-center gap-4 px-8 py-4 rounded-2xl text-white font-bold text-base overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
           >
             <span className="relative z-10">Solicitar Projeto</span>
             <div className="relative z-10 flex h-2 w-2">
@@ -122,7 +129,10 @@ const App: React.FC = () => {
         </header>
 
         {/* LINKS SECTION */}
-        <section className="w-full space-y-2 mb-16 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+        <section className="w-full space-y-2 mb-14 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          <h2 className="text-center text-[11px] font-black tracking-[0.35em] text-white/40 uppercase mb-6">
+            O que eu construo
+          </h2>
           {MAIN_LINKS.filter(l => l.id !== 'whatsapp').map((link) => (
             <ButtonCard
               key={link.id}
@@ -132,10 +142,66 @@ const App: React.FC = () => {
           ))}
         </section>
 
+        {/* FEATURED DEMOS */}
+        <section className="w-full mb-14 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+          <h2 className="text-center text-[11px] font-black tracking-[0.35em] text-white/40 uppercase mb-6">
+            Projetos em Destaque
+          </h2>
+          <div className="grid grid-cols-2 gap-3">
+            {DEMOS.map((demo) => (
+              <a
+                key={demo.id}
+                href={demo.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative rounded-2xl overflow-hidden glass-card"
+              >
+                <div
+                  className="h-1 w-full"
+                  style={{ background: `linear-gradient(90deg, ${demo.accentColor}, transparent)` }}
+                />
+                <div className="p-4 flex flex-col items-start gap-2">
+                  <span className="text-sm font-extrabold text-white group-hover:text-white transition-colors">
+                    {demo.title}
+                  </span>
+                  <span className="text-[10px] leading-relaxed text-white/40 group-hover:text-white/60 transition-colors line-clamp-2">
+                    {demo.description}
+                  </span>
+                  <span className="mt-1 inline-flex items-center gap-1 text-[9px] uppercase tracking-[0.15em] font-bold" style={{ color: demo.accentColor }}>
+                    Ver demo <ArrowUpRight size={10} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* PROCESS SECTION */}
+        <section className="w-full mb-14 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+          <h2 className="text-center text-[11px] font-black tracking-[0.35em] text-white/40 uppercase mb-6">
+            Como funciona
+          </h2>
+          <div className="flex flex-col gap-3">
+            {[
+              { step: '01', title: 'Escolha', text: 'Selecione uma categoria ou me conte sua ideia pelo WhatsApp.' },
+              { step: '02', title: 'Conversamos', text: 'Alinhamos objetivos, referências visuais e prazo do projeto.' },
+              { step: '03', title: 'Entrego', text: 'Seu projeto no ar, rápido, responsivo e pronto para converter.' },
+            ].map((item) => (
+              <div key={item.step} className="glass-card rounded-2xl p-4 flex items-center gap-4">
+                <span className="text-lg font-extrabold gradient-text shrink-0">{item.step}</span>
+                <div>
+                  <div className="text-sm font-bold text-white">{item.title}</div>
+                  <div className="text-[11px] text-white/40 leading-relaxed">{item.text}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* FOOTER */}
         <footer className="w-full text-center mt-auto pb-12 safe-area-bottom animate-fade-in-up" style={{ animationDelay: '400ms' }}>
           <div className="h-[1px] w-12 bg-white/10 mx-auto mb-8"></div>
-          
+
           <div className="flex justify-center items-center gap-3 mb-6">
             <span className="text-[10px] font-black tracking-[0.3em] text-white/40 uppercase">
               Powered by <span className="text-white/80">VYDO CODE</span>
@@ -145,19 +211,19 @@ const App: React.FC = () => {
           <p className="text-[10px] text-white/30 mb-4 font-medium">
             &copy; {new Date().getFullYear()} Todos os direitos reservados.
           </p>
-          
+
           <div className="flex justify-center gap-6 text-[9px] text-white/20 uppercase tracking-[0.2em] font-bold">
-            <a href="#" className="hover:text-white/60 transition-colors">Termos</a>
-            <a href="#" className="hover:text-white/60 transition-colors">Privacidade</a>
+            <button type="button" onClick={() => alert('Página de Termos de Uso em breve!')} className="hover:text-white/60 transition-colors cursor-pointer">Termos</button>
+            <button type="button" onClick={() => alert('Política de Privacidade em breve!')} className="hover:text-white/60 transition-colors cursor-pointer">Privacidade</button>
           </div>
         </footer>
 
       </main>
 
-      {/* FLOATING WHATSAPP - Original Full Icon */}
+      {/* FLOATING WHATSAPP */}
       <a
-        href="https://wa.me/5538998802822"
-        className="fixed bottom-6 right-6 z-50 p-4 rounded-full glass-button shadow-2xl group transition-all duration-500"
+        href={WHATSAPP}
+        className="fixed bottom-6 right-6 z-50 p-4 rounded-full glass-button shadow-2xl group transition-all duration-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
         aria-label="Falar no WhatsApp"
         target="_blank"
         rel="noopener noreferrer"

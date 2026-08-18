@@ -1,553 +1,122 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VitaLife Clinic — Medicina Integrada</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clínica Saúde — Demonstração VYDO CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#22d3ee}
 
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: #fefeff;
-            color: #18324a;
-            min-height: 100vh
-        }
+:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
-        /* Nav */
-        .nav {
-            padding: 24px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fff;
-            border-bottom: 1px solid #f0f4f8
-        }
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 700;
-            color: #071a33
-        }
-
-        .b-icon {
-            width: 36px;
-            height: 36px;
-            background: #e1f5ec;
-            color: #0b965e;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 32px
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: #5a7086;
-            font-weight: 500;
-            font-size: 15px;
-            transition: color .3s
-        }
-
-        .nav-link:hover {
-            color: #0b965e
-        }
-
-        .btn-schedule {
-            padding: 12px 28px;
-            background: #0b965e;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 8px 16px rgba(11, 150, 94, 0.2);
-            transition: all .3s
-        }
-
-        .btn-schedule:hover {
-            background: #097a4c;
-            transform: translateY(-2px)
-        }
-
-        /* Hero */
-        .hero {
-            display: flex;
-            padding: 60px 5%;
-            align-items: center;
-            gap: 40px;
-            height: calc(100vh - 85px)
-        }
-
-        .hero-text {
-            flex: 1
-        }
-
-        .h-tag {
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #0b965e;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px
-        }
-
-        .h-title {
-            font-size: 64px;
-            font-weight: 700;
-            line-height: 1.1;
-            color: #071a33;
-            margin-bottom: 24px
-        }
-
-        .h-title span {
-            color: #0b965e
-        }
-
-        .h-desc {
-            font-size: 18px;
-            color: #5a7086;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            max-width: 500px
-        }
-
-        .h-features {
-            display: flex;
-            gap: 24px;
-            margin-bottom: 40px
-        }
-
-        .hf-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            color: #18324a
-        }
-
-        .hf-icon {
-            width: 20px;
-            height: 20px;
-            color: #0b965e;
-            background: #e1f5ec;
-            border-radius: 50%;
-            padding: 4px
-        }
-
-        .hero-visual {
-            flex: 1;
-            height: 100%;
-            position: relative
-        }
-
-        .h-img-bg {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 80%;
-            height: 80%;
-            background: #e1f5ec;
-            border-radius: 300px 300px 0 0;
-            z-index: 0
-        }
-
-        .h-img {
-            position: absolute;
-            bottom: 0;
-            right: 5%;
-            height: 95%;
-            object-fit: cover;
-            z-index: 1;
-            filter: drop-shadow(-10px 0 20px rgba(0, 0, 0, 0.1))
-        }
-
-        /* Services Horizontal */
-        .services {
-            padding: 80px 5%;
-            background: #f8fbfb
-        }
-
-        .s-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 700;
-            color: #071a33;
-            margin-bottom: 60px
-        }
-
-        .svc-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px
-        }
-
-        .svc-card {
-            background: #fff;
-            padding: 32px 24px;
-            border-radius: 24px;
-            text-align: center;
-            border: 1px solid #f0f4f8;
-            transition: all .3s;
-            text-decoration: none;
-            color: inherit
-        }
-
-        .svc-card:hover {
-            border-color: #0b965e;
-            box-shadow: 0 15px 30px rgba(11, 150, 94, 0.08);
-            transform: translateY(-8px)
-        }
-
-        .svc-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 20px;
-            background: #f0f7fe;
-            color: #2078ca;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center
-        }
-
-        .svc-card:nth-child(2) .svc-icon {
-            background: #fdf2f2;
-            color: #d34c4c
-        }
-
-        .svc-card:nth-child(3) .svc-icon {
-            background: #e1f5ec;
-            color: #0b965e
-        }
-
-        .svc-card:nth-child(4) .svc-icon {
-            background: #f4f0fd;
-            color: #7c46c5
-        }
-
-        .svc-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px
-        }
-
-        .svc-desc {
-            font-size: 14px;
-            color: #5a7086;
-            line-height: 1.5;
-            margin-bottom: 16px
-        }
-
-        .svc-arrow {
-            width: 20px;
-            height: 20px;
-            color: #cbd5e1;
-            margin: 0 auto;
-            transition: color .3s, transform .3s
-        }
-
-        .svc-card:hover .svc-arrow {
-            color: #0b965e;
-            transform: translateX(4px)
-        }
-
-        /* Specialists */
-        .specialists {
-            padding: 100px 5%
-        }
-
-        .specialists-hdr {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 48px
-        }
-
-        .spec-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px
-        }
-
-        .doc-card {
-            border-radius: 24px;
-            overflow: hidden;
-            background: #f8fbfb;
-            border: 1px solid #f0f4f8
-        }
-
-        .doc-img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            object-position: top;
-            background: #e1f5ec
-        }
-
-        .doc-info {
-            padding: 24px
-        }
-
-        .doc-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: #071a33;
-            margin-bottom: 4px
-        }
-
-        .doc-spec {
-            font-size: 14px;
-            color: #0b965e;
-            font-weight: 600;
-            margin-bottom: 16px
-        }
-
-        @media(max-width:900px) {
-            .nav-links {
-                display: none
-            }
-
-            .hero {
-                flex-direction: column;
-                height: auto;
-                text-align: center
-            }
-
-            .hero-visual {
-                height: 400px;
-                width: 100%
-            }
-
-            .h-img-bg {
-                width: 100%;
-                height: 100%;
-                border-radius: 200px 200px 0 0;
-                right: 0
-            }
-
-            .h-img {
-                right: auto;
-                left: 50%;
-                transform: translateX(-50%)
-            }
-
-            .h-features {
-                justify-content: center;
-                flex-wrap: wrap
-            }
-
-            .svc-grid,
-            .spec-grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        /* Responsive Mobile First Tweaks (< 380px) */
-        @media (max-width: 380px) {
-            .nav {
-                padding: 16px;
-            }
-
-            .brand {
-                font-size: 20px;
-            }
-
-            .hero {
-                padding: 40px 16px;
-            }
-
-            .h-title {
-                font-size: 38px;
-            }
-
-            .h-desc {
-                font-size: 15px;
-            }
-
-            .h-features {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
-            }
-
-            .btn-schedule {
-                width: 100%;
-                text-align: center;
-                display: block;
-            }
-
-            .hero-visual {
-                height: 300px;
-            }
-
-            .services {
-                padding: 60px 16px;
-            }
-
-            .s-title {
-                font-size: 28px;
-            }
-
-            .svc-card {
-                padding: 24px 16px;
-            }
-
-            .specialists {
-                padding: 60px 16px;
-            }
-
-            .specialists-hdr {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-        }
-    </style></head>
-
+.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
+background:
+  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
+  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
+.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
+.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
 <body>
-    <nav class="nav">
-        <div class="brand">
-            <div class="b-icon"><i data-lucide="cross" style="width:20px;height:20px;fill:currentColor"></i></div>
-            VitaLife
-        </div>
-        <div class="nav-links">
-            <a href="#" class="nav-link">Especialidades</a>
-            <a href="#" class="nav-link">Corpo Clínico</a>
-            <a href="#" class="nav-link">Convênios</a>
-            <a href="#" class="nav-link">Exames</a>
-        </div>
-        <a href="#" class="btn-schedule">Agendar Consulta</a>
-    </nav>
 
-    <div class="hero">
-        <div class="hero-text">
-            <div class="h-tag"><i data-lucide="activity" style="width:16px;height:16px"></i> Saúde Premium</div>
-            <h1 class="h-title">A medicina do futuro, o cuidado vital de <span>sempre.</span></h1>
-            <p class="h-desc">Equipe multidisciplinar, tecnologia diagnóstica de ponta e um ambiente desenhado para sua
-                completa recuperação e bem-estar.</p>
 
-            <div class="h-features">
-                <div class="hf-item"><i data-lucide="check" class="hf-icon"></i> Médicos 5 Estrelas</div>
-                <div class="hf-item"><i data-lucide="check" class="hf-icon"></i> Equipamentos High-Tech</div>
-            </div>
-
-            <a href="#" class="btn-schedule" style="padding:16px 36px;font-size:16px">Agendar Avaliação</a>
-        </div>
-        <div class="hero-visual">
-            <div class="h-img-bg"></div>
-            <!-- Idealmente transparente no background da foto original -->
-            <img class="h-img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop"
-                alt="Doctor Female">
-        </div>
+<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
+    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">Vida Plena</a>
+    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+      <a href="#">Sobre</a><a href="#">Serviços</a><a href="#">Contato</a>
     </div>
+    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Contato</a>
+  </div>
+</nav>
+<section class="hero">
+  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:.8rem">VYDO CODE — Demonstração</p>
+  <h1>Vida Plena<br><span class="grad">saúde que cuida de você</span></h1>
+  <p>Clínica multidisciplinar com agendamento online em poucos cliques.</p>
+  <div style="display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap">
+    <a class="btn" style="background:#22d3ee;color:#fff" href="https://vydo-code.vercel.app/">Começar agora</a>
+    <a class="btn btn--ghost" href="https://vydo-code.vercel.app/">Saber mais</a>
+  </div>
+</section>
 
-    <div class="services">
-        <h2 class="s-title">Como podemos ajudar hoje?</h2>
-        <div class="svc-grid">
-            <a href="#" class="svc-card">
-                <div class="svc-icon"><i data-lucide="heart-pulse" style="width:32px;height:32px"></i></div>
-                <h3 class="svc-name">Cardiologia</h3>
-                <p class="svc-desc">Prevenção, check-up e tratamento das condições do coração.</p>
-                <i data-lucide="arrow-right" class="svc-arrow"></i>
-            </a>
+<section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:.4rem">Nossas especialidades</h2>
+    <p style="color:rgba(255,255,255,.5);margin-bottom:1.8rem">Cuidado completo em um só lugar, com corpo clínico experiente.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem">
 
-            <a href="#" class="svc-card">
-                <div class="svc-icon"><i data-lucide="brain" style="width:32px;height:32px"></i></div>
-                <h3 class="svc-name">Neurologia</h3>
-                <p class="svc-desc">Especialistas em distúrbios cognitivos, dor de cabeça e saúde cerebral.</p>
-                <i data-lucide="arrow-right" class="svc-arrow"></i>
-            </a>
-
-            <a href="#" class="svc-card">
-                <div class="svc-icon"><i data-lucide="microscope" style="width:32px;height:32px"></i></div>
-                <h3 class="svc-name">Laboratório</h3>
-                <p class="svc-desc">Exames de sangue complexos com laudos expressos em poucas horas.</p>
-                <i data-lucide="arrow-right" class="svc-arrow"></i>
-            </a>
-
-            <a href="#" class="svc-card">
-                <div class="svc-icon"><i data-lucide="baby" style="width:32px;height:32px"></i></div>
-                <h3 class="svc-name">Pediatria</h3>
-                <p class="svc-desc">Cuidado especializado e ambiente lúdico acolhedor para seus filhos.</p>
-                <i data-lucide="arrow-right" class="svc-arrow"></i>
-            </a>
-        </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🦷</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Odontologia</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Limpeza, clareamento, lentes de contato e implantes.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">👁️</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Oftalmologia</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Exames de vista, lentes e cirurgia refrativa.</p>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.6rem">🧠</div>
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.4rem">Psicologia</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Acompanhamento terapêutico presencial e online.</p>
+      </div>
     </div>
+  </div>
+</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">+15</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">especialistas</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">8k+</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">pacientes atendidos</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;text-align:center">
+        <div style="font-size:2.2rem;font-weight:800;color:var(--accent)">4.9★</div><div style="font-size:.8rem;color:rgba(255,255,255,.5)">avaliação média</div>
+      </div>
+    </div></div>
+</section><section style="padding:4.5rem 0;border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem">
+        <h3 style="font-weight:700;margin-bottom:.5rem">Agendamento online</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Escolha a especialidade, o dia e o horário em poucos cliques.</p>
+        <a class="btn" style="background:var(--accent);color:#fff;margin-top:1rem;font-size:.85rem" href="https://vydo-code.vercel.app/">Agendar consulta</a>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem">
+        <h3 style="font-weight:700;margin-bottom:.5rem">Convênios aceitos</h3>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.5)">Trabalhamos com os principais planos de saúde da região.</p>
+        <a class="btn btn--ghost" style="margin-top:1rem;font-size:.85rem" href="https://vydo-code.vercel.app/">Ver convênios</a>
+      </div>
+    </div></div>
+</section>
 
-    <div class="specialists">
-        <div class="specialists-hdr">
-            <h2 class="s-title" style="margin-bottom:0;text-align:left">Liderança <br>Médica</h2>
-            <a href="#" class="btn-schedule" style="background:#f0f4f8;color:#071a33;box-shadow:none">Ver todos os
-                Médicos</a>
-        </div>
+<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+  <div class="wrap">
+    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
+    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
+    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20Cl%C3%ADnica%20Sa%C3%BAde%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+  </div>
+</section>
+<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
+  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
+</footer>
 
-        <div class="spec-grid">
-            <div class="doc-card">
-                <img class="doc-img"
-                    src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=400&fit=crop"
-                    alt="Dr. Roberto">
-                <div class="doc-info">
-                    <h3 class="doc-name">Dr. Roberto Alves</h3>
-                    <p class="doc-spec">Cardiologista Chefe</p>
-                    <p style="font-size:13px;color:#5a7086;margin-bottom:16px">Ph.D. Harvard Medical School</p>
-                    <a href="#" style="color:#0b965e;font-size:13px;font-weight:600;text-decoration:none">Ver perfil
-                        completo &rarr;</a>
-                </div>
-            </div>
-
-            <div class="doc-card">
-                <img class="doc-img"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
-                    alt="Dra. Mariana">
-                <div class="doc-info">
-                    <h3 class="doc-name">Dra. Mariana Silva</h3>
-                    <p class="doc-spec">Neurocirurgiã</p>
-                    <p style="font-size:13px;color:#5a7086;margin-bottom:16px">Especialista pelo Hospital Sírio Libanês
-                    </p>
-                    <a href="#" style="color:#0b965e;font-size:13px;font-weight:600;text-decoration:none">Ver perfil
-                        completo &rarr;</a>
-                </div>
-            </div>
-
-            <div class="doc-card">
-                <img class="doc-img"
-                    src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop"
-                    alt="Dr. Paulo">
-                <div class="doc-info">
-                    <h3 class="doc-name">Dr. Paulo Cortez</h3>
-                    <p class="doc-spec">Pediatra</p>
-                    <p style="font-size:13px;color:#5a7086;margin-bottom:16px">Mais de 15 anos cuidando de crianças.</p>
-                    <a href="#" style="color:#0b965e;font-size:13px;font-weight:600;text-decoration:none">Ver perfil
-                        completo &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
-
 </html>
-

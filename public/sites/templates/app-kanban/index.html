@@ -1,789 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>K-Board — Kanban App</title>
-    <!-- Usando Inter para UI e Space Grotesk para Headers como no App Tasks / padrão Vydo -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f5f7;
-            /* Cor de fundo clássica de boards */
-            color: #172b4d;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        /* --- Header Top --- */
-        .app-header {
-            background-color: #0052cc;
-            /* Azul Trello/Jira */
-            padding: 12px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #ffffff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-        }
-
-        .header-left,
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .app-brand {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            letter-spacing: -0.02em;
-        }
-
-        .board-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: background 0.2s;
-        }
-
-        .board-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .search-bar {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid transparent;
-            border-radius: 4px;
-            padding: 6px 12px 6px 32px;
-            color: white;
-            width: 250px;
-            position: relative;
-            transition: all 0.2s;
-        }
-
-        .search-bar:focus-within {
-            background: white;
-            color: #172b4d;
-            border-color: #4c9aff;
-        }
-
-        .search-bar:focus-within .search-icon {
-            color: #5e6c84;
-        }
-
-        .search-input {
-            border: none;
-            background: transparent;
-            color: inherit;
-            outline: none;
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-        }
-
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .search-bar:focus-within .search-input::placeholder {
-            color: #5e6c84;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-        }
-
-        /* --- Board Header --- */
-        .board-header {
-            padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            border-bottom: 1px solid #dfe1e6;
-        }
-
-        .board-title-area {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .board-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            color: #172b4d;
-        }
-
-        .board-star {
-            color: #f2d600;
-            cursor: pointer;
-        }
-
-        .board-divider {
-            width: 1px;
-            height: 24px;
-            background: #dfe1e6;
-        }
-
-        .board-members {
-            display: flex;
-            align-items: center;
-        }
-
-        .member-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid white;
-            margin-left: -8px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .member-avatar:first-child {
-            margin-left: 0;
-        }
-
-        .add-member {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #f4f5f7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #5e6c84;
-            margin-left: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .add-member:hover {
-            background: #ebecf0;
-        }
-
-        .board-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn-secondary {
-            background: #f4f5f7;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            color: #42526e;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.2s;
-        }
-
-        .btn-secondary:hover {
-            background: #ebecf0;
-        }
-
-        /* --- Kanban Canvas --- */
-        .canvas {
-            flex: 1;
-            padding: 24px;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            /* Fundo sutil */
-            background-image: radial-gradient(#0052cc15 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-
-        /* Ocultando scrollbar fina */
-        .canvas::-webkit-scrollbar {
-            height: 10px;
-        }
-
-        .canvas::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 5px;
-        }
-
-        .canvas::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, 0.15);
-            border-radius: 5px;
-        }
-
-        /* --- Columns / Lists --- */
-        .k-column {
-            background: #ebecf0;
-            border-radius: 8px;
-            width: 320px;
-            min-width: 320px;
-            max-height: 100%;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 1px 2px rgba(9, 30, 66, 0.1);
-        }
-
-        .col-header {
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: grab;
-        }
-
-        .col-title {
-            font-weight: 600;
-            font-size: 15px;
-            color: #172b4d;
-        }
-
-        .col-count {
-            background: #dfe1e6;
-            color: #42526e;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-
-        .icon-btn-col {
-            background: none;
-            border: none;
-            color: #5e6c84;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: 4px;
-        }
-
-        .icon-btn-col:hover {
-            background: #091e4214;
-        }
-
-        /* --- Cards --- */
-        .col-cards {
-            padding: 0 12px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            min-height: 20px;
-            scrollbar-width: thin;
-        }
-
-        .col-cards::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .col-cards::-webkit-scrollbar-thumb {
-            background: #c1c7d0;
-            border-radius: 4px;
-        }
-
-        .k-card {
-            background: #ffffff;
-            border-radius: 6px;
-            padding: 12px;
-            box-shadow: 0 1px 2px rgba(9, 30, 66, 0.15);
-            cursor: grab;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-        }
-
-        .k-card:hover {
-            /* Subtil elevação estilo trello */
-            background-color: #f4f5f7;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(9, 30, 66, 0.2);
-        }
-
-        .card-cover {
-            width: calc(100% + 24px);
-            height: 120px;
-            margin: -12px -12px 12px -12px;
-            border-radius: 6px 6px 0 0;
-            object-fit: cover;
-            display: block;
-        }
-
-        .card-labels {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 8px;
-        }
-
-        .c-label {
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .bg-blue {
-            background: #0052cc;
-        }
-
-        .bg-green {
-            background: #36b37e;
-        }
-
-        .bg-orange {
-            background: #ff991f;
-        }
-
-        .bg-red {
-            background: #ff5630;
-        }
-
-        .bg-purple {
-            background: #6554c0;
-        }
-
-        .card-title {
-            font-size: 14px;
-            line-height: 1.4;
-            color: #172b4d;
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .c-icons {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #5e6c84;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .ci-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .ci-item.overdue {
-            color: white;
-            background: #ff5630;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-
-        .c-users {
-            display: flex;
-            align-items: center;
-        }
-
-        .c-user-img {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-left: -6px;
-            border: 2px solid white;
-        }
-
-        .c-user-img:first-child {
-            margin-left: 0;
-        }
-
-        /* --- Add Card Button --- */
-        .add-card-btn {
-            margin: 12px;
-            padding: 8px 12px;
-            color: #5e6c84;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 14px;
-            background: transparent;
-            border: none;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            text-align: left;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .add-card-btn:hover {
-            background: #091e4214;
-            color: #172b4d;
-        }
-
-        /* Add List Column */
-        .add-list-col {
-            background: rgba(255, 255, 255, 0.4);
-            border-radius: 8px;
-            width: 320px;
-            min-width: 320px;
-            padding: 12px 16px;
-            color: #172b4d;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .add-list-col:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
-
-        /* Responsive Mobile First Tweaks (< 380px) */
-        @media (max-width: 380px) {
-
-            .board-btn,
-            .search-bar,
-            .app-brand span,
-            .icon-btn-col {
-                display: none;
-            }
-
-            .app-header {
-                padding: 12px;
-            }
-
-            .header-left .icon-btn-col {
-                display: flex;
-                /* Mantém o ícone de menu hamburger simulado visível */
-            }
-
-            .board-header {
-                padding: 12px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-
-            .board-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .canvas {
-                padding: 16px;
-            }
-
-            .k-column {
-                width: 280px;
-                min-width: 280px;
-            }
-
-            .add-list-col {
-                width: 280px;
-                min-width: 280px;
-            }
-        }
-    </style></head>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>K-Board — Demonstração VYDO CODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#0052cc}
+
+:root{--bg:#0a0a0c;--surface:#111115;--border:rgba(255,255,255,.08);--txt:#fff;--txt2:rgba(255,255,255,.55)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:.85rem;font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn--ghost{background:transparent;border:1px solid var(--border);color:#fff}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+
+.hero{position:relative;padding:5.5rem 1.25rem 4rem;text-align:center;overflow:hidden;
+background:
+  radial-gradient(ellipse 70% 55% at 50% 10%,var(--accent)33 0%,transparent 70%),
+  linear-gradient(180deg,#0a0a0c 0%,#0d0d10 100%)}
+.hero h1{font-size:clamp(2.2rem,6vw,3.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;max-width:760px;margin:0 auto .9rem}
+.hero p{color:rgba(255,255,255,.6);font-size:clamp(.95rem,2.2vw,1.15rem);max-width:540px;margin:0 auto 2rem}
+.hero .grad{background:linear-gradient(120deg,#a78bfa 0%,var(--accent) 55%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
 <body>
 
-    <!-- Header Principal -->
-    <header class="app-header">
-        <div class="header-left">
-            <button class="icon-btn-col" style="color:white"><i data-lucide="grid"
-                    style="width:20px;height:20px"></i></button>
-            <div class="app-brand">
-                <i data-lucide="trello" style="width:24px;height:24px"></i> K-Board
-            </div>
-            <button class="board-btn">Projetos <i data-lucide="chevron-down"
-                    style="width:16px;height:16px"></i></button>
-            <button class="board-btn">Recentes <i data-lucide="chevron-down"
-                    style="width:16px;height:16px"></i></button>
-            <button class="board-btn bg-blue" style="background:#2684ff">Criar</button>
-        </div>
 
-        <div class="header-right">
-            <div class="search-bar">
-                <i data-lucide="search" class="search-icon"></i>
-                <input type="text" class="search-input" placeholder="Buscar tarefas...">
-            </div>
-            <button class="icon-btn-col" style="color:white"><i data-lucide="bell"
-                    style="width:20px;height:20px"></i></button>
-            <button class="icon-btn-col" style="color:white"><i data-lucide="help-circle"
-                    style="width:20px;height:20px"></i></button>
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" alt="User"
-                class="avatar">
-        </div>
-    </header>
-
-    <!-- Header do Board Atual -->
-    <div class="board-header">
-        <div class="board-title-area">
-            <h1 class="board-title">Roadmap Q4 Vydo</h1>
-            <i data-lucide="star" class="board-star" style="width:20px;height:20px;fill:#f2d600"></i>
-            <span class="col-count" style="background:#e3fcef;color:#006644">Público</span>
-
-            <div class="board-divider"></div>
-
-            <div class="board-members">
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
-                    class="member-avatar">
-                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
-                    class="member-avatar">
-                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop"
-                    class="member-avatar">
-                <div class="add-member"><i data-lucide="user-plus" style="width:16px;height:16px"></i></div>
-            </div>
-        </div>
-
-        <div class="board-actions">
-            <button class="btn-secondary"><i data-lucide="filter" style="width:16px;height:16px"></i> Filtros</button>
-            <button class="btn-secondary"><i data-lucide="more-horizontal" style="width:16px;height:16px"></i>
-                Menu</button>
-        </div>
+<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(10,10,12,.75);border-bottom:1px solid var(--border)">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem">
+    <a href="#" style="font-weight:800;font-size:1.05rem;letter-spacing:-.01em">K-Board</a>
+    <div class="nav-links" style="display:flex;gap:1.5rem;font-size:.85rem;color:rgba(255,255,255,.6)">
+      <a href="#">Recursos</a><a href="#">Planos</a><a href="#">Contato</a>
     </div>
-
-    <!-- Área de Listas (Kanban) -->
-    <div class="canvas">
-
-        <!-- Lista 1: Backlog -->
-        <div class="k-column">
-            <div class="col-header">
-                <div class="col-title">🎯 Backlog</div>
-                <div style="display:flex;gap:4px">
-                    <span class="col-count">3</span>
-                    <button class="icon-btn-col"><i data-lucide="more-horizontal"
-                            style="width:18px;height:18px"></i></button>
-                </div>
+    <a class="btn" style="background:var(--accent);color:#fff;padding:.55rem 1.1rem;font-size:.8rem" href="https://vydo-code.vercel.app/">Criar app</a>
+  </div>
+</nav>
+<section class="hero">
+  <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#0052cc;font-weight:700;margin-bottom:.8rem">App Web — Demonstração</p>
+  <h1>K-Board<br><span class="grad">gestão visual de projetos</span></h1>
+  <p>Aplicações web rápidas, organizadas e feitas sob medida para o seu negócio.</p>
+  <a class="btn" style="background:#0052cc;color:#fff" href="https://vydo-code.vercel.app/">Ver demonstração do app</a>
+</section>
+<section>
+  <div class="wrap">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:1.25rem;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.45)">
+      <div style="display:flex;align-items:center;gap:.5rem;padding:.8rem 1rem;border-bottom:1px solid var(--border)">
+        <span style="width:11px;height:11px;border-radius:50%;background:#ff5f57"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#febc2e"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#28c840"></span>
+        <span style="margin-left:auto;font-size:.75rem;color:rgba(255,255,255,.4)">K-Board</span>
+      </div>
+      <div style="display:grid;grid-template-columns:170px 1fr;min-height:380px">
+        <aside style="background:rgba(0,0,0,.3);padding:1.25rem;border-right:1px solid var(--border)">
+          <div style="width:34px;height:34px;border-radius:.6rem;background:#0052cc;margin-bottom:1.4rem"></div>
+          <div style="display:flex;flex-direction:column;gap:.55rem;font-size:.8rem;color:rgba(255,255,255,.55)">
+            <div style="color:#fff;font-weight:700">▸ Painel</div><div>Tarefas</div><div>Equipe</div><div>Relatórios</div><div>Configurações</div>
+          </div>
+        </aside>
+        <main style="padding:1.4rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem">
+            <h3 style="font-weight:700">Meu quadro</h3>
+            <span class="btn" style="background:#0052cc;color:#fff;padding:.4rem .9rem;font-size:.75rem">+ Novo item</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">
+            
+            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Backlog</span>
+                <span style="background:#0052cc33;color:#0052cc;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">3</span>
+              </div>
+              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Pesquisa de mercado</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Definir escopo</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Wireframes</div>
             </div>
-
-            <div class="col-cards">
-                <div class="k-card">
-                    <div class="card-labels">
-                        <span class="c-label bg-orange">Marketing</span>
-                    </div>
-                    <div class="card-title">Criar campanha de lançamento do novo editor Visual</div>
-                    <div class="card-meta">
-                        <div class="c-icons">
-                            <span class="ci-item"><i data-lucide="align-left" style="width:14px;height:14px"></i></span>
-                            <span class="ci-item"><i data-lucide="paperclip" style="width:14px;height:14px"></i>
-                                2</span>
-                        </div>
-                        <div class="c-users"></div>
-                    </div>
-                </div>
-
-                <div class="k-card">
-                    <div class="card-labels">
-                        <span class="c-label bg-purple">Design</span>
-                    </div>
-                    <div class="card-title">Mockups da página inicial (Dark Mode)</div>
-                    <div class="card-meta">
-                        <div class="c-icons">
-                            <span class="ci-item"><i data-lucide="check-square" style="width:14px;height:14px"></i>
-                                0/4</span>
-                        </div>
-                        <div class="c-users">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
-                                class="c-user-img">
-                        </div>
-                    </div>
-                </div>
+            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Em progresso</span>
+                <span style="background:#0052cc33;color:#0052cc;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">2</span>
+              </div>
+              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Frontend dashboard</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Integração API</div>
             </div>
-
-            <button class="add-card-btn"><i data-lucide="plus" style="width:16px;height:16px"></i> Adicionar um
-                cartão</button>
-        </div>
-
-        <!-- Lista 2: A Fazer -->
-        <div class="k-column">
-            <div class="col-header">
-                <div class="col-title">📋 A Fazer</div>
-                <div style="display:flex;gap:4px">
-                    <span class="col-count">2</span>
-                    <button class="icon-btn-col"><i data-lucide="more-horizontal"
-                            style="width:18px;height:18px"></i></button>
-                </div>
+            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:.9rem;padding:1rem">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+                <span style="font-size:.75rem;font-weight:700;color:rgba(255,255,255,.6)">Feito</span>
+                <span style="background:#0052cc33;color:#0052cc;font-size:.65rem;font-weight:800;padding:.15rem .5rem;border-radius:999px">2</span>
+              </div>
+              <div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Design system</div><div style="background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:.6rem;padding:.7rem;font-size:.75rem;color:rgba(255,255,255,.7);margin-bottom:.5rem">Autenticação</div>
             </div>
-
-            <div class="col-cards">
-                <div class="k-card">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=300&fit=crop"
-                        class="card-cover" alt="Cover">
-                    <div class="card-labels">
-                        <span class="c-label bg-blue">Frontend</span>
-                        <span class="c-label bg-red">Bug</span>
-                    </div>
-                    <div class="card-title">Corrigir alinhamento do carousel na versão Mobile (iOS)</div>
-                    <div class="card-meta">
-                        <div class="c-icons">
-                            <span class="ci-item overdue"><i data-lucide="clock" style="width:12px;height:12px"></i>
-                                Ontem</span>
-                            <span class="ci-item"><i data-lucide="align-left" style="width:14px;height:14px"></i></span>
-                        </div>
-                        <div class="c-users">
-                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
-                                class="c-user-img">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="k-card">
-                    <div class="card-labels">
-                        <span class="c-label bg-green">Backend</span>
-                    </div>
-                    <div class="card-title">Atualizar rotas da API REST para v2.0</div>
-                    <div class="card-meta">
-                        <div class="c-icons">
-                            <span class="ci-item"><i data-lucide="check-square" style="width:14px;height:14px"></i>
-                                1/8</span>
-                        </div>
-                        <div class="c-users">
-                            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop"
-                                class="c-user-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="add-card-btn"><i data-lucide="plus" style="width:16px;height:16px"></i> Adicionar um
-                cartão</button>
-        </div>
-
-        <!-- Lista 3: Em Progresso -->
-        <div class="k-column">
-            <div class="col-header">
-                <div class="col-title">🚀 Em Progresso</div>
-                <div style="display:flex;gap:4px">
-                    <span class="col-count">1</span>
-                    <button class="icon-btn-col"><i data-lucide="more-horizontal"
-                            style="width:18px;height:18px"></i></button>
-                </div>
-            </div>
-
-            <div class="col-cards">
-                <div class="k-card">
-                    <div class="card-labels">
-                        <span class="c-label bg-blue">Frontend</span>
-                    </div>
-                    <div class="card-title">Implementar Drag and Drop robusto (Kanban)</div>
-                    <div class="card-meta">
-                        <div class="c-icons">
-                            <span class="ci-item" style="color:#0052cc"><i data-lucide="clock"
-                                    style="width:14px;height:14px"></i> 24 Out</span>
-                            <span class="ci-item"><i data-lucide="message-square" style="width:14px;height:14px"></i>
-                                4</span>
-                        </div>
-                        <div class="c-users">
-                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
-                                class="c-user-img">
-                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
-                                class="c-user-img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="add-card-btn"><i data-lucide="plus" style="width:16px;height:16px"></i> Adicionar um
-                cartão</button>
-        </div>
-
-        <!-- Lista 4: Concluído -->
-        <div class="k-column">
-            <div class="col-header">
-                <div class="col-title">✅ Concluído</div>
-                <div style="display:flex;gap:4px">
-                    <span class="col-count">2</span>
-                    <button class="icon-btn-col"><i data-lucide="more-horizontal"
-                            style="width:18px;height:18px"></i></button>
-                </div>
-            </div>
-
-            <div class="col-cards">
-                <div class="k-card">
-                    <div class="card-labels">
-                        <span class="c-label bg-orange">Marketing</span>
-                    </div>
-                    <div class="card-title" style="text-decoration:line-through;color:#5e6c84">Texto de divulgação Blog
-                        Post Q4</div>
-                    <div class="card-meta">
-                        <div class="c-icons">
-                            <span class="ci-item" style="color:#36b37e"><i data-lucide="check-square"
-                                    style="width:14px;height:14px"></i> Feito</span>
-                        </div>
-                        <div class="c-users"></div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="add-card-btn"><i data-lucide="plus" style="width:16px;height:16px"></i> Adicionar um
-                cartão</button>
-        </div>
-
-        <!-- Add nova lista -->
-        <div class="add-list-col">
-            <i data-lucide="plus" style="width:18px;height:18px"></i> Adicionar outra lista
-        </div>
-
+          </div>
+        </main>
+      </div>
     </div>
+  </div>
+</section>
 
-    <script>
-        lucide.createIcons();
-    </script>
+<section class="demo-banner" style="background:linear-gradient(120deg,rgba(139,92,246,.18),rgba(34,211,236,.12));border-top:1px solid rgba(139,92,246,.3);padding:2.5rem 1.25rem;text-align:center">
+  <div class="wrap">
+    <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem">Demonstração</p>
+    <h3 style="font-size:1.25rem;font-weight:800;margin-bottom:.4rem">Gostou deste estilo? Ele é 100% seu.</h3>
+    <p style="color:rgba(255,255,255,.55);font-size:.9rem;margin-bottom:1.2rem">Criamos este site adaptado à sua marca, rápido e pronto para vender.</p>
+    <a class="btn" style="background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.25)" href="https://wa.me/5538998802822?text=Ol%C3%A1%21%20Vi%20o%20template%20K-Board%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es." target="_blank" rel="noopener">Quero esse site — falar no WhatsApp</a>
+  </div>
+</section>
+<footer style="padding:1.5rem;text-align:center;font-size:.75rem;color:rgba(255,255,255,.3)">
+  Desenvolvido por <a href="https://vydo-code.vercel.app/" target="_blank" rel="noopener" style="color:#a78bfa;font-weight:700">VYDO CODE</a>
+</footer>
+
 </body>
-
 </html>
-
